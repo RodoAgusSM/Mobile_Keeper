@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Lock} from '../types/Lock';
+import { Lock } from '../types/Lock';
 
 const getData = async () => {
   try {
@@ -26,3 +26,6 @@ const deleteData = async () => {
     // clear error
   }
 };
+
+
+export { getData, storeData, deleteData }
