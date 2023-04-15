@@ -1,6 +1,12 @@
 import React, {useEffect} from 'react';
 import {Text, View, StyleSheet, FlatList} from 'react-native';
-import {screenHeight, screenWidth, storeData, getData} from '../utils/index';
+import {
+  screenHeight,
+  screenWidth,
+  storeData,
+  getData,
+  colors,
+} from '../utils/index';
 import AwesomeButton from 'react-native-really-awesome-button';
 import {LockType, LockStatus} from '../enums/Index';
 import {Lock} from '../types/Lock';
@@ -51,9 +57,69 @@ export const GridNumbers = ({navigation}: any) => {
       lockCode: arrayToNumber(),
       lockStatus: LockStatus.locked,
     } as Lock;
-    console.log('LOCK ', lock);
     await storeData(lock);
     navigation.navigate('Home');
+  };
+
+  const renderBtns = (number: number) => {
+    if (number >= 0) {
+      return (
+        <AwesomeButton
+          progress={false}
+          width={screenWidth * 0.21}
+          height={screenHeight * 0.11}
+          style={{margin: 3}}
+          backgroundColor={colors.customGrey}
+          backgroundShadow={colors.customGreyContour}
+          backgroundActive={colors.customGreyActive}
+          backgroundDarker={colors.customGreyContour}
+          disabled={password.length === 4 || updating}
+          onPress={() => {
+            handlePress(number);
+          }}>
+          <Text>{number}</Text>
+        </AwesomeButton>
+      );
+    } else if (number === -1) {
+      return (
+        <AwesomeButton
+          progress={false}
+          width={screenWidth * 0.21}
+          height={screenHeight * 0.11}
+          style={{margin: 3}}
+          backgroundColor={
+            password.length === 0 ? colors.customRed : colors.red
+          }
+          backgroundShadow={colors.customRedContour}
+          backgroundActive={colors.customRedActive}
+          backgroundDarker={colors.customRedContour}
+          disabled={password.length === 0 || updating}
+          onPress={() => {
+            removeLastDigit();
+          }}>
+          <Text>{'C'}</Text>
+        </AwesomeButton>
+      );
+    } else if (number === -2) {
+      return (
+        <AwesomeButton
+          progress={false}
+          width={screenWidth * 0.21}
+          height={screenHeight * 0.11}
+          style={{margin: 3}}
+          backgroundColor={
+            password.length < 4 ? colors.customGreen : colors.green
+          }
+          backgroundShadow={colors.customGrenContour}
+          backgroundActive={colors.customGrenActive}
+          backgroundDarker={colors.customGrenContour}
+          disabled={password.length < 4 || updating}
+          onPress={async () => await handleFinish()}>
+          <Text>{'✓'}</Text>
+        </AwesomeButton>
+      );
+    }
+    return <></>;
   };
 
   return (
@@ -87,55 +153,7 @@ export const GridNumbers = ({navigation}: any) => {
             alignItems: 'center',
             flex: 1,
           }}
-          renderItem={({item}) =>
-            item >= 0 ? (
-              <AwesomeButton
-                progress={false}
-                width={screenWidth * 0.21}
-                height={screenHeight * 0.11}
-                style={{margin: 3}}
-                backgroundColor="grey"
-                backgroundShadow="black"
-                backgroundActive="#D3D3D3"
-                backgroundDarker="black"
-                disabled={password.length === 4 || updating}
-                onPress={() => {
-                  handlePress(item);
-                }}>
-                <Text>{item}</Text>
-              </AwesomeButton>
-            ) : item === -1 ? (
-              <AwesomeButton
-                progress={false}
-                width={screenWidth * 0.21}
-                height={screenHeight * 0.11}
-                style={{margin: 3}}
-                backgroundColor={password.length === 0 ? '#FFFFE0' : 'yellow'}
-                backgroundShadow="black"
-                backgroundActive="#FFFF90"
-                backgroundDarker="black"
-                disabled={password.length === 0 || updating}
-                onPress={() => {
-                  removeLastDigit();
-                }}>
-                <Text>{'x'}</Text>
-              </AwesomeButton>
-            ) : (
-              <AwesomeButton
-                progress={false}
-                width={screenWidth * 0.21}
-                height={screenHeight * 0.11}
-                style={{margin: 3}}
-                backgroundColor={password.length < 4 ? '#90EE90' : 'green'}
-                backgroundShadow="black"
-                backgroundActive="#95FE93"
-                backgroundDarker="black"
-                disabled={password.length < 4 || updating}
-                onPress={async () => await handleFinish()}>
-                <Text>{'✓'}</Text>
-              </AwesomeButton>
-            )
-          }
+          renderItem={({item}) => renderBtns(item)}
           numColumns={3}
         />
       </View>
