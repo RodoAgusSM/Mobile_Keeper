@@ -10,4 +10,8 @@ export const colors = {
     customGreen: '#4F9D25',
     customGrenContour: '#539035',
     customGrenActive: '#95FE93',
+    vanilla: '#E8E4D8',
+    gearGrey: '#A6A6A6',
+    gearGreyContour: '#C0C0C0',
+    gearGreyActive: '#A7A7A7',
 }

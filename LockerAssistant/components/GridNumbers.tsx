@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef} from 'react';
 import {Text, View, StyleSheet, FlatList} from 'react-native';
 import {
   screenHeight,
@@ -10,13 +10,21 @@ import {
 import AwesomeButton from 'react-native-really-awesome-button';
 import {LockType, LockStatus} from '../enums/Index';
 import {Lock} from '../types/Lock';
+import BottomSheet from '@gorhom/bottom-sheet';
 
 const digits: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, -1, 9, -2];
 
 export const GridNumbers = ({navigation}: any) => {
   const [password, setPassword] = React.useState<number[]>([]);
   const [updating, setUpdating] = React.useState<boolean>(false);
+  const [openButtonSheet, setOpenButtonSheet] = React.useState<boolean>(false);
   const [b, setB] = React.useState<Lock>();
+
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const snapPoints = useMemo(() => ['75%'], []);
+  const handleSheetChanges = useCallback((index: number) => {
+    console.log('handleSheetChanges', index);
+  }, []);
 
   useEffect(() => {
     const fetchStorage = async () => {
@@ -126,18 +134,18 @@ export const GridNumbers = ({navigation}: any) => {
     <View style={GridNumbersStyles.container}>
       <View
         style={{
-          height: screenHeight * 0.85,
+          height: screenHeight * 0.8,
           width: '95%',
           justifyContent: 'center',
           alignItems: 'center',
         }}>
         <View
           style={{
-            width: '35%',
+            width: '40%',
             height: '5%',
             justifyContent: 'center',
             alignItems: 'center',
-            borderWidth: 0.6,
+            borderWidth: 0.8,
             borderRadius: 8,
             borderColor: 'grey',
           }}>
@@ -156,7 +164,41 @@ export const GridNumbers = ({navigation}: any) => {
           renderItem={({item}) => renderBtns(item)}
           numColumns={3}
         />
+        <AwesomeButton
+          progress={false}
+          width={screenWidth * 0.21}
+          height={screenHeight * 0.11}
+          style={{margin: 3}}
+          backgroundColor={colors.gearGrey}
+          backgroundShadow={colors.gearGreyContour}
+          backgroundActive={colors.gearGreyActive}
+          backgroundDarker={colors.gearGreyContour}
+          onPress={() => setOpenButtonSheet(true)}>
+          <Text style={{fontSize: 30}}>{'⚙︎'}</Text>
+        </AwesomeButton>
       </View>
+      <BottomSheet
+        onClose={() => setOpenButtonSheet(false)}
+        ref={bottomSheetRef}
+        index={openButtonSheet ? 0 : -1}
+        snapPoints={snapPoints}
+        enablePanDownToClose={true}
+        style={{backgroundColor: 'transparent'}}
+        backgroundStyle={{
+          borderTopStartRadius: 18,
+          borderTopEndRadius: 18,
+        }}
+        onChange={() => handleSheetChanges}>
+        <Text
+          style={{
+            marginTop: '15%',
+            fontSize: 20,
+            fontWeight: '600',
+            textAlign: 'center',
+          }}>
+          Options here 🎉
+        </Text>
+      </BottomSheet>
     </View>
   );
 };
@@ -167,5 +209,6 @@ const GridNumbersStyles = StyleSheet.create({
     height: screenHeight,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: colors.vanilla,
   },
 });
