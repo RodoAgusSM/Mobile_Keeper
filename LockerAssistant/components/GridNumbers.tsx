@@ -5,20 +5,21 @@ import {
   screenWidth,
   storeData,
   getData,
+  deleteData,
   colors,
 } from '../utils/index';
 import AwesomeButton from 'react-native-really-awesome-button';
 import {LockType, LockStatus} from '../enums/Index';
 import {Lock} from '../types/Lock';
 import BottomSheet from '@gorhom/bottom-sheet';
+import {AnimatedKeyboardOptions} from 'react-native-reanimated';
 
 const digits: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, -1, 9, -2];
 
 export const GridNumbers = ({navigation}: any) => {
   const [password, setPassword] = React.useState<number[]>([]);
-  const [updating, setUpdating] = React.useState<boolean>(false);
-  const [openButtonSheet, setOpenButtonSheet] = React.useState<boolean>(false);
-  const [b, setB] = React.useState<Lock>();
+  const [openBottomSheet, setOpenBottomSheet] = React.useState<boolean>(false);
+  const [storage, setStorage] = React.useState<Lock>();
 
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['75%'], []);
@@ -29,27 +30,36 @@ export const GridNumbers = ({navigation}: any) => {
   useEffect(() => {
     const fetchStorage = async () => {
       const data = (await getData()) as Lock;
-      setB(data);
+      setStorage(data);
     };
     fetchStorage();
   }, []);
 
   useEffect(() => {
-    if (updating) {
-      setUpdating(false);
+    if (storage) {
     }
-  }, [password]);
+  }, [storage]);
+
+  useEffect(() => {
+    if (!openBottomSheet) {
+      bottomSheetRef.current?.close();
+    } else if (openBottomSheet) {
+      bottomSheetRef.current?.expand();
+    }
+  }, [openBottomSheet]);
 
   const handlePress = (digit: number) => {
     if (password.length < 4) {
-      setUpdating(true);
       setPassword([...password, digit]);
     }
   };
 
   const removeLastDigit = () => {
-    setUpdating(true);
     setPassword(password.slice(0, password.length - 1));
+  };
+
+  const cleanAllDigits = () => {
+    setPassword([]);
   };
 
   const arrayToNumber = () => {
@@ -69,6 +79,12 @@ export const GridNumbers = ({navigation}: any) => {
     navigation.navigate('Home');
   };
 
+  const handleChangePassword = async () => {
+    await deleteData();
+    cleanAllDigits();
+    setOpenBottomSheet(false);
+  };
+
   const renderBtns = (number: number) => {
     if (number >= 0) {
       return (
@@ -81,7 +97,7 @@ export const GridNumbers = ({navigation}: any) => {
           backgroundShadow={colors.customGreyContour}
           backgroundActive={colors.customGreyActive}
           backgroundDarker={colors.customGreyContour}
-          disabled={password.length === 4 || updating}
+          disabled={password.length === 4}
           onPress={() => {
             handlePress(number);
           }}>
@@ -101,7 +117,7 @@ export const GridNumbers = ({navigation}: any) => {
           backgroundShadow={colors.customRedContour}
           backgroundActive={colors.customRedActive}
           backgroundDarker={colors.customRedContour}
-          disabled={password.length === 0 || updating}
+          disabled={password.length === 0}
           onPress={() => {
             removeLastDigit();
           }}>
@@ -121,7 +137,7 @@ export const GridNumbers = ({navigation}: any) => {
           backgroundShadow={colors.customGrenContour}
           backgroundActive={colors.customGrenActive}
           backgroundDarker={colors.customGrenContour}
-          disabled={password.length < 4 || updating}
+          disabled={password.length < 4}
           onPress={async () => await handleFinish()}>
           <Text>{'✓'}</Text>
         </AwesomeButton>
@@ -173,14 +189,14 @@ export const GridNumbers = ({navigation}: any) => {
           backgroundShadow={colors.gearGreyContour}
           backgroundActive={colors.gearGreyActive}
           backgroundDarker={colors.gearGreyContour}
-          onPress={() => setOpenButtonSheet(true)}>
+          onPress={() => setOpenBottomSheet(true)}>
           <Text style={{fontSize: 30}}>{'⚙︎'}</Text>
         </AwesomeButton>
       </View>
       <BottomSheet
-        onClose={() => setOpenButtonSheet(false)}
+        onClose={() => setOpenBottomSheet(false)}
         ref={bottomSheetRef}
-        index={openButtonSheet ? 0 : -1}
+        index={openBottomSheet ? 0 : -1}
         snapPoints={snapPoints}
         enablePanDownToClose={true}
         style={{backgroundColor: 'transparent'}}
@@ -191,13 +207,49 @@ export const GridNumbers = ({navigation}: any) => {
         onChange={() => handleSheetChanges}>
         <Text
           style={{
-            marginTop: '15%',
+            marginTop: '5%',
             fontSize: 20,
             fontWeight: '600',
             textAlign: 'center',
           }}>
-          Options here 🎉
+          Settings 🎉
         </Text>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <AwesomeButton
+            progress={false}
+            width={screenWidth * 0.7}
+            height={screenHeight * 0.1}
+            backgroundColor={colors.gearGrey}
+            backgroundShadow={colors.gearGreyContour}
+            backgroundActive={colors.gearGreyActive}
+            backgroundDarker={colors.gearGreyContour}
+            disabled={password.length === 4}
+            onPress={async () => {
+              await handleChangePassword();
+            }}>
+            <Text>{'Change password'}</Text>
+          </AwesomeButton>
+          <AwesomeButton
+            progress={false}
+            width={screenWidth * 0.7}
+            height={screenHeight * 0.1}
+            backgroundColor={colors.gearGrey}
+            backgroundShadow={colors.gearGreyContour}
+            backgroundActive={colors.gearGreyActive}
+            backgroundDarker={colors.gearGreyContour}
+            disabled={password.length === 4}
+            style={{margin: 25}}
+            onPress={() => {
+              navigation.navigate('Home');
+            }}>
+            <Text>{'Change locker'}</Text>
+          </AwesomeButton>
+        </View>
       </BottomSheet>
     </View>
   );

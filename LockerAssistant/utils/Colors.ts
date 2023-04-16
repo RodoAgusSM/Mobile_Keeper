@@ -14,4 +14,5 @@ export const colors = {
     gearGrey: '#A6A6A6',
     gearGreyContour: '#C0C0C0',
     gearGreyActive: '#A7A7A7',
+    customYellow: '#FFFF90',
 }
