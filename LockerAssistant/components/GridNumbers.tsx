@@ -12,7 +12,6 @@ import AwesomeButton from 'react-native-really-awesome-button';
 import {LockType, LockStatus} from '../enums/Index';
 import {Lock} from '../types/Lock';
 import BottomSheet from '@gorhom/bottom-sheet';
-import {AnimatedKeyboardOptions} from 'react-native-reanimated';
 
 const digits: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, -1, 9, -2];
 
@@ -55,7 +54,9 @@ export const GridNumbers = ({navigation}: any) => {
   };
 
   const removeLastDigit = () => {
-    setPassword(password.slice(0, password.length - 1));
+    if (password.length > 0) {
+      setPassword(password.slice(0, password.length - 1));
+    }
   };
 
   const cleanAllDigits = () => {
@@ -79,7 +80,7 @@ export const GridNumbers = ({navigation}: any) => {
     navigation.navigate('Home');
   };
 
-  const handleChangePassword = async () => {
+  const handleResetPassword = async () => {
     await deleteData();
     cleanAllDigits();
     setOpenBottomSheet(false);
@@ -98,7 +99,7 @@ export const GridNumbers = ({navigation}: any) => {
           backgroundActive={colors.customGreyActive}
           backgroundDarker={colors.customGreyContour}
           disabled={password.length === 4}
-          onPress={() => {
+          onPressOut={() => {
             handlePress(number);
           }}>
           <Text>{number}</Text>
@@ -118,7 +119,7 @@ export const GridNumbers = ({navigation}: any) => {
           backgroundActive={colors.customRedActive}
           backgroundDarker={colors.customRedContour}
           disabled={password.length === 0}
-          onPress={() => {
+          onPressOut={() => {
             removeLastDigit();
           }}>
           <Text>{'C'}</Text>
@@ -138,7 +139,7 @@ export const GridNumbers = ({navigation}: any) => {
           backgroundActive={colors.customGrenActive}
           backgroundDarker={colors.customGrenContour}
           disabled={password.length < 4}
-          onPress={async () => await handleFinish()}>
+          onPressOut={async () => await handleFinish()}>
           <Text>{'✓'}</Text>
         </AwesomeButton>
       );
@@ -230,9 +231,9 @@ export const GridNumbers = ({navigation}: any) => {
             backgroundDarker={colors.gearGreyContour}
             disabled={password.length === 4}
             onPress={async () => {
-              await handleChangePassword();
+              await handleResetPassword();
             }}>
-            <Text>{'Change password'}</Text>
+            <Text>{'Reset password'}</Text>
           </AwesomeButton>
           <AwesomeButton
             progress={false}
