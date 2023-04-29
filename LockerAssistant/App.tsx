@@ -28,6 +28,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Home} from './views/Home';
 import {Locker} from './views/Locker';
+import {Passcode} from './views/Passcode';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -77,6 +78,7 @@ function App(): JSX.Element {
         }}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Locker" component={Locker} />
+        <Stack.Screen name="Passcode" component={Passcode} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,22 +1,20 @@
 import React, {useCallback, useEffect, useMemo, useRef} from 'react';
-import {Text, View, StyleSheet, FlatList} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 import {
   screenHeight,
   screenWidth,
-  storeData,
+  getData,
   deleteData,
   colors,
 } from '../utils/index';
 import AwesomeButton from 'react-native-really-awesome-button';
-import {LockType, LockStatus} from '../enums/Index';
 import {Lock} from '../types/Lock';
 import BottomSheet from '@gorhom/bottom-sheet';
 
-const digits: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, -1, 9, -2];
-
-export const GridNumbers = ({route, navigation}: any) => {
-  const [password, setPassword] = React.useState<number[]>([]);
+export const Code = ({route, navigation}: any) => {
+  const {updateScreen} = route?.params ?? false;
   const [openBottomSheet, setOpenBottomSheet] = React.useState<boolean>(false);
+  const [storage, setStorage] = React.useState<Lock>(null);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['65%'], []);
@@ -24,7 +22,9 @@ export const GridNumbers = ({route, navigation}: any) => {
     console.log('handleSheetChanges', index);
   }, []);
 
-  console.log('LOCKER', password);
+  useEffect(() => {
+    fetchStorage();
+  });
 
   useEffect(() => {
     if (!openBottomSheet) {
@@ -34,44 +34,15 @@ export const GridNumbers = ({route, navigation}: any) => {
     }
   }, [openBottomSheet]);
 
-  const handlePress = (digit: number) => {
-    if (password.length < 4) {
-      setPassword([...password, digit]);
-    }
-  };
-
-  const removeLastDigit = () => {
-    if (password.length > 0) {
-      setPassword(password.slice(0, password.length - 1));
-    }
-  };
-
-  const cleanAllDigits = () => {
-    setPassword([]);
-  };
-
-  const arrayToNumber = () => {
-    return password[0] !== 0
-      ? Number(password.join(''))
-      : password[0] + '' + Number(password.slice(1).join(''));
-  };
-
-  const handleFinish = async () => {
-    const lock = {
-      lockerNumber: 7,
-      lockType: LockType.electronicCombinationLock,
-      lockCode: arrayToNumber(),
-      lockStatus: LockStatus.locked,
-    } as Lock;
-    await storeData(lock);
-    cleanAllDigits();
-    navigation.navigate('Passcode', {updateScreen: true});
+  const fetchStorage = async () => {
+    const data = (await getData()) as Lock;
+    setStorage(data);
   };
 
   const handleResetPassword = async () => {
     await deleteData();
-    cleanAllDigits();
     setOpenBottomSheet(false);
+    navigation.navigate('Locker');
   };
 
   const handleChangeLocker = async () => {
@@ -80,68 +51,9 @@ export const GridNumbers = ({route, navigation}: any) => {
     navigation.navigate('Home');
   };
 
-  const renderBtns = (number: number) => {
-    if (number >= 0) {
-      return (
-        <AwesomeButton
-          progress={false}
-          width={screenWidth * 0.2}
-          height={screenHeight * 0.1}
-          style={{margin: '2%'}}
-          backgroundColor={
-            password.length < 4 ? colors.customGrey : colors.grey
-          }
-          backgroundShadow={colors.customGreyContour}
-          backgroundActive={colors.customGreyActive}
-          backgroundDarker={colors.customGreyContour}
-          disabled={password.length === 4}
-          onPressOut={() => {
-            handlePress(number);
-          }}>
-          <Text>{number}</Text>
-        </AwesomeButton>
-      );
-    } else if (number === -1) {
-      return (
-        <AwesomeButton
-          progress={false}
-          width={screenWidth * 0.2}
-          height={screenHeight * 0.1}
-          style={{margin: '2%'}}
-          backgroundColor={
-            password.length === 0 ? colors.customRed : colors.red
-          }
-          backgroundShadow={colors.customRedContour}
-          backgroundActive={colors.customRedActive}
-          backgroundDarker={colors.customRedContour}
-          disabled={password.length === 0}
-          onPressOut={() => {
-            removeLastDigit();
-          }}>
-          <Text>{'C'}</Text>
-        </AwesomeButton>
-      );
-    } else if (number === -2) {
-      return (
-        <AwesomeButton
-          progress={false}
-          width={screenWidth * 0.2}
-          height={screenHeight * 0.1}
-          style={{margin: '2%'}}
-          backgroundColor={
-            password.length < 4 ? colors.customGreen : colors.green
-          }
-          backgroundShadow={colors.customGrenContour}
-          backgroundActive={colors.customGrenActive}
-          backgroundDarker={colors.customGrenContour}
-          disabled={password.length < 4}
-          onPressOut={async () => await handleFinish()}>
-          <Text>{'✓'}</Text>
-        </AwesomeButton>
-      );
-    }
-    return <></>;
-  };
+  if (updateScreen && !storage) {
+    fetchStorage();
+  }
 
   return (
     <View style={GridNumbersStyles.container}>
@@ -154,29 +66,46 @@ export const GridNumbers = ({route, navigation}: any) => {
         }}>
         <View
           style={{
-            width: '40%',
-            height: '5%',
+            width: '95%',
+            height: '90%',
             justifyContent: 'center',
             alignItems: 'center',
-            borderWidth: 0.8,
-            borderRadius: 8,
-            borderColor: 'grey',
+            marginBottom: '4%',
+            borderWidth: 1,
+            borderRadius: 10,
+            backgroundColor: colors.darkerVanilla,
           }}>
-          <Text style={{fontSize: 18, fontWeight: '600'}}>{password}</Text>
+          <View
+            style={{
+              width: '100%',
+              height: '35%',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text
+              style={{
+                fontSize: 22,
+                fontWeight: '800',
+              }}>
+              {'Locker number'}
+            </Text>
+            <Text style={{fontSize: 20, fontWeight: '600', color: colors.blue}}>
+              {storage?.lockerNumber}
+            </Text>
+          </View>
+          <View
+            style={{
+              width: '100%',
+              height: '35%',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text style={{fontSize: 22, fontWeight: '800'}}>{'Passcode'}</Text>
+            <Text style={{fontSize: 20, fontWeight: '600', color: colors.blue}}>
+              {storage?.lockCode}
+            </Text>
+          </View>
         </View>
-        <FlatList
-          scrollEnabled={false}
-          data={digits}
-          horizontal={false}
-          columnWrapperStyle={{justifyContent: 'space-between', margin: '2%'}}
-          contentContainerStyle={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            flex: 1,
-          }}
-          renderItem={({item}) => renderBtns(item)}
-          numColumns={3}
-        />
         <AwesomeButton
           progress={false}
           width={screenWidth * 0.2}

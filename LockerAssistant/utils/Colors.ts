@@ -1,11 +1,12 @@
 export const colors = {
+    grey: '#808080',
     customGrey: '#BFBCA7',
     customGreyContour: '#92918b',
     customGreyActive: '#D3D3D3',
     red: '#FF0000',
     customRed: '#9C2D35',
     customRedContour: '#C54D55',
-    customRedActive: '#FFFF90',
+    customRedActive: '#F0112F',
     green: '#00FF00',
     customGreen: '#4F9D25',
     customGrenContour: '#539035',
@@ -15,4 +16,6 @@ export const colors = {
     gearGreyContour: '#C0C0C0',
     gearGreyActive: '#A7A7A7',
     customYellow: '#FFFF90',
+    darkerVanilla: '#F3E5AB',
+    blue: '#0000FF',
 }

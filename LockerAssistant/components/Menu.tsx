@@ -1,9 +1,20 @@
-import React from 'react';
-import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
-import {screenHeight, screenWidth} from '../utils/index';
+import React, {useEffect} from 'react';
+import {Text, View, StyleSheet} from 'react-native';
+import {getData, screenHeight, screenWidth} from '../utils/index';
 import {Button} from './Button';
+import {Lock} from '../types/Lock';
 
 export const Menu = ({navigation}: any) => {
+  useEffect(() => {
+    const fetchStorage = async () => {
+      const data = (await getData()) as Lock;
+      if (data) {
+        navigation.navigate('Passcode');
+      }
+    };
+    fetchStorage();
+  }, []);
+
   return (
     <View style={homeStyles.mainContainer}>
       <View style={homeStyles.upperViewContainer}>
