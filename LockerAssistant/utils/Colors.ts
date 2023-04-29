@@ -30,7 +30,6 @@ export const colors = {
     papayaWhite: '#FFEFD6',
     floralWhite: '#FEF9EF',
     melon: '#FEB3B1',
-    lightRed: '#FE6D73'
-
-
+    lightRed: '#FE6D73',
+    bittersweet: '#FF5C61',
 }

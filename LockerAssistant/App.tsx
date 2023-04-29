@@ -17,18 +17,13 @@ import {
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Home} from './views/Home';
 import {Locker} from './views/Locker';
 import {Passcode} from './views/Passcode';
+import './translation';
 
 type SectionProps = PropsWithChildren<{
   title: string;

@@ -1,5 +1,8 @@
 import React, {useCallback, useEffect, useMemo, useRef} from 'react';
 import {Text, View, StyleSheet, FlatList} from 'react-native';
+import {useTranslation} from 'react-i18next';
+import BottomSheet from '@gorhom/bottom-sheet';
+import AwesomeButton from 'react-native-really-awesome-button';
 import {
   screenHeight,
   screenWidth,
@@ -7,14 +10,14 @@ import {
   deleteData,
   colors,
 } from '../utils/index';
-import AwesomeButton from 'react-native-really-awesome-button';
 import {LockType, LockStatus} from '../enums/Index';
 import {Lock} from '../types/Lock';
-import BottomSheet from '@gorhom/bottom-sheet';
 
 const digits: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, -1, 9, -2];
 
-export const GridNumbers = ({route, navigation}: any) => {
+export const GridNumbers = ({navigation}: any) => {
+  const {t, i18n} = useTranslation();
+
   const [password, setPassword] = React.useState<number[]>([]);
   const [openBottomSheet, setOpenBottomSheet] = React.useState<boolean>(false);
 
@@ -23,8 +26,6 @@ export const GridNumbers = ({route, navigation}: any) => {
   const handleSheetChanges = useCallback((index: number) => {
     console.log('handleSheetChanges', index);
   }, []);
-
-  console.log('LOCKER', password);
 
   useEffect(() => {
     if (!openBottomSheet) {
@@ -181,7 +182,9 @@ export const GridNumbers = ({route, navigation}: any) => {
         style={{backgroundColor: 'transparent'}}
         backgroundStyle={GridNumbersStyles.bottomSheetBackgroundStyle}
         onChange={() => handleSheetChanges}>
-        <Text style={GridNumbersStyles.settingsTitleTxt}>Settings 🎉</Text>
+        <Text style={GridNumbersStyles.settingsTitleTxt}>
+          {t('BottomSheet.settings')}
+        </Text>
         <View style={GridNumbersStyles.bottomSheetView}>
           <AwesomeButton
             progress={false}
@@ -194,7 +197,7 @@ export const GridNumbers = ({route, navigation}: any) => {
             onPress={async () => {
               await handleResetPassword();
             }}>
-            <Text>{'Reset password'}</Text>
+            <Text>{t('BottomSheet.resetPassword')}</Text>
           </AwesomeButton>
           <AwesomeButton
             progress={false}
@@ -208,8 +211,38 @@ export const GridNumbers = ({route, navigation}: any) => {
             onPress={async () => {
               await handleChangeLocker();
             }}>
-            <Text>{'Change locker'}</Text>
+            <Text>{t('BottomSheet.changeLocker')}</Text>
           </AwesomeButton>
+          {i18n.language === 'sp' && (
+            <AwesomeButton
+              progress={false}
+              width={screenWidth * 0.55}
+              height={screenHeight * 0.08}
+              backgroundColor={colors.sunset}
+              backgroundShadow={colors.xanthous}
+              backgroundActive={colors.peach}
+              backgroundDarker={colors.xanthous}
+              onPressOut={() => {
+                i18n.changeLanguage('en');
+              }}>
+              <Text>{t('Language.english')}</Text>
+            </AwesomeButton>
+          )}
+          {i18n.language === 'en' && (
+            <AwesomeButton
+              progress={false}
+              width={screenWidth * 0.55}
+              height={screenHeight * 0.08}
+              backgroundColor={colors.sunset}
+              backgroundShadow={colors.xanthous}
+              backgroundActive={colors.peach}
+              backgroundDarker={colors.xanthous}
+              onPressOut={() => {
+                i18n.changeLanguage('sp');
+              }}>
+              <Text>{t('Language.spanish')}</Text>
+            </AwesomeButton>
+          )}
         </View>
       </BottomSheet>
     </View>

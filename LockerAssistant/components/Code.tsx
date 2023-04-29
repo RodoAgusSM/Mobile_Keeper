@@ -1,5 +1,8 @@
 import React, {useCallback, useEffect, useMemo, useRef} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
+import {useTranslation} from 'react-i18next';
+import BottomSheet from '@gorhom/bottom-sheet';
+import AwesomeButton from 'react-native-really-awesome-button';
 import {
   screenHeight,
   screenWidth,
@@ -7,11 +10,11 @@ import {
   deleteData,
   colors,
 } from '../utils/index';
-import AwesomeButton from 'react-native-really-awesome-button';
 import {Lock} from '../types/Lock';
-import BottomSheet from '@gorhom/bottom-sheet';
 
 export const Code = ({route, navigation}: any) => {
+  const {t, i18n} = useTranslation();
+
   const {updateScreen} = route?.params ?? false;
   const [openBottomSheet, setOpenBottomSheet] = React.useState<boolean>(false);
   const [storage, setStorage] = React.useState<Lock>(null);
@@ -138,8 +141,8 @@ export const Code = ({route, navigation}: any) => {
         enablePanDownToClose={true}
         style={{backgroundColor: 'transparent'}}
         backgroundStyle={{
-          borderTopStartRadius: 18,
-          borderTopEndRadius: 18,
+          borderTopStartRadius: 22,
+          borderTopEndRadius: 22,
           backgroundColor: colors.papayaWhite,
         }}
         onChange={() => handleSheetChanges}>
@@ -150,7 +153,7 @@ export const Code = ({route, navigation}: any) => {
             fontWeight: '600',
             textAlign: 'center',
           }}>
-          Settings 🎉
+          {t('BottomSheet.settings')}
         </Text>
         <View
           style={{
@@ -169,7 +172,7 @@ export const Code = ({route, navigation}: any) => {
             onPress={async () => {
               await handleResetPassword();
             }}>
-            <Text>{'Reset password'}</Text>
+            <Text>{t('BottomSheet.resetPassword')}</Text>
           </AwesomeButton>
           <AwesomeButton
             progress={false}
@@ -183,8 +186,38 @@ export const Code = ({route, navigation}: any) => {
             onPress={async () => {
               await handleChangeLocker();
             }}>
-            <Text>{'Change locker'}</Text>
+            <Text>{t('BottomSheet.changeLocker')}</Text>
           </AwesomeButton>
+          {i18n.language === 'sp' && (
+            <AwesomeButton
+              progress={false}
+              width={screenWidth * 0.55}
+              height={screenHeight * 0.08}
+              backgroundColor={colors.sunset}
+              backgroundShadow={colors.xanthous}
+              backgroundActive={colors.peach}
+              backgroundDarker={colors.xanthous}
+              onPressOut={() => {
+                i18n.changeLanguage('en');
+              }}>
+              <Text>{t('Language.english')}</Text>
+            </AwesomeButton>
+          )}
+          {i18n.language === 'en' && (
+            <AwesomeButton
+              progress={false}
+              width={screenWidth * 0.55}
+              height={screenHeight * 0.08}
+              backgroundColor={colors.sunset}
+              backgroundShadow={colors.xanthous}
+              backgroundActive={colors.peach}
+              backgroundDarker={colors.xanthous}
+              onPressOut={() => {
+                i18n.changeLanguage('sp');
+              }}>
+              <Text>{t('Language.spanish')}</Text>
+            </AwesomeButton>
+          )}
         </View>
       </BottomSheet>
     </View>
