@@ -17,5 +17,20 @@ export const colors = {
     gearGreyActive: '#A7A7A7',
     customYellow: '#FFFF90',
     darkerVanilla: '#F3E5AB',
-    blue: '#0000FF',
+
+    cerulean: '#227C9D',
+    moonstone: '#1DA0A8',
+    lightSeaGreen: '#17C3B2',
+    esmerald: '#75BD81',
+    celadon: '#8BC795',
+    sage: '#C5C986',
+    xanthous: '#FFB947',
+    sunset: '#FFCB77',
+    peach: '#FFE2B3',
+    papayaWhite: '#FFEFD6',
+    floralWhite: '#FEF9EF',
+    melon: '#FEB3B1',
+    lightRed: '#FE6D73'
+
+
 }

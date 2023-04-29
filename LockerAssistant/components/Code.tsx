@@ -73,7 +73,7 @@ export const Code = ({route, navigation}: any) => {
             marginBottom: '4%',
             borderWidth: 1,
             borderRadius: 10,
-            backgroundColor: colors.darkerVanilla,
+            backgroundColor: colors.peach,
           }}>
           <View
             style={{
@@ -89,7 +89,13 @@ export const Code = ({route, navigation}: any) => {
               }}>
               {'Locker number'}
             </Text>
-            <Text style={{fontSize: 20, fontWeight: '600', color: colors.blue}}>
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: '600',
+                color: colors.cerulean,
+                textDecorationLine: 'underline',
+              }}>
               {storage?.lockerNumber}
             </Text>
           </View>
@@ -101,7 +107,13 @@ export const Code = ({route, navigation}: any) => {
               alignItems: 'center',
             }}>
             <Text style={{fontSize: 22, fontWeight: '800'}}>{'Passcode'}</Text>
-            <Text style={{fontSize: 20, fontWeight: '600', color: colors.blue}}>
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: '700',
+                color: colors.cerulean,
+                textDecorationLine: 'underline',
+              }}>
               {storage?.lockCode}
             </Text>
           </View>
@@ -128,6 +140,7 @@ export const Code = ({route, navigation}: any) => {
         backgroundStyle={{
           borderTopStartRadius: 18,
           borderTopEndRadius: 18,
+          backgroundColor: colors.papayaWhite,
         }}
         onChange={() => handleSheetChanges}>
         <Text
@@ -149,10 +162,10 @@ export const Code = ({route, navigation}: any) => {
             progress={false}
             width={screenWidth * 0.55}
             height={screenHeight * 0.08}
-            backgroundColor={colors.gearGrey}
-            backgroundShadow={colors.gearGreyContour}
-            backgroundActive={colors.gearGreyActive}
-            backgroundDarker={colors.gearGreyContour}
+            backgroundColor={colors.sunset}
+            backgroundShadow={colors.xanthous}
+            backgroundActive={colors.peach}
+            backgroundDarker={colors.xanthous}
             onPress={async () => {
               await handleResetPassword();
             }}>
@@ -162,10 +175,10 @@ export const Code = ({route, navigation}: any) => {
             progress={false}
             width={screenWidth * 0.55}
             height={screenHeight * 0.08}
-            backgroundColor={colors.gearGrey}
-            backgroundShadow={colors.gearGreyContour}
-            backgroundActive={colors.gearGreyActive}
-            backgroundDarker={colors.gearGreyContour}
+            backgroundColor={colors.sunset}
+            backgroundShadow={colors.xanthous}
+            backgroundActive={colors.peach}
+            backgroundDarker={colors.xanthous}
             style={{margin: 25}}
             onPress={async () => {
               await handleChangeLocker();
@@ -184,6 +197,6 @@ const GridNumbersStyles = StyleSheet.create({
     height: screenHeight,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.vanilla,
+    backgroundColor: colors.floralWhite,
   },
 });

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-import {getData, screenHeight, screenWidth} from '../utils/index';
-import {Button} from './Button';
+import {colors, getData, screenHeight, screenWidth} from '../utils/index';
+import AwesomeButton from 'react-native-really-awesome-button';
 import {Lock} from '../types/Lock';
 
 export const Menu = ({navigation}: any) => {
@@ -19,15 +19,38 @@ export const Menu = ({navigation}: any) => {
     <View style={homeStyles.mainContainer}>
       <View style={homeStyles.upperViewContainer}>
         <Text style={homeStyles.header}>
-          Select the type of locker you are going to use
+          {'Select the type of locker you are going to use'}
         </Text>
       </View>
       <View style={homeStyles.lowerViewContainer}>
-        <Button text="LockPad" event={() => navigation.navigate('Locker')} />
-        <Button
-          text="Electronic Combination Locks"
-          event={() => navigation.navigate('Locker')}
-        />
+        <AwesomeButton
+          progress={false}
+          width={screenWidth * 0.7}
+          height={screenHeight * 0.08}
+          style={{margin: '2%'}}
+          backgroundColor={colors.lightSeaGreen}
+          backgroundShadow={colors.moonstone}
+          backgroundActive={colors.cerulean}
+          backgroundDarker={colors.moonstone}
+          onPressOut={() => {
+            navigation.navigate('Locker');
+          }}>
+          <Text>{'LockPad'}</Text>
+        </AwesomeButton>
+        <AwesomeButton
+          progress={false}
+          width={screenWidth * 0.7}
+          height={screenHeight * 0.08}
+          style={{margin: '2%'}}
+          backgroundColor={colors.celadon}
+          backgroundShadow={colors.esmerald}
+          backgroundActive={colors.sage}
+          backgroundDarker={colors.esmerald}
+          onPressOut={() => {
+            navigation.navigate('Locker');
+          }}>
+          <Text>{'Electronic Combination Locks'}</Text>
+        </AwesomeButton>
       </View>
     </View>
   );
@@ -41,28 +64,26 @@ const homeStyles = StyleSheet.create({
     alignItems: 'center',
     height: screenHeight,
     width: screenWidth,
-    backgroundColor: '#10F212',
+    backgroundColor: colors.floralWhite,
   },
   upperViewContainer: {
     width: '95%',
     height: '10%',
-    backgroundColor: '#F0F01F',
-    marginTop: 10,
-    borderRadius: 10,
+    marginBottom: '20%',
+    borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: colors.peach,
+  },
+  header: {
+    fontSize: 15,
+    fontWeight: '600',
   },
   lowerViewContainer: {
     width: '95%',
-    height: '80%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#0001FF',
     marginBottom: 10,
     borderRadius: 10,
-  },
-  header: {
-    fontSize: 14,
-    fontWeight: '500',
   },
 });

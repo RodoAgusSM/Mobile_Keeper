@@ -145,35 +145,18 @@ export const GridNumbers = ({route, navigation}: any) => {
 
   return (
     <View style={GridNumbersStyles.container}>
-      <View
-        style={{
-          height: screenHeight * 0.8,
-          width: '95%',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <View
-          style={{
-            width: '40%',
-            height: '5%',
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderWidth: 0.8,
-            borderRadius: 8,
-            borderColor: 'grey',
-          }}>
-          <Text style={{fontSize: 18, fontWeight: '600'}}>{password}</Text>
+      <View style={GridNumbersStyles.containerView}>
+        <View style={GridNumbersStyles.passwordView}>
+          <Text style={GridNumbersStyles.passwordTxt}>{password}</Text>
         </View>
         <FlatList
           scrollEnabled={false}
           data={digits}
           horizontal={false}
           columnWrapperStyle={{justifyContent: 'space-between', margin: '2%'}}
-          contentContainerStyle={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            flex: 1,
-          }}
+          contentContainerStyle={
+            GridNumbersStyles.flatlistContentContainerStyle
+          }
           renderItem={({item}) => renderBtns(item)}
           numColumns={3}
         />
@@ -196,34 +179,18 @@ export const GridNumbers = ({route, navigation}: any) => {
         snapPoints={snapPoints}
         enablePanDownToClose={true}
         style={{backgroundColor: 'transparent'}}
-        backgroundStyle={{
-          borderTopStartRadius: 18,
-          borderTopEndRadius: 18,
-        }}
+        backgroundStyle={GridNumbersStyles.bottomSheetBackgroundStyle}
         onChange={() => handleSheetChanges}>
-        <Text
-          style={{
-            marginTop: '5%',
-            fontSize: 20,
-            fontWeight: '600',
-            textAlign: 'center',
-          }}>
-          Settings 🎉
-        </Text>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+        <Text style={GridNumbersStyles.settingsTitleTxt}>Settings 🎉</Text>
+        <View style={GridNumbersStyles.bottomSheetView}>
           <AwesomeButton
             progress={false}
             width={screenWidth * 0.55}
             height={screenHeight * 0.08}
-            backgroundColor={colors.gearGrey}
-            backgroundShadow={colors.gearGreyContour}
-            backgroundActive={colors.gearGreyActive}
-            backgroundDarker={colors.gearGreyContour}
+            backgroundColor={colors.sunset}
+            backgroundShadow={colors.xanthous}
+            backgroundActive={colors.peach}
+            backgroundDarker={colors.xanthous}
             onPress={async () => {
               await handleResetPassword();
             }}>
@@ -233,10 +200,10 @@ export const GridNumbers = ({route, navigation}: any) => {
             progress={false}
             width={screenWidth * 0.55}
             height={screenHeight * 0.08}
-            backgroundColor={colors.gearGrey}
-            backgroundShadow={colors.gearGreyContour}
-            backgroundActive={colors.gearGreyActive}
-            backgroundDarker={colors.gearGreyContour}
+            backgroundColor={colors.sunset}
+            backgroundShadow={colors.xanthous}
+            backgroundActive={colors.peach}
+            backgroundDarker={colors.xanthous}
             style={{margin: 25}}
             onPress={async () => {
               await handleChangeLocker();
@@ -255,6 +222,39 @@ const GridNumbersStyles = StyleSheet.create({
     height: screenHeight,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.vanilla,
+    backgroundColor: colors.floralWhite,
   },
+  containerView: {
+    height: screenHeight * 0.8,
+    width: '95%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  passwordView: {
+    width: '40%',
+    height: '5%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 0.8,
+    borderRadius: 8,
+    borderColor: 'grey',
+  },
+  passwordTxt: {fontSize: 18, fontWeight: '600'},
+  flatlistContentContainerStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+  },
+  bottomSheetBackgroundStyle: {
+    borderTopStartRadius: 22,
+    borderTopEndRadius: 22,
+    backgroundColor: colors.papayaWhite,
+  },
+  settingsTitleTxt: {
+    marginTop: '5%',
+    fontSize: 20,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  bottomSheetView: {flex: 1, justifyContent: 'center', alignItems: 'center'},
 });
