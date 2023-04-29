@@ -2,7 +2,7 @@ export default {
     Menu: {
         selectTypeOfLocker: "Seleccione el tipo de candado que desea usar",
         Lockpad: "Clásico",
-        electronicCombinationLock: "Cambinacion electronica",
+        electronicCombinationLock: "Combinación electrónica",
     },
     Code: {
         lockerNumber: "Número de casillero",
