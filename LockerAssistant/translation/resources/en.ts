@@ -4,6 +4,10 @@ export default {
         Lockpad: "Lockpad",
         electronicCombinationLock: "Electronic Combination Lock",
     },
+    Code: {
+        lockerNumber: "Locker number",
+        passcode: "Passcode",
+    },
     BottomSheet: {
         settings: "Settings 🎉",
         resetPassword: "Reset password",

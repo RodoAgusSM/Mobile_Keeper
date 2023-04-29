@@ -90,7 +90,7 @@ export const Code = ({route, navigation}: any) => {
                 fontSize: 22,
                 fontWeight: '800',
               }}>
-              {'Locker number'}
+              {t('Code.lockerNumber')}
             </Text>
             <Text
               style={{
@@ -109,7 +109,9 @@ export const Code = ({route, navigation}: any) => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Text style={{fontSize: 22, fontWeight: '800'}}>{'Passcode'}</Text>
+            <Text style={{fontSize: 22, fontWeight: '800'}}>
+              {t('Code.passcode')}
+            </Text>
             <Text
               style={{
                 fontSize: 20,

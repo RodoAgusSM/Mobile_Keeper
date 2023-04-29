@@ -4,6 +4,10 @@ export default {
         Lockpad: "Clásico",
         electronicCombinationLock: "Cambinacion electronica",
     },
+    Code: {
+        lockerNumber: "Número de casillero",
+        passcode: "Contraseña",
+    },
     BottomSheet: {
         settings: "Ajustes 🎉",
         resetPassword: "Resetear contraseña",
