@@ -5,79 +5,58 @@
  * @format
  */
 import 'react-native-gesture-handler';
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import React, {useEffect, useState} from 'react';
+import {StatusBar, StyleSheet} from 'react-native';
+import './translation';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Home} from './views/Home';
 import {Locker} from './views/Locker';
 import {Passcode} from './views/Passcode';
-import './translation';
+import {colors, getData} from './utils';
+import {Lock} from './types/Lock';
+import {Spinner} from './components/Spinner';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+const App = () => {
   const Stack = createNativeStackNavigator();
+  const [hasItemStored, setHasItemStored] = useState<boolean>();
+
+  useEffect(() => {
+    const fetchStorage = async () => {
+      const data = (await getData()) as Lock;
+      if (data) {
+        setHasItemStored(true);
+      } else {
+        setHasItemStored(false);
+      }
+    };
+    fetchStorage();
+  }, []);
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Locker" component={Locker} />
-        <Stack.Screen name="Passcode" component={Passcode} />
-      </Stack.Navigator>
+      <StatusBar
+        hidden={false}
+        animated={true}
+        networkActivityIndicatorVisible={true}
+        backgroundColor={'black'}
+      />
+      {hasItemStored === undefined ? (
+        <Spinner />
+      ) : (
+        <Stack.Navigator
+          initialRouteName={hasItemStored ? 'Passcode' : 'Home'}
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Locker" component={Locker} />
+          <Stack.Screen name="Passcode" component={Passcode} />
+        </Stack.Navigator>
+      )}
     </NavigationContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
   sectionContainer: {
