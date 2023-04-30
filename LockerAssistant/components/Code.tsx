@@ -7,6 +7,7 @@ import {
   screenHeight,
   screenWidth,
   getData,
+  removePasswordData,
   deleteData,
   colors,
 } from '../utils/index';
@@ -17,13 +18,11 @@ export const Code = ({route, navigation}: any) => {
 
   const {updateScreen} = route?.params ?? false;
   const [openBottomSheet, setOpenBottomSheet] = React.useState<boolean>(false);
-  const [storage, setStorage] = React.useState<Lock>(null);
+  const [storage, setStorage] = React.useState<Lock>();
 
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['65%'], []);
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
+  const handleSheetChanges = useCallback((index: number) => {}, []);
 
   useEffect(() => {
     fetchStorage();
@@ -43,9 +42,12 @@ export const Code = ({route, navigation}: any) => {
   };
 
   const handleResetPassword = async () => {
-    await deleteData();
+    await removePasswordData();
     setOpenBottomSheet(false);
-    navigation.navigate('Locker');
+    navigation.navigate('Locker', {
+      passwordLength: storage?.lockLenght,
+      lockerNumber: storage?.lockerNumber,
+    });
   };
 
   const handleChangeLocker = async () => {

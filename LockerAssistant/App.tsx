@@ -11,9 +11,10 @@ import './translation';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Home} from './views/Home';
+import {Setting} from './views/Setting';
 import {Locker} from './views/Locker';
 import {Passcode} from './views/Passcode';
-import {colors, getData} from './utils';
+import {getData} from './utils';
 import {Lock} from './types/Lock';
 import {Spinner} from './components/Spinner';
 
@@ -50,6 +51,7 @@ const App = () => {
             headerShown: false,
           }}>
           <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Setting" component={Setting} />
           <Stack.Screen name="Locker" component={Locker} />
           <Stack.Screen name="Passcode" component={Passcode} />
         </Stack.Navigator>

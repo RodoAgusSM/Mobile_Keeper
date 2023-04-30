@@ -1,8 +1,14 @@
 export default {
     Menu: {
-        selectTypeOfLocker: "Seleccione el tipo de candado que desea usar",
-        Lockpad: "Clásico",
-        electronicCombinationLock: "Combinación electrónica",
+        title: "🔒 Bienvenido a Locker Assistant 🔒",
+        start: "Empecemos! 🔑",
+        information: "ⓘ",
+    },
+    Settings: {
+        lockerNumber: "Número de casillero",
+        lockerNumberPlaceholder: "Ejemplo: 20",
+        passwordLength: "Largo de la contraseña",
+        continue: "Continuar",
     },
     Code: {
         lockerNumber: "Número de casillero",

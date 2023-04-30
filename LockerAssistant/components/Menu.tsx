@@ -7,7 +7,6 @@ import {Lock} from '../types/Lock';
 
 export const Menu = ({navigation}: any) => {
   const {t, i18n} = useTranslation();
-  console.log(i18n.language);
   useEffect(() => {
     const fetchStorage = async () => {
       const data = (await getData()) as Lock;
@@ -21,23 +20,9 @@ export const Menu = ({navigation}: any) => {
   return (
     <View style={homeStyles.mainContainer}>
       <View style={homeStyles.upperViewContainer}>
-        <Text style={homeStyles.header}>{t('Menu.selectTypeOfLocker')}</Text>
+        <Text style={homeStyles.header}>{t('Menu.title')}</Text>
       </View>
       <View style={homeStyles.lowerViewContainer}>
-        <AwesomeButton
-          progress={false}
-          width={screenWidth * 0.7}
-          height={screenHeight * 0.08}
-          style={{margin: '2%'}}
-          backgroundColor={colors.lightSeaGreen}
-          backgroundShadow={colors.moonstone}
-          backgroundActive={colors.cerulean}
-          backgroundDarker={colors.moonstone}
-          onPressOut={() => {
-            navigation.navigate('Locker');
-          }}>
-          <Text>{t('Menu.Lockpad')}</Text>
-        </AwesomeButton>
         <AwesomeButton
           progress={false}
           width={screenWidth * 0.7}
@@ -48,9 +33,9 @@ export const Menu = ({navigation}: any) => {
           backgroundActive={colors.sage}
           backgroundDarker={colors.esmerald}
           onPressOut={() => {
-            navigation.navigate('Locker');
+            navigation.navigate('Setting');
           }}>
-          <Text>{t('Menu.electronicCombinationLock')}</Text>
+          <Text>{t('Menu.start')}</Text>
         </AwesomeButton>
         {i18n.language === 'sp' && (
           <AwesomeButton
@@ -82,6 +67,22 @@ export const Menu = ({navigation}: any) => {
               i18n.changeLanguage('sp');
             }}>
             <Text>{t('Language.spanish')}</Text>
+          </AwesomeButton>
+        )}
+        {false && (
+          <AwesomeButton
+            progress={false}
+            width={screenWidth * 0.15}
+            height={screenHeight * 0.08}
+            style={{margin: '2%'}}
+            backgroundColor={colors.lightSeaGreen}
+            backgroundShadow={colors.moonstone}
+            backgroundActive={colors.cerulean}
+            backgroundDarker={colors.moonstone}
+            onPressOut={() => {
+              navigation.navigate('Locker');
+            }}>
+            <Text style={{fontSize: 18}}>{t('Menu.information')}</Text>
           </AwesomeButton>
         )}
       </View>

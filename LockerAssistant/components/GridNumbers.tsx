@@ -15,17 +15,18 @@ import {Lock} from '../types/Lock';
 
 const digits: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, -1, 9, -2];
 
-export const GridNumbers = ({navigation}: any) => {
+export const GridNumbers = ({route, navigation}: any) => {
   const {t, i18n} = useTranslation();
+
+  const {passwordLength} = route?.params ?? 4;
+  const {lockerNumber} = route?.params ?? 1;
 
   const [password, setPassword] = React.useState<number[]>([]);
   const [openBottomSheet, setOpenBottomSheet] = React.useState<boolean>(false);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['65%'], []);
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
+  const handleSheetChanges = useCallback((index: number) => {}, []);
 
   useEffect(() => {
     if (!openBottomSheet) {
@@ -36,7 +37,7 @@ export const GridNumbers = ({navigation}: any) => {
   }, [openBottomSheet]);
 
   const handlePress = (digit: number) => {
-    if (password.length < 4) {
+    if (password.length < passwordLength) {
       setPassword([...password, digit]);
     }
   };
@@ -59,7 +60,8 @@ export const GridNumbers = ({navigation}: any) => {
 
   const handleFinish = async () => {
     const lock = {
-      lockerNumber: 7,
+      lockerNumber: lockerNumber as number,
+      lockLenght: passwordLength,
       lockType: LockType.electronicCombinationLock,
       lockCode: arrayToNumber(),
       lockStatus: LockStatus.locked,
@@ -67,12 +69,6 @@ export const GridNumbers = ({navigation}: any) => {
     await storeData(lock);
     cleanAllDigits();
     navigation.navigate('Passcode', {updateScreen: true});
-  };
-
-  const handleResetPassword = async () => {
-    await deleteData();
-    cleanAllDigits();
-    setOpenBottomSheet(false);
   };
 
   const handleChangeLocker = async () => {
@@ -90,12 +86,12 @@ export const GridNumbers = ({navigation}: any) => {
           height={screenHeight * 0.1}
           style={{margin: '2%'}}
           backgroundColor={
-            password.length < 4 ? colors.customGrey : colors.grey
+            password.length < passwordLength ? colors.customGrey : colors.grey
           }
           backgroundShadow={colors.customGreyContour}
           backgroundActive={colors.customGreyActive}
           backgroundDarker={colors.customGreyContour}
-          disabled={password.length === 4}
+          disabled={password.length === passwordLength}
           onPressOut={() => {
             handlePress(number);
           }}>
@@ -130,12 +126,12 @@ export const GridNumbers = ({navigation}: any) => {
           height={screenHeight * 0.1}
           style={{margin: '2%'}}
           backgroundColor={
-            password.length < 4 ? colors.customGreen : colors.green
+            password.length < passwordLength ? colors.customGreen : colors.green
           }
           backgroundShadow={colors.customGrenContour}
           backgroundActive={colors.customGrenActive}
           backgroundDarker={colors.customGrenContour}
-          disabled={password.length < 4}
+          disabled={password.length < passwordLength}
           onPressOut={async () => await handleFinish()}>
           <Text>{'✓'}</Text>
         </AwesomeButton>
@@ -186,19 +182,6 @@ export const GridNumbers = ({navigation}: any) => {
           {t('BottomSheet.settings')}
         </Text>
         <View style={GridNumbersStyles.bottomSheetView}>
-          <AwesomeButton
-            progress={false}
-            width={screenWidth * 0.55}
-            height={screenHeight * 0.08}
-            backgroundColor={colors.sunset}
-            backgroundShadow={colors.xanthous}
-            backgroundActive={colors.peach}
-            backgroundDarker={colors.xanthous}
-            onPress={async () => {
-              await handleResetPassword();
-            }}>
-            <Text>{t('BottomSheet.resetPassword')}</Text>
-          </AwesomeButton>
           <AwesomeButton
             progress={false}
             width={screenWidth * 0.55}
@@ -289,5 +272,9 @@ const GridNumbersStyles = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'center',
   },
-  bottomSheetView: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+  bottomSheetView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

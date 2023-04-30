@@ -1,8 +1,14 @@
 export default {
     Menu: {
-        selectTypeOfLocker: "Select the type of locker you are going to use",
-        Lockpad: "Lockpad",
-        electronicCombinationLock: "Electronic Combination Lock",
+        title: "🔒 Welcome to Locker Assistant 🔒",
+        start: "Let's go! 🔑",
+        information: "ⓘ",
+    },
+    Settings: {
+        lockerNumber: "Locker number",
+        lockerNumberPlaceholder: "Example: 20",
+        passwordLength: "Password length",
+        continue: "Continue",
     },
     Code: {
         lockerNumber: "Locker number",
