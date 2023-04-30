@@ -4,9 +4,16 @@ import {useTranslation} from 'react-i18next';
 import {colors, getData, screenHeight, screenWidth} from '../utils/index';
 import AwesomeButton from 'react-native-really-awesome-button';
 import {Lock} from '../types/Lock';
+import {Popup} from './Popup';
 
 export const Menu = ({navigation}: any) => {
   const {t, i18n} = useTranslation();
+  const [showPopup, setShowPopup] = React.useState<boolean>(false);
+
+  const handlePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
   useEffect(() => {
     const fetchStorage = async () => {
       const data = (await getData()) as Lock;
@@ -32,6 +39,7 @@ export const Menu = ({navigation}: any) => {
           backgroundShadow={colors.esmerald}
           backgroundActive={colors.sage}
           backgroundDarker={colors.esmerald}
+          disabled={showPopup}
           onPressOut={() => {
             navigation.navigate('Setting');
           }}>
@@ -42,11 +50,12 @@ export const Menu = ({navigation}: any) => {
             progress={false}
             width={screenWidth * 0.7}
             height={screenHeight * 0.08}
-            style={{marginTop: '10%'}}
+            style={{marginTop: '2%'}}
             backgroundColor={colors.lightRed}
             backgroundShadow={colors.bittersweet}
             backgroundActive={colors.melon}
             backgroundDarker={colors.bittersweet}
+            disabled={showPopup}
             onPressOut={() => {
               i18n.changeLanguage('en');
             }}>
@@ -58,34 +67,35 @@ export const Menu = ({navigation}: any) => {
             progress={false}
             width={screenWidth * 0.7}
             height={screenHeight * 0.08}
-            style={{marginTop: '10%'}}
+            style={{marginTop: '2%'}}
             backgroundColor={colors.lightRed}
             backgroundShadow={colors.bittersweet}
             backgroundActive={colors.melon}
             backgroundDarker={colors.bittersweet}
+            disabled={showPopup}
             onPressOut={() => {
               i18n.changeLanguage('sp');
             }}>
             <Text>{t('Language.spanish')}</Text>
           </AwesomeButton>
         )}
-        {false && (
-          <AwesomeButton
-            progress={false}
-            width={screenWidth * 0.15}
-            height={screenHeight * 0.08}
-            style={{margin: '2%'}}
-            backgroundColor={colors.lightSeaGreen}
-            backgroundShadow={colors.moonstone}
-            backgroundActive={colors.cerulean}
-            backgroundDarker={colors.moonstone}
-            onPressOut={() => {
-              navigation.navigate('Locker');
-            }}>
-            <Text style={{fontSize: 18}}>{t('Menu.information')}</Text>
-          </AwesomeButton>
-        )}
+        <AwesomeButton
+          progress={false}
+          width={screenWidth * 0.15}
+          height={screenHeight * 0.08}
+          style={{marginTop: '4%'}}
+          backgroundColor={colors.lightSeaGreen}
+          backgroundShadow={colors.moonstone}
+          backgroundActive={colors.cerulean}
+          backgroundDarker={colors.moonstone}
+          disabled={showPopup}
+          onPressOut={() => {
+            handlePopup();
+          }}>
+          <Text style={{fontSize: 18}}>{t('Menu.information')}</Text>
+        </AwesomeButton>
       </View>
+      {showPopup && <Popup event={handlePopup} />}
     </View>
   );
 };
@@ -105,6 +115,7 @@ const homeStyles = StyleSheet.create({
     height: '10%',
     marginBottom: '25%',
     borderRadius: 12,
+    borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.peach,

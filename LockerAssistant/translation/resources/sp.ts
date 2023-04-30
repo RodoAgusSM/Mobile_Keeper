@@ -17,10 +17,23 @@ export default {
     BottomSheet: {
         settings: "Ajustes 🎉",
         resetPassword: "Resetear contraseña",
-        changeLocker: "Cambiar candado",
+        eraseLocker: "Borrar candado",
     },
     Language: {
         english: "Inglés 🇺🇸",
         spanish: "Españól 🇪🇸",
+    },
+    Info: {
+        engineerInfo: "Hola soy Rodolfo Agustín Silva Messano, Ingeniero en Sistemas creador de esta app. Si te gustó mirá mis redes sociales 😀",
+        githubMedia: "Github",
+        github: "@RodoAgusSM",
+        githubURL: "https://github.com/RodoAgusSM",
+        instagramMedia: "Instagram",
+        instagram: "@rodoagus_94",
+        instagramURL: "https://www.instagram.com/rodoagus_94",
+        twitterMedia: "Twitter",
+        twitter: "@RodoAgusSM",
+        twitterURL: "https://twitter.com/RodoAgusSM",
+        close: "Cerrar",
     }
 };

@@ -71,7 +71,7 @@ export const GridNumbers = ({route, navigation}: any) => {
     navigation.navigate('Passcode', {updateScreen: true});
   };
 
-  const handleChangeLocker = async () => {
+  const handleEraseLocker = async () => {
     await deleteData();
     setOpenBottomSheet(false);
     navigation.navigate('Home');
@@ -192,9 +192,9 @@ export const GridNumbers = ({route, navigation}: any) => {
             backgroundDarker={colors.xanthous}
             style={{margin: 25}}
             onPress={async () => {
-              await handleChangeLocker();
+              await handleEraseLocker();
             }}>
-            <Text>{t('BottomSheet.changeLocker')}</Text>
+            <Text>{t('BottomSheet.eraseLocker')}</Text>
           </AwesomeButton>
           {i18n.language === 'sp' && (
             <AwesomeButton
