@@ -27,7 +27,9 @@ export const Menu = ({navigation}: any) => {
   return (
     <View style={homeStyles.mainContainer}>
       <View style={homeStyles.upperViewContainer}>
-        <Text style={homeStyles.header}>{t('Menu.title')}</Text>
+        <View style={homeStyles.subUpperViewContainer}>
+          <Text style={homeStyles.header}>{t('Menu.title')}</Text>
+        </View>
       </View>
       <View style={homeStyles.lowerViewContainer}>
         <AwesomeButton
@@ -104,16 +106,21 @@ const homeStyles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
     alignItems: 'center',
     height: screenHeight,
     width: screenWidth,
     backgroundColor: colors.floralWhite,
   },
   upperViewContainer: {
+    flex: 1,
     width: '95%',
-    height: '10%',
-    marginBottom: '25%',
+    marginTop: '10%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  subUpperViewContainer: {
+    width: '100%',
+    height: '50%',
     borderRadius: 12,
     borderWidth: 1,
     justifyContent: 'center',
@@ -125,6 +132,7 @@ const homeStyles = StyleSheet.create({
     fontWeight: '600',
   },
   lowerViewContainer: {
+    flex: 4,
     width: '95%',
     justifyContent: 'center',
     alignItems: 'center',
