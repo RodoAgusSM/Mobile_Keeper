@@ -21,34 +21,40 @@ export const Configuration = ({navigation}: any) => {
   return (
     <View style={settingStyles.container}>
       <View style={settingStyles.inputsView}>
-        <Text style={settingStyles.lockerNumberTxt}>
-          {t('Settings.lockerNumber')}
-        </Text>
-        <TextInput
-          style={settingStyles.textInput}
-          keyboardType="numeric"
-          onChangeText={onChangeLockerNumber}
-          value={lockerNumber}
-          placeholder={t('Settings.lockerNumberPlaceholder') ?? ''}
-        />
-        <Text style={settingStyles.passwordLengthTxt}>
-          {t('Settings.passwordLength')}
-        </Text>
-        <Text style={settingStyles.numberLengthTxt}>
-          {passwordLength && +passwordLength.toFixed(3)}
-        </Text>
-        <Slider
-          style={{width: screenWidth * 0.7}}
-          minimumTrackTintColor={colors.xanthous}
-          thumbTintColor={colors.xanthous}
-          value={passwordLength}
-          onValueChange={onChangePasswordLength}
-          step={1}
-          lowerLimit={3}
-          upperLimit={6}
-          minimumValue={3}
-          maximumValue={6}
-        />
+        <View style={settingStyles.subInputsView}>
+          <View style={settingStyles.InputsDividerView}>
+            <Text style={settingStyles.lockerNumberTxt}>
+              {t('Settings.lockerNumber')}
+            </Text>
+            <TextInput
+              style={settingStyles.textInput}
+              keyboardType="numeric"
+              onChangeText={onChangeLockerNumber}
+              value={lockerNumber}
+              placeholder={t('Settings.lockerNumberPlaceholder') ?? ''}
+            />
+          </View>
+          <View style={settingStyles.InputsDividerView}>
+            <Text style={settingStyles.passwordLengthTxt}>
+              {t('Settings.passwordLength')}
+            </Text>
+            <Text style={settingStyles.numberLengthTxt}>
+              {passwordLength && +passwordLength.toFixed(3)}
+            </Text>
+            <Slider
+              style={{width: screenWidth * 0.7}}
+              minimumTrackTintColor={colors.xanthous}
+              thumbTintColor={colors.xanthous}
+              value={passwordLength}
+              onValueChange={onChangePasswordLength}
+              step={1}
+              lowerLimit={3}
+              upperLimit={6}
+              minimumValue={3}
+              maximumValue={6}
+            />
+          </View>
+        </View>
       </View>
       <View style={settingStyles.buttonView}>
         <AwesomeButton
@@ -84,20 +90,31 @@ const settingStyles = StyleSheet.create({
     backgroundColor: colors.floralWhite,
   },
   inputsView: {
-    width: '95%',
+    width: '100%',
     display: 'flex',
     flex: 3,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: '10%',
+  },
+  subInputsView: {
+    width: '95%',
+    height: '90%',
+    marginTop: '5%',
+    alignItems: 'center',
     borderWidth: 1,
     borderRadius: 10,
     backgroundColor: colors.peach,
+  },
+  InputsDividerView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   lockerNumberTxt: {
     fontSize: 22,
     fontWeight: '800',
     textDecorationLine: 'underline',
+    marginBottom: '2%',
   },
   textInput: {
     borderBottomWidth: 2,
@@ -105,15 +122,12 @@ const settingStyles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     textAlign: 'center',
-    marginTop: '2%',
-    marginBottom: '8%',
   },
   passwordLengthTxt: {
     fontSize: 22,
     fontWeight: '800',
     textDecorationLine: 'underline',
-    marginTop: '8%',
-    marginBottom: '4%',
+    marginBottom: '2%',
   },
   numberLengthTxt: {
     fontSize: 20,
