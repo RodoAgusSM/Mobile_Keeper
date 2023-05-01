@@ -84,7 +84,6 @@ export const GridNumbers = ({route, navigation}: any) => {
           progress={false}
           width={screenWidth * 0.2}
           height={screenHeight * 0.1}
-          style={{margin: '2%'}}
           backgroundColor={
             password.length < passwordLength ? colors.customGrey : colors.grey
           }
@@ -104,7 +103,6 @@ export const GridNumbers = ({route, navigation}: any) => {
           progress={false}
           width={screenWidth * 0.2}
           height={screenHeight * 0.1}
-          style={{margin: '2%'}}
           backgroundColor={
             password.length === 0 ? colors.customRed : colors.red
           }
@@ -124,7 +122,6 @@ export const GridNumbers = ({route, navigation}: any) => {
           progress={false}
           width={screenWidth * 0.2}
           height={screenHeight * 0.1}
-          style={{margin: '2%'}}
           backgroundColor={
             password.length < passwordLength ? colors.customGreen : colors.green
           }
@@ -150,7 +147,10 @@ export const GridNumbers = ({route, navigation}: any) => {
           scrollEnabled={false}
           data={digits}
           horizontal={false}
-          columnWrapperStyle={{justifyContent: 'space-between', margin: '2%'}}
+          columnWrapperStyle={{
+            margin: '1.4%',
+            gap: 12,
+          }}
           contentContainerStyle={
             GridNumbersStyles.flatlistContentContainerStyle
           }
@@ -242,13 +242,13 @@ const GridNumbersStyles = StyleSheet.create({
   },
   containerView: {
     height: screenHeight * 0.8,
-    width: '95%',
+    width: screenWidth * 0.95,
     justifyContent: 'center',
     alignItems: 'center',
   },
   passwordView: {
-    width: '40%',
-    height: '5%',
+    width: screenWidth * 0.4,
+    height: screenHeight * 0.06,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 0.8,
@@ -267,7 +267,6 @@ const GridNumbersStyles = StyleSheet.create({
     backgroundColor: colors.papayaWhite,
   },
   settingsTitleTxt: {
-    marginTop: '5%',
     fontSize: 20,
     fontWeight: '600',
     textAlign: 'center',
