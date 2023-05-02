@@ -139,7 +139,11 @@ export const GridNumbers = ({route, navigation}: any) => {
 
   return (
     <View style={GridNumbersStyles.container}>
-      <View style={GridNumbersStyles.containerView}>
+      <View
+        style={GridNumbersStyles.containerView}
+        onTouchStart={() => {
+          setOpenBottomSheet(false);
+        }}>
         <View style={GridNumbersStyles.passwordView}>
           <Text style={GridNumbersStyles.passwordTxt}>{password}</Text>
         </View>

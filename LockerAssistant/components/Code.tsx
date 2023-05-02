@@ -64,10 +64,14 @@ export const Code = ({route, navigation}: any) => {
     <View style={GridNumbersStyles.container}>
       <View
         style={{
-          height: screenHeight * 0.8,
+          flex: 4,
           width: '95%',
+          marginTop: '5%',
           justifyContent: 'center',
           alignItems: 'center',
+        }}
+        onTouchStart={() => {
+          setOpenBottomSheet(false);
         }}>
         <View
           style={{
@@ -125,6 +129,15 @@ export const Code = ({route, navigation}: any) => {
             </Text>
           </View>
         </View>
+      </View>
+      <View
+        style={{
+          flex: 1,
+          width: '95%',
+          marginBottom: '5%',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
         <AwesomeButton
           progress={false}
           width={screenWidth * 0.2}
@@ -161,7 +174,7 @@ export const Code = ({route, navigation}: any) => {
         </Text>
         <View
           style={{
-            flex: 1,
+            flex: 3,
             justifyContent: 'center',
             alignItems: 'center',
           }}>
