@@ -113,7 +113,7 @@ const homeStyles = StyleSheet.create({
   },
   upperViewContainer: {
     flex: 1,
-    width: '95%',
+    width: '90%',
     marginTop: '10%',
     justifyContent: 'flex-end',
     alignItems: 'center',
