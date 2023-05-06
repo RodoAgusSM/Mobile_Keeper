@@ -1,6 +1,6 @@
 export default {
     Menu: {
-        title: "🔒 Welcome to Locker Assistant 🔒",
+        title: "🔒 Welcome to Keeper 🔒",
         start: "Let's go! 🔑",
         information: "ⓘ",
     },
