@@ -32,6 +32,7 @@ export const Configuration = ({navigation}: any) => {
               onChangeText={onChangeLockerNumber}
               value={lockerNumber}
               placeholder={t('Settings.lockerNumberPlaceholder') ?? ''}
+              returnKeyType="done"
             />
           </View>
           <View style={settingStyles.InputsDividerView}>
@@ -81,26 +82,24 @@ export const Configuration = ({navigation}: any) => {
 
 const settingStyles = StyleSheet.create({
   container: {
+    flex: 1,
     width: screenWidth,
     height: screenHeight,
     display: 'flex',
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.floralWhite,
   },
   inputsView: {
-    width: '100%',
-    display: 'flex',
     flex: 3,
+    display: 'flex',
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
   subInputsView: {
     width: '95%',
-    height: '90%',
-    marginTop: '5%',
-    alignItems: 'center',
+    height: '75%',
     borderWidth: 1,
     borderRadius: 10,
     backgroundColor: colors.peach,
