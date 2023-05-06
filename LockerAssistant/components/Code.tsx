@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useRef} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, ImageBackground} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import BottomSheet from '@gorhom/bottom-sheet';
@@ -62,81 +62,30 @@ export const Code = ({route, navigation}: any) => {
   return (
     <View style={GridNumbersStyles.container}>
       <View
-        style={{
-          flex: 4,
-          width: '95%',
-          marginTop: '5%',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
+        style={GridNumbersStyles.upperContainer}
         onTouchStart={() => {
           setOpenBottomSheet(false);
         }}>
-        <View
-          style={{
-            width: '95%',
-            height: '90%',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginBottom: '4%',
-            borderWidth: 1,
-            borderRadius: 10,
-            backgroundColor: colors.peach,
-          }}>
-          <View
-            style={{
-              width: '100%',
-              height: '35%',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text
-              style={{
-                fontSize: 22,
-                fontWeight: '800',
-              }}>
+        <View style={GridNumbersStyles.dataContainer}>
+          <View style={GridNumbersStyles.lockNumberView}>
+            <Text style={GridNumbersStyles.lockNumberTitleTxt}>
               {t('Code.lockerNumber')}
             </Text>
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: '600',
-                color: colors.cerulean,
-                textDecorationLine: 'underline',
-              }}>
+            <Text style={GridNumbersStyles.lockNumberTxt}>
               {storage?.lockerNumber}
             </Text>
           </View>
-          <View
-            style={{
-              width: '100%',
-              height: '35%',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text style={{fontSize: 22, fontWeight: '800'}}>
+          <View style={GridNumbersStyles.passcodeView}>
+            <Text style={GridNumbersStyles.passcodeTitleTxt}>
               {t('Code.passcode')}
             </Text>
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: '700',
-                color: colors.cerulean,
-                textDecorationLine: 'underline',
-              }}>
+            <Text style={GridNumbersStyles.passcodeTxt}>
               {storage?.lockCode}
             </Text>
           </View>
         </View>
       </View>
-      <View
-        style={{
-          flex: 1,
-          width: '95%',
-          marginBottom: '5%',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+      <View style={GridNumbersStyles.lowerContainer}>
         <AwesomeButton
           progress={false}
           width={screenWidth * 0.2}
@@ -156,27 +105,12 @@ export const Code = ({route, navigation}: any) => {
         snapPoints={snapPoints}
         enablePanDownToClose={true}
         style={{backgroundColor: 'transparent'}}
-        backgroundStyle={{
-          borderTopStartRadius: 22,
-          borderTopEndRadius: 22,
-          backgroundColor: colors.papayaWhite,
-        }}
+        backgroundStyle={GridNumbersStyles.bottomSheetBackgroundStyle}
         onChange={() => handleSheetChanges}>
-        <Text
-          style={{
-            marginTop: '5%',
-            fontSize: 20,
-            fontWeight: '600',
-            textAlign: 'center',
-          }}>
+        <Text style={GridNumbersStyles.settingsTitleTxt}>
           {t('BottomSheet.settings')}
         </Text>
-        <View
-          style={{
-            flex: 3,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+        <View style={GridNumbersStyles.bottomSheetView}>
           <AwesomeButton
             progress={false}
             width={screenWidth * 0.55}
@@ -247,5 +181,70 @@ const GridNumbersStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.floralWhite,
+  },
+  upperContainer: {
+    flex: 4,
+    width: '95%',
+    marginTop: '5%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dataContainer: {
+    width: '95%',
+    height: '90%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: '4%',
+    borderWidth: 1,
+    borderRadius: 10,
+    backgroundColor: colors.peach,
+  },
+  lockNumberView: {
+    width: '100%',
+    height: '35%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  lockNumberTitleTxt: {fontSize: 22, fontWeight: '800'},
+  lockNumberTxt: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: colors.cerulean,
+    textDecorationLine: 'underline',
+  },
+  passcodeView: {
+    width: '100%',
+    height: '35%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  passcodeTitleTxt: {fontSize: 22, fontWeight: '800'},
+  passcodeTxt: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: colors.cerulean,
+    textDecorationLine: 'underline',
+  },
+  lowerContainer: {
+    flex: 1,
+    width: '95%',
+    marginBottom: '5%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  bottomSheetBackgroundStyle: {
+    borderTopStartRadius: 22,
+    borderTopEndRadius: 22,
+    backgroundColor: colors.papayaWhite,
+  },
+  settingsTitleTxt: {
+    fontSize: 20,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  bottomSheetView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
