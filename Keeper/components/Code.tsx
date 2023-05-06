@@ -107,14 +107,14 @@ const GridNumbersStyles = StyleSheet.create({
   },
   upperContainer: {
     flex: 4,
+    display: 'flex',
     width: '95%',
-    marginTop: '5%',
     justifyContent: 'center',
     alignItems: 'center',
   },
   dataContainer: {
     width: '95%',
-    height: '90%',
+    height: '75%',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: '4%',
