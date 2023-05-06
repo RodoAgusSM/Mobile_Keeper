@@ -38,9 +38,7 @@ export const GridNumbers = ({route, navigation}: any) => {
   };
 
   const arrayToNumber = () => {
-    return password[0] !== 0
-      ? Number(password.join(''))
-      : password[0] + '' + Number(password.slice(1).join(''));
+    return password.toString().replace(/,/g, '');
   };
 
   const handleFinish = async () => {

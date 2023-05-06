@@ -4,6 +4,6 @@ export type Lock = {
     lockerNumber: number;
     lockLenght: number;
     lockType: LockType;
-    lockCode: number | null;
+    lockCode: number | string | null;
     lockStatus: LockStatus;
 }

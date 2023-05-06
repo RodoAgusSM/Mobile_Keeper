@@ -98,7 +98,7 @@ const settingStyles = StyleSheet.create({
     alignItems: 'center',
   },
   subInputsView: {
-    width: '95%',
+    width: '90%',
     height: '75%',
     borderWidth: 1,
     borderRadius: 10,
