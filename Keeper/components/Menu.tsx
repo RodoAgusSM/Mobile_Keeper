@@ -83,7 +83,7 @@ export const Menu = ({navigation}: any) => {
         )}
         <AwesomeButton
           progress={false}
-          width={screenWidth * 0.15}
+          width={screenWidth * 0.2}
           height={screenHeight * 0.08}
           style={{marginTop: '4%'}}
           backgroundColor={colors.lightSeaGreen}
@@ -115,7 +115,7 @@ const homeStyles = StyleSheet.create({
     flex: 1,
     width: '95%',
     marginTop: '10%',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   subUpperViewContainer: {
@@ -132,7 +132,7 @@ const homeStyles = StyleSheet.create({
     fontWeight: '600',
   },
   lowerViewContainer: {
-    flex: 3,
+    flex: 4,
     width: '95%',
     justifyContent: 'center',
     alignItems: 'center',
