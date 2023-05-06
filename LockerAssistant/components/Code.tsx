@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useRef} from 'react';
-import {Text, View, StyleSheet, ImageBackground} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import BottomSheet from '@gorhom/bottom-sheet';
@@ -13,9 +13,10 @@ import {
   colors,
 } from '../utils/index';
 import {Lock} from '../types/Lock';
+import {CustomBottomSheet} from './CustomBottomSheet';
 
-export const Code = ({route, navigation}: any) => {
-  const {t, i18n} = useTranslation();
+export const Code = ({navigation}: any) => {
+  const {t} = useTranslation();
 
   const [openBottomSheet, setOpenBottomSheet] = React.useState<boolean>(false);
   const [storage, setStorage] = React.useState<Lock>();
@@ -98,78 +99,16 @@ export const Code = ({route, navigation}: any) => {
           <Text style={{fontSize: 30}}>{'⚙︎'}</Text>
         </AwesomeButton>
       </View>
-      <BottomSheet
-        onClose={() => setOpenBottomSheet(false)}
-        ref={bottomSheetRef}
-        index={openBottomSheet ? 0 : -1}
+      <CustomBottomSheet
+        navigation={navigation}
+        bottomSheetRef={bottomSheetRef}
         snapPoints={snapPoints}
-        enablePanDownToClose={true}
-        style={{backgroundColor: 'transparent'}}
-        backgroundStyle={GridNumbersStyles.bottomSheetBackgroundStyle}
-        onChange={() => handleSheetChanges}>
-        <Text style={GridNumbersStyles.settingsTitleTxt}>
-          {t('BottomSheet.settings')}
-        </Text>
-        <View style={GridNumbersStyles.bottomSheetView}>
-          <AwesomeButton
-            progress={false}
-            width={screenWidth * 0.55}
-            height={screenHeight * 0.08}
-            backgroundColor={colors.sunset}
-            backgroundShadow={colors.xanthous}
-            backgroundActive={colors.peach}
-            backgroundDarker={colors.xanthous}
-            onPress={async () => {
-              await handleResetPassword();
-            }}>
-            <Text>{t('BottomSheet.resetPassword')}</Text>
-          </AwesomeButton>
-          <AwesomeButton
-            progress={false}
-            width={screenWidth * 0.55}
-            height={screenHeight * 0.08}
-            backgroundColor={colors.sunset}
-            backgroundShadow={colors.xanthous}
-            backgroundActive={colors.peach}
-            backgroundDarker={colors.xanthous}
-            style={{margin: 25}}
-            onPress={async () => {
-              await handleEraseLocker();
-            }}>
-            <Text>{t('BottomSheet.eraseLocker')}</Text>
-          </AwesomeButton>
-          {i18n.language === 'sp' && (
-            <AwesomeButton
-              progress={false}
-              width={screenWidth * 0.55}
-              height={screenHeight * 0.08}
-              backgroundColor={colors.sunset}
-              backgroundShadow={colors.xanthous}
-              backgroundActive={colors.peach}
-              backgroundDarker={colors.xanthous}
-              onPressOut={() => {
-                i18n.changeLanguage('en');
-              }}>
-              <Text>{t('Language.english')}</Text>
-            </AwesomeButton>
-          )}
-          {i18n.language === 'en' && (
-            <AwesomeButton
-              progress={false}
-              width={screenWidth * 0.55}
-              height={screenHeight * 0.08}
-              backgroundColor={colors.sunset}
-              backgroundShadow={colors.xanthous}
-              backgroundActive={colors.peach}
-              backgroundDarker={colors.xanthous}
-              onPressOut={() => {
-                i18n.changeLanguage('sp');
-              }}>
-              <Text>{t('Language.spanish')}</Text>
-            </AwesomeButton>
-          )}
-        </View>
-      </BottomSheet>
+        openBottomSheet={openBottomSheet}
+        setOpenBottomSheet={setOpenBottomSheet}
+        handleSheetChanges={handleSheetChanges}
+        handleResetPassword={handleResetPassword}
+        handleEraseLocker={handleEraseLocker}
+      />
     </View>
   );
 };
@@ -229,21 +168,6 @@ const GridNumbersStyles = StyleSheet.create({
     flex: 1,
     width: '95%',
     marginBottom: '5%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  bottomSheetBackgroundStyle: {
-    borderTopStartRadius: 22,
-    borderTopEndRadius: 22,
-    backgroundColor: colors.papayaWhite,
-  },
-  settingsTitleTxt: {
-    fontSize: 20,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
-  bottomSheetView: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },

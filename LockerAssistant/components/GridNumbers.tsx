@@ -12,6 +12,7 @@ import {
 } from '../utils/index';
 import {LockType, LockStatus} from '../enums/Index';
 import {Lock} from '../types/Lock';
+import {CustomBottomSheet} from './CustomBottomSheet';
 
 const digits: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, -1, 9, -2];
 
@@ -173,65 +174,15 @@ export const GridNumbers = ({route, navigation}: any) => {
           <Text style={{fontSize: 30}}>{'⚙︎'}</Text>
         </AwesomeButton>
       </View>
-      <BottomSheet
-        onClose={() => setOpenBottomSheet(false)}
-        ref={bottomSheetRef}
-        index={openBottomSheet ? 0 : -1}
+      <CustomBottomSheet
+        navigation={navigation}
+        bottomSheetRef={bottomSheetRef}
         snapPoints={snapPoints}
-        enablePanDownToClose={true}
-        style={{backgroundColor: 'transparent'}}
-        backgroundStyle={GridNumbersStyles.bottomSheetBackgroundStyle}
-        onChange={() => handleSheetChanges}>
-        <Text style={GridNumbersStyles.settingsTitleTxt}>
-          {t('BottomSheet.settings')}
-        </Text>
-        <View style={GridNumbersStyles.bottomSheetView}>
-          <AwesomeButton
-            progress={false}
-            width={screenWidth * 0.55}
-            height={screenHeight * 0.08}
-            backgroundColor={colors.sunset}
-            backgroundShadow={colors.xanthous}
-            backgroundActive={colors.peach}
-            backgroundDarker={colors.xanthous}
-            style={{margin: 25}}
-            onPress={async () => {
-              await handleEraseLocker();
-            }}>
-            <Text>{t('BottomSheet.eraseLocker')}</Text>
-          </AwesomeButton>
-          {i18n.language === 'sp' && (
-            <AwesomeButton
-              progress={false}
-              width={screenWidth * 0.55}
-              height={screenHeight * 0.08}
-              backgroundColor={colors.sunset}
-              backgroundShadow={colors.xanthous}
-              backgroundActive={colors.peach}
-              backgroundDarker={colors.xanthous}
-              onPressOut={() => {
-                i18n.changeLanguage('en');
-              }}>
-              <Text>{t('Language.english')}</Text>
-            </AwesomeButton>
-          )}
-          {i18n.language === 'en' && (
-            <AwesomeButton
-              progress={false}
-              width={screenWidth * 0.55}
-              height={screenHeight * 0.08}
-              backgroundColor={colors.sunset}
-              backgroundShadow={colors.xanthous}
-              backgroundActive={colors.peach}
-              backgroundDarker={colors.xanthous}
-              onPressOut={() => {
-                i18n.changeLanguage('sp');
-              }}>
-              <Text>{t('Language.spanish')}</Text>
-            </AwesomeButton>
-          )}
-        </View>
-      </BottomSheet>
+        openBottomSheet={openBottomSheet}
+        setOpenBottomSheet={setOpenBottomSheet}
+        handleSheetChanges={handleSheetChanges}
+        handleEraseLocker={handleEraseLocker}
+      />
     </View>
   );
 };
@@ -264,20 +215,5 @@ const GridNumbersStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-  },
-  bottomSheetBackgroundStyle: {
-    borderTopStartRadius: 22,
-    borderTopEndRadius: 22,
-    backgroundColor: colors.papayaWhite,
-  },
-  settingsTitleTxt: {
-    fontSize: 20,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
-  bottomSheetView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
