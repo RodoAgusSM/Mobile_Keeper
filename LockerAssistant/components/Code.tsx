@@ -1,8 +1,7 @@
-import React, {useCallback, useEffect, useMemo, useRef} from 'react';
+import React, {useCallback} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import BottomSheet from '@gorhom/bottom-sheet';
 import AwesomeButton from 'react-native-really-awesome-button';
 import {
   screenHeight,
@@ -21,24 +20,12 @@ export const Code = ({navigation}: any) => {
   const [openBottomSheet, setOpenBottomSheet] = React.useState<boolean>(false);
   const [storage, setStorage] = React.useState<Lock>();
 
-  const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = useMemo(() => ['65%'], []);
-  const handleSheetChanges = useCallback((index: number) => {}, []);
-
   useFocusEffect(
     useCallback(() => {
       fetchStorage();
       return () => {};
     }, []),
   );
-
-  useEffect(() => {
-    if (!openBottomSheet) {
-      bottomSheetRef.current?.close();
-    } else if (openBottomSheet) {
-      bottomSheetRef.current?.expand();
-    }
-  }, [openBottomSheet]);
 
   const fetchStorage = async () => {
     const data = (await getData()) as Lock;
@@ -101,11 +88,8 @@ export const Code = ({navigation}: any) => {
       </View>
       <CustomBottomSheet
         navigation={navigation}
-        bottomSheetRef={bottomSheetRef}
-        snapPoints={snapPoints}
         openBottomSheet={openBottomSheet}
         setOpenBottomSheet={setOpenBottomSheet}
-        handleSheetChanges={handleSheetChanges}
         handleResetPassword={handleResetPassword}
         handleEraseLocker={handleEraseLocker}
       />

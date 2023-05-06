@@ -1,7 +1,5 @@
-import React, {useCallback, useEffect, useMemo, useRef} from 'react';
+import React from 'react';
 import {Text, View, StyleSheet, FlatList} from 'react-native';
-import {useTranslation} from 'react-i18next';
-import BottomSheet from '@gorhom/bottom-sheet';
 import AwesomeButton from 'react-native-really-awesome-button';
 import {
   screenHeight,
@@ -17,25 +15,11 @@ import {CustomBottomSheet} from './CustomBottomSheet';
 const digits: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, -1, 9, -2];
 
 export const GridNumbers = ({route, navigation}: any) => {
-  const {t, i18n} = useTranslation();
-
   const {passwordLength} = route?.params ?? 4;
   const {lockerNumber} = route?.params ?? 1;
 
   const [password, setPassword] = React.useState<number[]>([]);
   const [openBottomSheet, setOpenBottomSheet] = React.useState<boolean>(false);
-
-  const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = useMemo(() => ['65%'], []);
-  const handleSheetChanges = useCallback((index: number) => {}, []);
-
-  useEffect(() => {
-    if (!openBottomSheet) {
-      bottomSheetRef.current?.close();
-    } else if (openBottomSheet) {
-      bottomSheetRef.current?.expand();
-    }
-  }, [openBottomSheet]);
 
   const handlePress = (digit: number) => {
     if (password.length < passwordLength) {
@@ -176,11 +160,8 @@ export const GridNumbers = ({route, navigation}: any) => {
       </View>
       <CustomBottomSheet
         navigation={navigation}
-        bottomSheetRef={bottomSheetRef}
-        snapPoints={snapPoints}
         openBottomSheet={openBottomSheet}
         setOpenBottomSheet={setOpenBottomSheet}
-        handleSheetChanges={handleSheetChanges}
         handleEraseLocker={handleEraseLocker}
       />
     </View>

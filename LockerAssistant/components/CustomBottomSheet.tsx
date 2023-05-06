@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useEffect, useMemo, useRef} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
 import AwesomeButton from 'react-native-really-awesome-button';
@@ -7,11 +7,8 @@ import {useTranslation} from 'react-i18next';
 
 type BottomSheetProps = {
   navigation: any;
-  bottomSheetRef: any;
-  snapPoints: any;
   openBottomSheet: any;
   setOpenBottomSheet: any;
-  handleSheetChanges: any;
   handleResetPassword?: any;
   handleEraseLocker: any;
 };
@@ -19,16 +16,28 @@ type BottomSheetProps = {
 export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
   const {t, i18n} = useTranslation();
 
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const snapPoints = useMemo(() => ['65%'], []);
+  const handleSheetChanges = useCallback((index: number) => {}, []);
+
+  useEffect(() => {
+    if (!bottomSheetProps.openBottomSheet) {
+      bottomSheetRef.current?.close();
+    } else if (bottomSheetProps.openBottomSheet) {
+      bottomSheetRef.current?.expand();
+    }
+  }, [bottomSheetProps.openBottomSheet]);
+
   return (
     <BottomSheet
       onClose={() => bottomSheetProps.setOpenBottomSheet(false)}
-      ref={bottomSheetProps.bottomSheetRef}
+      ref={bottomSheetRef}
       index={bottomSheetProps.openBottomSheet ? 0 : -1}
-      snapPoints={bottomSheetProps.snapPoints}
+      snapPoints={snapPoints}
       enablePanDownToClose={true}
       style={{backgroundColor: 'transparent'}}
       backgroundStyle={CustomBottomSheetStyles.bottomSheetBackgroundStyle}
-      onChange={() => bottomSheetProps.handleSheetChanges}>
+      onChange={() => handleSheetChanges}>
       <Text style={CustomBottomSheetStyles.settingsTitleTxt}>
         {t('BottomSheet.settings')}
       </Text>
