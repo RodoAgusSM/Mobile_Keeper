@@ -1,5 +1,6 @@
 import React, {useCallback, useEffect, useMemo, useRef} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import BottomSheet from '@gorhom/bottom-sheet';
 import AwesomeButton from 'react-native-really-awesome-button';
@@ -16,7 +17,6 @@ import {Lock} from '../types/Lock';
 export const Code = ({route, navigation}: any) => {
   const {t, i18n} = useTranslation();
 
-  const {updateScreen} = route?.params ?? false;
   const [openBottomSheet, setOpenBottomSheet] = React.useState<boolean>(false);
   const [storage, setStorage] = React.useState<Lock>();
 
@@ -24,9 +24,12 @@ export const Code = ({route, navigation}: any) => {
   const snapPoints = useMemo(() => ['65%'], []);
   const handleSheetChanges = useCallback((index: number) => {}, []);
 
-  useEffect(() => {
-    fetchStorage();
-  });
+  useFocusEffect(
+    useCallback(() => {
+      fetchStorage();
+      return () => {};
+    }, []),
+  );
 
   useEffect(() => {
     if (!openBottomSheet) {
@@ -55,10 +58,6 @@ export const Code = ({route, navigation}: any) => {
     setOpenBottomSheet(false);
     navigation.navigate('Home');
   };
-
-  if (updateScreen && !storage) {
-    fetchStorage();
-  }
 
   return (
     <View style={GridNumbersStyles.container}>

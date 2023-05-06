@@ -68,7 +68,7 @@ export const GridNumbers = ({route, navigation}: any) => {
     } as Lock;
     await storeData(lock);
     cleanAllDigits();
-    navigation.navigate('Passcode', {updateScreen: true});
+    navigation.navigate('Passcode');
   };
 
   const handleEraseLocker = async () => {
