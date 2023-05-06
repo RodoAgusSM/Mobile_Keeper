@@ -32,6 +32,7 @@ export const Configuration = ({navigation}: any) => {
               onChangeText={onChangeLockerNumber}
               value={lockerNumber}
               placeholder={t('Settings.lockerNumberPlaceholder') ?? ''}
+              placeholderTextColor={colors.xanthous}
               returnKeyType="done"
             />
           </View>
