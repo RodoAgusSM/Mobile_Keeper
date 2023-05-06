@@ -120,7 +120,7 @@ const homeStyles = StyleSheet.create({
   },
   subUpperViewContainer: {
     width: '100%',
-    height: '50%',
+    height: '40%',
     borderRadius: 12,
     borderWidth: 1,
     justifyContent: 'center',
@@ -132,11 +132,9 @@ const homeStyles = StyleSheet.create({
     fontWeight: '600',
   },
   lowerViewContainer: {
-    flex: 4,
+    flex: 3,
     width: '95%',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10,
-    borderRadius: 10,
   },
 });
