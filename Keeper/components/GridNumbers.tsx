@@ -54,6 +54,8 @@ export const GridNumbers = ({route, navigation}: any) => {
     navigation.navigate('Passcode');
   };
 
+  const handleChangeLocker = async () => {};
+
   const handleEraseLocker = async () => {
     await deleteData();
     setOpenBottomSheet(false);
@@ -157,9 +159,9 @@ export const GridNumbers = ({route, navigation}: any) => {
         </AwesomeButton>
       </View>
       <CustomBottomSheet
-        navigation={navigation}
         openBottomSheet={openBottomSheet}
         setOpenBottomSheet={setOpenBottomSheet}
+        handleChangeLocker={handleChangeLocker}
         handleEraseLocker={handleEraseLocker}
       />
     </View>

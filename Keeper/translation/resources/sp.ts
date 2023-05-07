@@ -16,7 +16,8 @@ export default {
     },
     BottomSheet: {
         settings: "Ajustes 🎉",
-        resetPassword: "Resetear contraseña",
+        changeLocker: "Cambiar casillero",
+        changePassword: "Cambiar contraseña",
         eraseLocker: "Borrar candado",
     },
     Language: {

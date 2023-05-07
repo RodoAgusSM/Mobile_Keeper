@@ -6,33 +6,40 @@ import {screenHeight, screenWidth, colors} from '../utils/index';
 import {useTranslation} from 'react-i18next';
 
 type BottomSheetProps = {
-  navigation: any;
   openBottomSheet: any;
   setOpenBottomSheet: any;
-  handleResetPassword?: any;
+  handleChangeLocker: any;
+  handleChangePassword?: any;
   handleEraseLocker: any;
 };
 
 export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
   const {t, i18n} = useTranslation();
+  const {
+    openBottomSheet,
+    setOpenBottomSheet,
+    handleChangeLocker,
+    handleChangePassword,
+    handleEraseLocker,
+  } = bottomSheetProps;
 
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['65%'], []);
   const handleSheetChanges = useCallback((index: number) => {}, []);
 
   useEffect(() => {
-    if (!bottomSheetProps.openBottomSheet) {
+    if (!openBottomSheet) {
       bottomSheetRef.current?.close();
-    } else if (bottomSheetProps.openBottomSheet) {
+    } else if (openBottomSheet) {
       bottomSheetRef.current?.expand();
     }
-  }, [bottomSheetProps.openBottomSheet]);
+  }, [openBottomSheet]);
 
   return (
     <BottomSheet
-      onClose={() => bottomSheetProps.setOpenBottomSheet(false)}
+      onClose={() => setOpenBottomSheet(false)}
       ref={bottomSheetRef}
-      index={bottomSheetProps.openBottomSheet ? 0 : -1}
+      index={openBottomSheet ? 0 : -1}
       snapPoints={snapPoints}
       enablePanDownToClose={true}
       style={{backgroundColor: 'transparent'}}
@@ -51,10 +58,25 @@ export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
           backgroundActive={colors.peach}
           backgroundDarker={colors.xanthous}
           onPress={async () => {
-            await bottomSheetProps.handleResetPassword();
+            await handleChangeLocker();
           }}>
-          <Text>{t('BottomSheet.resetPassword')}</Text>
+          <Text>{t('BottomSheet.changeLocker')}</Text>
         </AwesomeButton>
+        {handleChangePassword && (
+          <AwesomeButton
+            progress={false}
+            width={screenWidth * 0.55}
+            height={screenHeight * 0.08}
+            backgroundColor={colors.sunset}
+            backgroundShadow={colors.xanthous}
+            backgroundActive={colors.peach}
+            backgroundDarker={colors.xanthous}
+            onPress={async () => {
+              await handleChangePassword();
+            }}>
+            <Text>{t('BottomSheet.changePassword')}</Text>
+          </AwesomeButton>
+        )}
         <AwesomeButton
           progress={false}
           width={screenWidth * 0.55}
@@ -63,9 +85,8 @@ export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
           backgroundShadow={colors.xanthous}
           backgroundActive={colors.peach}
           backgroundDarker={colors.xanthous}
-          style={{margin: 25}}
           onPress={async () => {
-            await bottomSheetProps.handleEraseLocker();
+            await handleEraseLocker();
           }}>
           <Text>{t('BottomSheet.eraseLocker')}</Text>
         </AwesomeButton>
@@ -119,5 +140,6 @@ const CustomBottomSheetStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    gap: 25,
   },
 });

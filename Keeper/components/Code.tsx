@@ -32,7 +32,9 @@ export const Code = ({navigation}: any) => {
     setStorage(data);
   };
 
-  const handleResetPassword = async () => {
+  const handleChangeLocker = async () => {};
+
+  const handleChangePassword = async () => {
     await removePasswordData();
     setOpenBottomSheet(false);
     navigation.navigate('Locker', {
@@ -87,10 +89,10 @@ export const Code = ({navigation}: any) => {
         </AwesomeButton>
       </View>
       <CustomBottomSheet
-        navigation={navigation}
         openBottomSheet={openBottomSheet}
         setOpenBottomSheet={setOpenBottomSheet}
-        handleResetPassword={handleResetPassword}
+        handleChangeLocker={handleChangeLocker}
+        handleChangePassword={handleChangePassword}
         handleEraseLocker={handleEraseLocker}
       />
     </View>

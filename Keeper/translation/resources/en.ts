@@ -16,7 +16,8 @@ export default {
     },
     BottomSheet: {
         settings: "Settings 🎉",
-        resetPassword: "Reset password",
+        changeLocker: "Change locker",
+        changePassword: "Change password",
         eraseLocker: "Erase locker",
     },
     Language: {
