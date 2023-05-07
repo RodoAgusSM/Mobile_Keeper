@@ -5,13 +5,19 @@ import {Text, View, TextInput, StyleSheet} from 'react-native';
 import Slider from '@react-native-community/slider';
 import {colors, screenHeight, screenWidth} from '../utils/index';
 
-export const Configuration = ({navigation}: any) => {
+export const Configuration = ({route, navigation}: any) => {
   const {t} = useTranslation();
-  const [lockerNumber, setLockerNumber] = React.useState<string>('');
-  const [passwordLength, setPasswordLength] = useState<number>(3);
 
-  const onChangeLockerNumber = (digit: string) => {
-    setLockerNumber(digit.replace(/[^0-9]/g, ''));
+  const {isChangingLockNumber} = route?.params ? route?.params : false;
+  const {passwordLength: pLength} = route?.params ? route?.params : 3;
+
+  const [lockNumber, setLockNumber] = React.useState<string>('');
+  const [passwordLength, setPasswordLength] = useState<number>(
+    isChangingLockNumber ? pLength : 3,
+  );
+
+  const onChangeLockNumber = (digit: string) => {
+    setLockNumber(digit.replace(/[^0-9]/g, ''));
   };
 
   const onChangePasswordLength = (number: number) => {
@@ -23,56 +29,58 @@ export const Configuration = ({navigation}: any) => {
       <View style={settingStyles.inputsView}>
         <View style={settingStyles.subInputsView}>
           <View style={settingStyles.InputsDividerView}>
-            <Text style={settingStyles.lockerNumberTxt}>
-              {t('Settings.lockerNumber')}
+            <Text style={settingStyles.lockNumberTxt}>
+              {t('Settings.lockNumber')}
             </Text>
             <TextInput
               style={settingStyles.textInput}
               keyboardType="numeric"
-              onChangeText={onChangeLockerNumber}
-              value={lockerNumber}
-              placeholder={t('Settings.lockerNumberPlaceholder') ?? ''}
+              onChangeText={onChangeLockNumber}
+              value={lockNumber}
+              placeholder={t('Settings.lockNumberPlaceholder') ?? ''}
               placeholderTextColor={colors.xanthous}
               returnKeyType="done"
             />
           </View>
-          <View style={settingStyles.InputsDividerView}>
-            <Text style={settingStyles.passwordLengthTxt}>
-              {t('Settings.passwordLength')}
-            </Text>
-            <Text style={settingStyles.numberLengthTxt}>
-              {passwordLength && +passwordLength.toFixed(3)}
-            </Text>
-            <Slider
-              style={{width: screenWidth * 0.7}}
-              minimumTrackTintColor={colors.xanthous}
-              thumbTintColor={colors.xanthous}
-              value={passwordLength}
-              onValueChange={onChangePasswordLength}
-              step={1}
-              lowerLimit={3}
-              upperLimit={6}
-              minimumValue={3}
-              maximumValue={6}
-            />
-          </View>
+          {!isChangingLockNumber && (
+            <View style={settingStyles.InputsDividerView}>
+              <Text style={settingStyles.passwordLengthTxt}>
+                {t('Settings.passwordLength')}
+              </Text>
+              <Text style={settingStyles.numberLengthTxt}>
+                {passwordLength && +passwordLength.toFixed(3)}
+              </Text>
+              <Slider
+                style={{width: screenWidth * 0.7}}
+                minimumTrackTintColor={colors.xanthous}
+                thumbTintColor={colors.xanthous}
+                value={passwordLength}
+                onValueChange={onChangePasswordLength}
+                step={1}
+                lowerLimit={3}
+                upperLimit={6}
+                minimumValue={3}
+                maximumValue={6}
+              />
+            </View>
+          )}
         </View>
       </View>
       <View style={settingStyles.buttonView}>
         <AwesomeButton
           progress={false}
           width={screenWidth * 0.4}
-          height={screenHeight * 0.1}
+          height={screenHeight * 0.08}
           style={{margin: '2%'}}
           backgroundColor={
-            lockerNumber.trim() !== '' ? colors.sunset : colors.peach
+            lockNumber.trim() !== '' ? colors.sunset : colors.peach
           }
           backgroundShadow={colors.xanthous}
           backgroundActive={colors.peach}
           backgroundDarker={colors.xanthous}
-          disabled={lockerNumber.trim() === ''}
+          disabled={lockNumber.trim() === ''}
           onPressOut={() => {
-            navigation.navigate('Locker', {passwordLength, lockerNumber});
+            navigation.navigate('Locker', {passwordLength, lockNumber});
           }}>
           <Text>{t('Settings.continue')}</Text>
         </AwesomeButton>
@@ -110,7 +118,7 @@ const settingStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  lockerNumberTxt: {
+  lockNumberTxt: {
     fontSize: 22,
     fontWeight: '800',
     textDecorationLine: 'underline',

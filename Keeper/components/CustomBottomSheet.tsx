@@ -49,19 +49,21 @@ export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
         {t('BottomSheet.settings')}
       </Text>
       <View style={CustomBottomSheetStyles.bottomSheetView}>
-        <AwesomeButton
-          progress={false}
-          width={screenWidth * 0.55}
-          height={screenHeight * 0.08}
-          backgroundColor={colors.sunset}
-          backgroundShadow={colors.xanthous}
-          backgroundActive={colors.peach}
-          backgroundDarker={colors.xanthous}
-          onPress={async () => {
-            await handleChangeLocker();
-          }}>
-          <Text>{t('BottomSheet.changeLocker')}</Text>
-        </AwesomeButton>
+        {handleChangePassword && (
+          <AwesomeButton
+            progress={false}
+            width={screenWidth * 0.55}
+            height={screenHeight * 0.08}
+            backgroundColor={colors.sunset}
+            backgroundShadow={colors.xanthous}
+            backgroundActive={colors.peach}
+            backgroundDarker={colors.xanthous}
+            onPress={async () => {
+              await handleChangeLocker();
+            }}>
+            <Text>{t('BottomSheet.changeLocker')}</Text>
+          </AwesomeButton>
+        )}
         {handleChangePassword && (
           <AwesomeButton
             progress={false}

@@ -1,7 +1,7 @@
 import { LockType, LockStatus } from "../enums/Index";
 
 export type Lock = {
-    lockerNumber: number;
+    lockNumber: number | null;
     lockLenght: number;
     lockType: LockType;
     lockCode: number | string | null;

@@ -16,7 +16,7 @@ const digits: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, -1, 9, -2];
 
 export const GridNumbers = ({route, navigation}: any) => {
   const {passwordLength} = route?.params ?? 4;
-  const {lockerNumber} = route?.params ?? 1;
+  const {lockNumber} = route?.params ?? 1;
 
   const [password, setPassword] = React.useState<number[]>([]);
   const [openBottomSheet, setOpenBottomSheet] = React.useState<boolean>(false);
@@ -43,7 +43,7 @@ export const GridNumbers = ({route, navigation}: any) => {
 
   const handleFinish = async () => {
     const lock = {
-      lockerNumber: lockerNumber as number,
+      lockNumber: lockNumber as number,
       lockLenght: passwordLength,
       lockType: LockType.electronicCombinationLock,
       lockCode: arrayToNumber(),
@@ -53,8 +53,6 @@ export const GridNumbers = ({route, navigation}: any) => {
     cleanAllDigits();
     navigation.navigate('Passcode');
   };
-
-  const handleChangeLocker = async () => {};
 
   const handleEraseLocker = async () => {
     await deleteData();
@@ -149,7 +147,7 @@ export const GridNumbers = ({route, navigation}: any) => {
         <AwesomeButton
           progress={false}
           width={screenWidth * 0.2}
-          height={screenHeight * 0.1}
+          height={screenHeight * 0.08}
           backgroundColor={colors.gearGrey}
           backgroundShadow={colors.gearGreyContour}
           backgroundActive={colors.gearGreyActive}
@@ -161,7 +159,6 @@ export const GridNumbers = ({route, navigation}: any) => {
       <CustomBottomSheet
         openBottomSheet={openBottomSheet}
         setOpenBottomSheet={setOpenBottomSheet}
-        handleChangeLocker={handleChangeLocker}
         handleEraseLocker={handleEraseLocker}
       />
     </View>

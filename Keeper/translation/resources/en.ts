@@ -5,13 +5,13 @@ export default {
         information: "ⓘ",
     },
     Settings: {
-        lockerNumber: "Locker number",
-        lockerNumberPlaceholder: "Example: 20",
+        lockNumber: "Locker number",
+        lockNumberPlaceholder: "Example: 20",
         passwordLength: "Password length",
         continue: "Continue",
     },
     Code: {
-        lockerNumber: "Locker number",
+        lockNumber: "Locker number",
         passcode: "Passcode",
     },
     BottomSheet: {

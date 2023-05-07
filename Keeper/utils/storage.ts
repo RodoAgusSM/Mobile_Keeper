@@ -18,6 +18,21 @@ const storeData = async (value: Lock) => {
     // saving error
   }
 };
+const removeLockNumberData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem('@lock_Object');
+    const lock = jsonValue != null ? (JSON.parse(jsonValue) as Lock) : null;
+    if (lock) {
+      console.log(lock)
+      await deleteData()
+      lock.lockNumber = null;
+      const newJsonValue = JSON.stringify(lock);
+      await AsyncStorage.setItem('@lock_Object', newJsonValue);
+    }
+  } catch (e) {
+    // error reading value
+  }
+};
 
 const removePasswordData = async () => {
   try {
@@ -43,4 +58,4 @@ const deleteData = async () => {
 };
 
 
-export { getData, storeData, removePasswordData, deleteData }
+export { getData, storeData, removeLockNumberData, removePasswordData, deleteData }

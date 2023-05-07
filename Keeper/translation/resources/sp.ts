@@ -5,13 +5,13 @@ export default {
         information: "ⓘ",
     },
     Settings: {
-        lockerNumber: "Número de casillero",
-        lockerNumberPlaceholder: "Ejemplo: 20",
+        lockNumber: "Número de casillero",
+        lockNumberPlaceholder: "Ejemplo: 20",
         passwordLength: "Largo de la contraseña",
         continue: "Continuar",
     },
     Code: {
-        lockerNumber: "Número de casillero",
+        lockNumber: "Número de casillero",
         passcode: "Contraseña",
     },
     BottomSheet: {

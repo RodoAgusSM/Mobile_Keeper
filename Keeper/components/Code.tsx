@@ -7,6 +7,7 @@ import {
   screenHeight,
   screenWidth,
   getData,
+  removeLockNumberData,
   removePasswordData,
   deleteData,
   colors,
@@ -32,14 +33,21 @@ export const Code = ({navigation}: any) => {
     setStorage(data);
   };
 
-  const handleChangeLocker = async () => {};
+  const handleChangeLocker = async () => {
+    await removeLockNumberData();
+    setOpenBottomSheet(false);
+    navigation.navigate('Setting', {
+      isChangingLockNumber: true,
+      passwordLength: storage?.lockLenght,
+    });
+  };
 
   const handleChangePassword = async () => {
     await removePasswordData();
     setOpenBottomSheet(false);
     navigation.navigate('Locker', {
       passwordLength: storage?.lockLenght,
-      lockerNumber: storage?.lockerNumber,
+      lockNumber: storage?.lockNumber,
     });
   };
 
@@ -59,10 +67,10 @@ export const Code = ({navigation}: any) => {
         <View style={GridNumbersStyles.dataContainer}>
           <View style={GridNumbersStyles.lockNumberView}>
             <Text style={GridNumbersStyles.lockNumberTitleTxt}>
-              {t('Code.lockerNumber')}
+              {t('Code.lockNumber')}
             </Text>
             <Text style={GridNumbersStyles.lockNumberTxt}>
-              {storage?.lockerNumber}
+              {storage?.lockNumber}
             </Text>
           </View>
           <View style={GridNumbersStyles.passcodeView}>
@@ -79,7 +87,7 @@ export const Code = ({navigation}: any) => {
         <AwesomeButton
           progress={false}
           width={screenWidth * 0.2}
-          height={screenHeight * 0.1}
+          height={screenHeight * 0.08}
           backgroundColor={colors.gearGrey}
           backgroundShadow={colors.gearGreyContour}
           backgroundActive={colors.gearGreyActive}
