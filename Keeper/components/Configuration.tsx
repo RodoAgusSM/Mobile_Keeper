@@ -1,9 +1,14 @@
 import React, {useState} from 'react';
+import {Text, View, TextInput, StyleSheet} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import AwesomeButton from 'react-native-really-awesome-button';
-import {Text, View, TextInput, StyleSheet} from 'react-native';
 import Slider from '@react-native-community/slider';
-import {colors, screenHeight, screenWidth} from '../utils/index';
+import {
+  colors,
+  screenHeight,
+  screenWidth,
+  storeLockerNumber,
+} from '../utils/index';
 
 export const Configuration = ({route, navigation}: any) => {
   const {t} = useTranslation();
@@ -22,6 +27,16 @@ export const Configuration = ({route, navigation}: any) => {
 
   const onChangePasswordLength = (number: number) => {
     setPasswordLength(number);
+  };
+
+  const handleFlow = async () => {
+    if (isChangingLockNumber) {
+      await storeLockerNumber(lockNumber);
+      navigation.navigate('Passcode');
+    } else {
+      navigation.navigate('Locker', {passwordLength, lockNumber});
+    }
+    setLockNumber('');
   };
 
   return (
@@ -79,9 +94,7 @@ export const Configuration = ({route, navigation}: any) => {
           backgroundActive={colors.peach}
           backgroundDarker={colors.xanthous}
           disabled={lockNumber.trim() === ''}
-          onPressOut={() => {
-            navigation.navigate('Locker', {passwordLength, lockNumber});
-          }}>
+          onPressOut={async () => await handleFlow()}>
           <Text>{t('Settings.continue')}</Text>
         </AwesomeButton>
       </View>

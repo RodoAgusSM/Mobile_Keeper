@@ -8,7 +8,7 @@ import {useTranslation} from 'react-i18next';
 type BottomSheetProps = {
   openBottomSheet: any;
   setOpenBottomSheet: any;
-  handleChangeLocker: any;
+  handleChangeLocker?: any;
   handleChangePassword?: any;
   handleEraseLocker: any;
 };
