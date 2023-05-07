@@ -8,6 +8,7 @@ import 'react-native-gesture-handler';
 import React, {useEffect, useState} from 'react';
 import {StatusBar, StyleSheet} from 'react-native';
 import './translation';
+import RNBootSplash from 'react-native-bootsplash';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Home} from './views/Home';
@@ -20,7 +21,7 @@ import {Spinner} from './components/Spinner';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
-  const [hasItemStored, setHasItemStored] = useState<boolean>();
+  const [hasItemStored, setHasItemStored] = useState<boolean | null>(null);
 
   useEffect(() => {
     const fetchStorage = async () => {
@@ -35,14 +36,14 @@ const App = () => {
   }, []);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer onReady={() => RNBootSplash.hide()}>
       <StatusBar
         hidden={false}
         animated={true}
         networkActivityIndicatorVisible={true}
         backgroundColor={'black'}
       />
-      {hasItemStored === undefined ? (
+      {hasItemStored === null ? (
         <Spinner />
       ) : (
         <Stack.Navigator
