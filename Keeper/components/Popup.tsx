@@ -54,6 +54,7 @@ export const Popup = (handlePopup: PopupProps) => {
         </View>
         <AwesomeButton
           progress={false}
+          width={screenWidth * 0.2}
           height={screenHeight * 0.08}
           style={{marginTop: '12%'}}
           backgroundColor={colors.lightSeaGreen}

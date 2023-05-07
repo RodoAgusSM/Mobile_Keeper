@@ -31,12 +31,13 @@ const App = () => {
       } else {
         setHasItemStored(false);
       }
+      await RNBootSplash.hide({fade: true, duration: 650});
     };
     fetchStorage();
   }, []);
 
   return (
-    <NavigationContainer onReady={() => RNBootSplash.hide()}>
+    <NavigationContainer>
       <StatusBar
         hidden={false}
         animated={true}
