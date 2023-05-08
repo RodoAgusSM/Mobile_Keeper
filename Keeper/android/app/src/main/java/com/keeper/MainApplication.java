@@ -1,4 +1,4 @@
-package com.lockerassistant;
+package com.keeper;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

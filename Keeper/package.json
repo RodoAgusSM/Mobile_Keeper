@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "pods": "cd ios && pod install && cd .."
+    "pods": "cd ios && pod install && cd ..",
+    "android-aab": "cd android && ./gradlew bundleRelease",
+    "android-apk": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4",
