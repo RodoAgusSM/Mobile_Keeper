@@ -1,6 +1,5 @@
 import React from 'react';
-import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
-import {screenHeight, screenWidth} from '../utils/index';
+import {Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 type BtnProps = {
   text: string;

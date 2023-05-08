@@ -1,5 +1,27 @@
-import { getData, storeData, storeLockerNumber, removeLockNumberData, removePasswordData, deleteData } from "./storage"
-import { screenHeight, screenWidth } from "./screenDimension"
-import { colors } from "./colors"
+import {
+    getLockData,
+    storeLockData,
+    storeLockNumberData,
+    removeLockNumberData,
+    deleteData,
+    getUserPreferencesData,
+    storeUserPreferencesData,
+} from './storage';
+import { screenHeight, screenWidth } from './screenDimension';
+import { colors } from './colors';
+import { handleLanguageChange, handleEraseLocker } from './functions';
 
-export { getData, storeData, storeLockerNumber, removeLockNumberData, removePasswordData, deleteData, screenHeight, screenWidth, colors }
+export {
+    getLockData,
+    storeLockData,
+    storeLockNumberData,
+    removeLockNumberData,
+    deleteData,
+    getUserPreferencesData,
+    storeUserPreferencesData,
+    screenHeight,
+    screenWidth,
+    colors,
+    handleLanguageChange,
+    handleEraseLocker
+};

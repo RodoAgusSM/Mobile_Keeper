@@ -1,7 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Lock } from '../types/Lock';
+import { UserPreferences } from '../types/UserPreferences';
 
-const getData = async () => {
+const getLockData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('@lock_Object');
     return jsonValue != null ? (JSON.parse(jsonValue) as Lock) : null;
@@ -10,7 +11,7 @@ const getData = async () => {
   }
 };
 
-const storeData = async (value: Lock) => {
+const storeLockData = async (value: Lock) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem('@lock_Object', jsonValue);
@@ -19,7 +20,7 @@ const storeData = async (value: Lock) => {
   }
 };
 
-const storeLockerNumber = async (value: string) => {
+const storeLockNumberData = async (value: string) => {
   try {
     const jsonValue = await AsyncStorage.getItem('@lock_Object');
     const lock = jsonValue != null ? (JSON.parse(jsonValue) as Lock) : null;
@@ -49,21 +50,6 @@ const removeLockNumberData = async () => {
   }
 };
 
-const removePasswordData = async () => {
-  try {
-    const jsonValue = await AsyncStorage.getItem('@lock_Object');
-    const lock = jsonValue != null ? (JSON.parse(jsonValue) as Lock) : null;
-    if (lock) {
-      await deleteData()
-      lock.lockCode = null;
-      const newJsonValue = JSON.stringify(lock);
-      await AsyncStorage.setItem('@lock_Object', newJsonValue);
-    }
-  } catch (e) {
-    // error reading value
-  }
-};
-
 const deleteData = async () => {
   try {
     await AsyncStorage.clear();
@@ -72,5 +58,23 @@ const deleteData = async () => {
   }
 };
 
+const getUserPreferencesData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem('@userPrefetences_Object');
+    return jsonValue != null ? (JSON.parse(jsonValue) as UserPreferences) : null;
+  } catch (e) {
+    // error reading value
+  }
+};
 
-export { getData, storeData, storeLockerNumber, removeLockNumberData, removePasswordData, deleteData }
+const storeUserPreferencesData = async (value: UserPreferences) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem('@userPrefetences_Object', jsonValue);
+  } catch (e) {
+    // saving error
+  }
+};
+
+
+export { getLockData, storeLockData, storeLockNumberData, removeLockNumberData, deleteData, getUserPreferencesData, storeUserPreferencesData }

@@ -6,14 +6,15 @@ import AwesomeButton from 'react-native-really-awesome-button';
 import {
   screenHeight,
   screenWidth,
-  getData,
-  removeLockNumberData,
-  removePasswordData,
-  deleteData,
+  getLockData,
+  handleEraseLocker,
   colors,
+  getUserPreferencesData,
 } from '../utils/index';
 import {Lock} from '../types/Lock';
 import {CustomBottomSheet} from './CustomBottomSheet';
+import {UserPreferences} from '../types/UserPreferences';
+import i18n from '../translation';
 
 export const Code = ({navigation}: any) => {
   const {t} = useTranslation();
@@ -23,18 +24,30 @@ export const Code = ({navigation}: any) => {
 
   useFocusEffect(
     useCallback(() => {
+      fetchUserPreferences().then((data: any) => {
+        const userPreferences = data as UserPreferences;
+        if (userPreferences) {
+          i18n.changeLanguage(userPreferences.language);
+        }
+      });
       fetchStorage();
       return () => {};
     }, []),
   );
 
+  const fetchUserPreferences = async () => {
+    const userPreferences = (await getUserPreferencesData()) as UserPreferences;
+    if (userPreferences) {
+      i18n.changeLanguage(userPreferences.language);
+    }
+  };
+
   const fetchStorage = async () => {
-    const data = (await getData()) as Lock;
+    const data = (await getLockData()) as Lock;
     setStorage(data);
   };
 
   const handleChangeLocker = async () => {
-    await removeLockNumberData();
     setOpenBottomSheet(false);
     navigation.navigate('Setting', {
       isChangingLockNumber: true,
@@ -43,18 +56,11 @@ export const Code = ({navigation}: any) => {
   };
 
   const handleChangePassword = async () => {
-    await removePasswordData();
     setOpenBottomSheet(false);
     navigation.navigate('Locker', {
       passwordLength: storage?.lockLenght,
       lockNumber: storage?.lockNumber,
     });
-  };
-
-  const handleEraseLocker = async () => {
-    await deleteData();
-    setOpenBottomSheet(false);
-    navigation.navigate('Home');
   };
 
   return (
@@ -101,7 +107,9 @@ export const Code = ({navigation}: any) => {
         setOpenBottomSheet={setOpenBottomSheet}
         handleChangeLocker={handleChangeLocker}
         handleChangePassword={handleChangePassword}
-        handleEraseLocker={handleEraseLocker}
+        handleEraseLocker={() =>
+          handleEraseLocker(navigation, setOpenBottomSheet)
+        }
       />
     </View>
   );

@@ -5,9 +5,10 @@ import AwesomeButton from 'react-native-really-awesome-button';
 import Slider from '@react-native-community/slider';
 import {
   colors,
+  removeLockNumberData,
   screenHeight,
   screenWidth,
-  storeLockerNumber,
+  storeLockNumberData,
 } from '../utils/index';
 
 export const Configuration = ({route, navigation}: any) => {
@@ -31,7 +32,8 @@ export const Configuration = ({route, navigation}: any) => {
 
   const handleFlow = async () => {
     if (isChangingLockNumber) {
-      await storeLockerNumber(lockNumber);
+      await removeLockNumberData();
+      await storeLockNumberData(lockNumber);
       navigation.navigate('Passcode');
     } else {
       navigation.navigate('Locker', {passwordLength, lockNumber});

@@ -6,7 +6,7 @@ export default {
     },
     Settings: {
         lockNumber: "Número de casillero",
-        lockNumberPlaceholder: "Ejemplo: 20",
+        lockNumberPlaceholder: "Ejemplo: 73",
         passwordLength: "Largo de la contraseña",
         continue: "Continuar",
     },

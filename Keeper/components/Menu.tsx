@@ -1,10 +1,19 @@
 import React, {useEffect} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {useTranslation} from 'react-i18next';
-import {colors, getData, screenHeight, screenWidth} from '../utils/index';
+import {
+  colors,
+  getLockData,
+  getUserPreferencesData,
+  handleLanguageChange,
+  screenHeight,
+  screenWidth,
+} from '../utils/index';
 import AwesomeButton from 'react-native-really-awesome-button';
+import {Language} from '../enums/Index';
 import {Lock} from '../types/Lock';
 import {Popup} from './Popup';
+import {UserPreferences} from '../types/UserPreferences';
 
 export const Menu = ({navigation}: any) => {
   const {t, i18n} = useTranslation();
@@ -15,12 +24,20 @@ export const Menu = ({navigation}: any) => {
   };
 
   useEffect(() => {
+    const fetchUserPreferences = async () => {
+      const userPreferences =
+        (await getUserPreferencesData()) as UserPreferences;
+      if (userPreferences) {
+        i18n.changeLanguage(userPreferences.language);
+      }
+    };
     const fetchStorage = async () => {
-      const data = (await getData()) as Lock;
+      const data = (await getLockData()) as Lock;
       if (data) {
         navigation.navigate('Passcode');
       }
     };
+    fetchUserPreferences();
     fetchStorage();
   }, []);
 
@@ -58,8 +75,8 @@ export const Menu = ({navigation}: any) => {
             backgroundActive={colors.melon}
             backgroundDarker={colors.bittersweet}
             disabled={showPopup}
-            onPressOut={() => {
-              i18n.changeLanguage('en');
+            onPressOut={async () => {
+              await handleLanguageChange(Language.english);
             }}>
             <Text>{t('Language.english')}</Text>
           </AwesomeButton>
@@ -75,8 +92,8 @@ export const Menu = ({navigation}: any) => {
             backgroundActive={colors.melon}
             backgroundDarker={colors.bittersweet}
             disabled={showPopup}
-            onPressOut={() => {
-              i18n.changeLanguage('sp');
+            onPressOut={async () => {
+              await handleLanguageChange(Language.spanish);
             }}>
             <Text>{t('Language.spanish')}</Text>
           </AwesomeButton>

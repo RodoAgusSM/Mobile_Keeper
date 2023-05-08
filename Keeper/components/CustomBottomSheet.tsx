@@ -2,8 +2,15 @@ import React, {useCallback, useEffect, useMemo, useRef} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
 import AwesomeButton from 'react-native-really-awesome-button';
-import {screenHeight, screenWidth, colors} from '../utils/index';
+import {
+  screenHeight,
+  screenWidth,
+  colors,
+  handleLanguageChange,
+} from '../utils/index';
 import {useTranslation} from 'react-i18next';
+import {UserPreferences} from '../types/UserPreferences';
+import {Language} from '../enums/Index';
 
 type BottomSheetProps = {
   openBottomSheet: any;
@@ -101,8 +108,8 @@ export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
             backgroundShadow={colors.xanthous}
             backgroundActive={colors.peach}
             backgroundDarker={colors.xanthous}
-            onPressOut={() => {
-              i18n.changeLanguage('en');
+            onPressOut={async () => {
+              await handleLanguageChange(Language.english);
             }}>
             <Text>{t('Language.english')}</Text>
           </AwesomeButton>
@@ -116,8 +123,8 @@ export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
             backgroundShadow={colors.xanthous}
             backgroundActive={colors.peach}
             backgroundDarker={colors.xanthous}
-            onPressOut={() => {
-              i18n.changeLanguage('sp');
+            onPressOut={async () => {
+              await handleLanguageChange(Language.spanish);
             }}>
             <Text>{t('Language.spanish')}</Text>
           </AwesomeButton>

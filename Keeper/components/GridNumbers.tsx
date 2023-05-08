@@ -4,9 +4,9 @@ import AwesomeButton from 'react-native-really-awesome-button';
 import {
   screenHeight,
   screenWidth,
-  storeData,
-  deleteData,
+  storeLockData,
   colors,
+  handleEraseLocker,
 } from '../utils/index';
 import {LockType, LockStatus} from '../enums/Index';
 import {Lock} from '../types/Lock';
@@ -42,22 +42,16 @@ export const GridNumbers = ({route, navigation}: any) => {
   };
 
   const handleFinish = async () => {
-    const lock = {
-      lockNumber: lockNumber as number,
+    const lock: Lock = {
+      lockNumber,
       lockLenght: passwordLength,
       lockType: LockType.electronicCombinationLock,
       lockCode: arrayToNumber(),
       lockStatus: LockStatus.locked,
-    } as Lock;
-    await storeData(lock);
+    };
+    await storeLockData(lock);
     cleanAllDigits();
     navigation.navigate('Passcode');
-  };
-
-  const handleEraseLocker = async () => {
-    await deleteData();
-    setOpenBottomSheet(false);
-    navigation.navigate('Home');
   };
 
   const renderBtns = (number: number) => {
@@ -159,7 +153,9 @@ export const GridNumbers = ({route, navigation}: any) => {
       <CustomBottomSheet
         openBottomSheet={openBottomSheet}
         setOpenBottomSheet={setOpenBottomSheet}
-        handleEraseLocker={handleEraseLocker}
+        handleEraseLocker={() =>
+          handleEraseLocker(navigation, setOpenBottomSheet)
+        }
       />
     </View>
   );

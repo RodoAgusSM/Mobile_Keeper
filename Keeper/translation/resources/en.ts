@@ -6,7 +6,7 @@ export default {
     },
     Settings: {
         lockNumber: "Locker number",
-        lockNumberPlaceholder: "Example: 20",
+        lockNumberPlaceholder: "Example: 73",
         passwordLength: "Password length",
         continue: "Continue",
     },
