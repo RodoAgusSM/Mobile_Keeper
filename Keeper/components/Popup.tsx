@@ -9,6 +9,7 @@ type PopupProps = {
 };
 
 export const Popup = (handlePopup: PopupProps) => {
+  const {event} = handlePopup;
   const {t} = useTranslation();
   return (
     <View style={popupStyles.superMainContainer}>
@@ -54,7 +55,7 @@ export const Popup = (handlePopup: PopupProps) => {
         </View>
         <AwesomeButton
           progress={false}
-          width={screenWidth * 0.2}
+          width={screenWidth * 0.22}
           height={screenHeight * 0.08}
           style={{marginTop: '12%'}}
           backgroundColor={colors.lightSeaGreen}
@@ -62,9 +63,9 @@ export const Popup = (handlePopup: PopupProps) => {
           backgroundActive={colors.cerulean}
           backgroundDarker={colors.moonstone}
           onPressOut={() => {
-            handlePopup.event();
+            event();
           }}>
-          <Text style={{fontSize: 18}}>{t('Info.close')}</Text>
+          <Text style={popupStyles.labeltxt}>{t('Info.close')}</Text>
         </AwesomeButton>
       </View>
     </View>
@@ -93,6 +94,7 @@ const popupStyles = StyleSheet.create({
   engineerInfoTxt: {
     fontSize: 20,
     fontWeight: '500',
+    color: colors.plumPurple,
     marginBottom: 20,
     textAlign: 'center',
   },
@@ -100,11 +102,16 @@ const popupStyles = StyleSheet.create({
   hiperlinkNameTxt: {
     fontSize: 20,
     fontWeight: '500',
+    color: colors.plumPurple,
   },
   hiperlinkTxt: {
     fontSize: 20,
     fontWeight: '500',
     color: colors.cerulean,
     textDecorationLine: 'underline',
+  },
+  labeltxt: {
+    fontWeight: '700',
+    color: colors.plumPurple,
   },
 });

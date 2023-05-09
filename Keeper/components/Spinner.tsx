@@ -5,7 +5,7 @@ import {colors, screenHeight, screenWidth} from '../utils/index';
 export const Spinner = () => {
   return (
     <View style={SpinnerStyles.container}>
-      <ActivityIndicator size="large" color={colors.lightSeaGreen} />
+      <ActivityIndicator size="large" color={colors.deepCerise} />
     </View>
   );
 };

@@ -1,7 +1,7 @@
-import { Language } from "../enums/Index";
 import i18n from "../translation";
-import { UserPreferences } from "../types/UserPreferences";
 import { deleteData, storeUserPreferencesData } from "./storage";
+import { Language, Screen } from "../enums/Index";
+import { UserPreferences } from "../types/UserPreferences";
 
 export const handleLanguageChange = async (language: Language) => {
     const userPreferences: UserPreferences = {
@@ -14,5 +14,5 @@ export const handleLanguageChange = async (language: Language) => {
 export const handleEraseLocker = async (navigation: any, setOpenBottomSheet: any) => {
     await deleteData();
     setOpenBottomSheet(false);
-    navigation.navigate('Home');
+    navigation.navigate(Screen.home);
 };

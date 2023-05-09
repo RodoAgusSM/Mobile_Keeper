@@ -2,6 +2,7 @@ import React, {useCallback} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
+import i18n from '../translation';
 import AwesomeButton from 'react-native-really-awesome-button';
 import {
   screenHeight,
@@ -12,9 +13,9 @@ import {
   getUserPreferencesData,
 } from '../utils/index';
 import {Lock} from '../types/Lock';
+import {Screen} from '../enums/Index';
 import {CustomBottomSheet} from './CustomBottomSheet';
 import {UserPreferences} from '../types/UserPreferences';
-import i18n from '../translation';
 
 export const Code = ({navigation}: any) => {
   const {t} = useTranslation();
@@ -49,7 +50,7 @@ export const Code = ({navigation}: any) => {
 
   const handleChangeLocker = async () => {
     setOpenBottomSheet(false);
-    navigation.navigate('Setting', {
+    navigation.navigate(Screen.setting, {
       isChangingLockNumber: true,
       passwordLength: storage?.lockLenght,
     });
@@ -57,7 +58,7 @@ export const Code = ({navigation}: any) => {
 
   const handleChangePassword = async () => {
     setOpenBottomSheet(false);
-    navigation.navigate('Locker', {
+    navigation.navigate(Screen.locker, {
       passwordLength: storage?.lockLenght,
       lockNumber: storage?.lockNumber,
     });
@@ -92,14 +93,14 @@ export const Code = ({navigation}: any) => {
       <View style={GridNumbersStyles.lowerContainer}>
         <AwesomeButton
           progress={false}
-          width={screenWidth * 0.2}
-          height={screenHeight * 0.08}
+          width={screenWidth * 0.22}
+          height={screenHeight * 0.1}
           backgroundColor={colors.gearGrey}
           backgroundShadow={colors.gearGreyContour}
           backgroundActive={colors.gearGreyActive}
           backgroundDarker={colors.gearGreyContour}
           onPress={() => setOpenBottomSheet(true)}>
-          <Text style={{fontSize: 30}}>{'⚙︎'}</Text>
+          <Text style={{fontSize: 30, color: colors.plumPurple}}>{'⚙︎'}</Text>
         </AwesomeButton>
       </View>
       <CustomBottomSheet
@@ -132,7 +133,7 @@ const GridNumbersStyles = StyleSheet.create({
   },
   dataContainer: {
     width: '95%',
-    height: '75%',
+    height: '70%',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: '4%',
@@ -146,7 +147,11 @@ const GridNumbersStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  lockNumberTitleTxt: {fontSize: 22, fontWeight: '800'},
+  lockNumberTitleTxt: {
+    fontSize: 22,
+    fontWeight: '800',
+    color: colors.plumPurple,
+  },
   lockNumberTxt: {
     fontSize: 20,
     fontWeight: '600',
@@ -159,7 +164,7 @@ const GridNumbersStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  passcodeTitleTxt: {fontSize: 22, fontWeight: '800'},
+  passcodeTitleTxt: {fontSize: 22, fontWeight: '800', color: colors.plumPurple},
   passcodeTxt: {
     fontSize: 20,
     fontWeight: '700',
@@ -169,7 +174,7 @@ const GridNumbersStyles = StyleSheet.create({
   lowerContainer: {
     flex: 1,
     width: '95%',
-    marginBottom: '5%',
+    marginBottom: '10%',
     justifyContent: 'center',
     alignItems: 'center',
   },

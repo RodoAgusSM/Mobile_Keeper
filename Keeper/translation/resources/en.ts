@@ -1,6 +1,7 @@
 export default {
     ForceTouch: {
         newLocker: "New locker",
+        language: "Spanish",
     },
     Menu: {
         title: "🔒 Welcome to Keeper 🔒",

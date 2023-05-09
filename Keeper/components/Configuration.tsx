@@ -10,6 +10,7 @@ import {
   screenWidth,
   storeLockNumberData,
 } from '../utils/index';
+import {Screen} from '../enums/Index';
 
 export const Configuration = ({route, navigation}: any) => {
   const {t} = useTranslation();
@@ -34,9 +35,9 @@ export const Configuration = ({route, navigation}: any) => {
     if (isChangingLockNumber) {
       await removeLockNumberData();
       await storeLockNumberData(lockNumber);
-      navigation.navigate('Passcode');
+      navigation.navigate(Screen.passcode);
     } else {
-      navigation.navigate('Locker', {passwordLength, lockNumber});
+      navigation.navigate(Screen.locker, {passwordLength, lockNumber});
     }
     setLockNumber('');
   };
@@ -46,7 +47,7 @@ export const Configuration = ({route, navigation}: any) => {
       <View style={settingStyles.inputsView}>
         <View style={settingStyles.subInputsView}>
           <View style={settingStyles.InputsDividerView}>
-            <Text style={settingStyles.lockNumberTxt}>
+            <Text style={settingStyles.headerTxt}>
               {t('Settings.lockNumber')}
             </Text>
             <TextInput
@@ -61,7 +62,7 @@ export const Configuration = ({route, navigation}: any) => {
           </View>
           {!isChangingLockNumber && (
             <View style={settingStyles.InputsDividerView}>
-              <Text style={settingStyles.passwordLengthTxt}>
+              <Text style={settingStyles.headerTxt}>
                 {t('Settings.passwordLength')}
               </Text>
               <Text style={settingStyles.numberLengthTxt}>
@@ -97,7 +98,7 @@ export const Configuration = ({route, navigation}: any) => {
           backgroundDarker={colors.xanthous}
           disabled={lockNumber.trim() === ''}
           onPressOut={async () => await handleFlow()}>
-          <Text>{t('Settings.continue')}</Text>
+          <Text style={settingStyles.labeltxt}>{t('Settings.continue')}</Text>
         </AwesomeButton>
       </View>
     </View>
@@ -133,28 +134,25 @@ const settingStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  lockNumberTxt: {
+  headerTxt: {
     fontSize: 22,
     fontWeight: '800',
+    color: colors.plumPurple,
     textDecorationLine: 'underline',
     marginBottom: '2%',
   },
   textInput: {
+    color: colors.plumPurple,
     borderBottomWidth: 2,
     borderColor: colors.xanthous,
     fontSize: 20,
     fontWeight: '600',
     textAlign: 'center',
   },
-  passwordLengthTxt: {
-    fontSize: 22,
-    fontWeight: '800',
-    textDecorationLine: 'underline',
-    marginBottom: '2%',
-  },
   numberLengthTxt: {
     fontSize: 20,
     fontWeight: '600',
+    color: colors.plumPurple,
     textDecorationLine: 'underline',
     textDecorationColor: colors.xanthous,
   },
@@ -164,5 +162,9 @@ const settingStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  labeltxt: {
+    fontWeight: '700',
+    color: colors.plumPurple,
   },
 });

@@ -68,7 +68,9 @@ export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
             onPress={async () => {
               await handleChangeLocker();
             }}>
-            <Text>{t('BottomSheet.changeLocker')}</Text>
+            <Text style={CustomBottomSheetStyles.labeltxt}>
+              {t('BottomSheet.changeLocker')}
+            </Text>
           </AwesomeButton>
         )}
         {handleChangePassword && (
@@ -83,7 +85,9 @@ export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
             onPress={async () => {
               await handleChangePassword();
             }}>
-            <Text>{t('BottomSheet.changePassword')}</Text>
+            <Text style={CustomBottomSheetStyles.labeltxt}>
+              {t('BottomSheet.changePassword')}
+            </Text>
           </AwesomeButton>
         )}
         <AwesomeButton
@@ -97,7 +101,9 @@ export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
           onPress={async () => {
             await handleEraseLocker();
           }}>
-          <Text>{t('BottomSheet.eraseLocker')}</Text>
+          <Text style={CustomBottomSheetStyles.labeltxt}>
+            {t('BottomSheet.eraseLocker')}
+          </Text>
         </AwesomeButton>
         {i18n.language === 'sp' && (
           <AwesomeButton
@@ -111,7 +117,9 @@ export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
             onPressOut={async () => {
               await handleLanguageChange(Language.english);
             }}>
-            <Text>{t('Language.english')}</Text>
+            <Text style={CustomBottomSheetStyles.labeltxt}>
+              {t('Language.english')}
+            </Text>
           </AwesomeButton>
         )}
         {i18n.language === 'en' && (
@@ -126,7 +134,9 @@ export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
             onPressOut={async () => {
               await handleLanguageChange(Language.spanish);
             }}>
-            <Text>{t('Language.spanish')}</Text>
+            <Text style={CustomBottomSheetStyles.labeltxt}>
+              {t('Language.spanish')}
+            </Text>
           </AwesomeButton>
         )}
       </View>
@@ -142,13 +152,18 @@ const CustomBottomSheetStyles = StyleSheet.create({
   },
   settingsTitleTxt: {
     fontSize: 20,
-    fontWeight: '600',
+    fontWeight: '700',
     textAlign: 'center',
+    color: colors.plumPurple,
   },
   bottomSheetView: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     gap: 25,
+  },
+  labeltxt: {
+    fontWeight: '700',
+    color: colors.plumPurple,
   },
 });

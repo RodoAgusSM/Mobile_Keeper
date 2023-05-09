@@ -11,12 +11,9 @@ export const colors = {
     customGreen: '#4F9D25',
     customGrenContour: '#539035',
     customGrenActive: '#95FE93',
-    vanilla: '#E8E4D8',
     gearGrey: '#A6A6A6',
     gearGreyContour: '#C0C0C0',
     gearGreyActive: '#A7A7A7',
-    customYellow: '#FFFF90',
-    darkerVanilla: '#F3E5AB',
 
     cerulean: '#227C9D',
     moonstone: '#1DA0A8',
@@ -32,4 +29,6 @@ export const colors = {
     melon: '#FEB3B1',
     lightRed: '#FE6D73',
     bittersweet: '#FF5C61',
+    deepCerise: '#DC428E',
+    plumPurple: '#4E285D',
 }

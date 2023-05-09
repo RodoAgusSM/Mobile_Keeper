@@ -8,11 +8,11 @@ import {
   colors,
   handleEraseLocker,
 } from '../utils/index';
-import {LockType, LockStatus} from '../enums/Index';
+import {LockType, LockStatus, Screen} from '../enums/Index';
 import {Lock} from '../types/Lock';
 import {CustomBottomSheet} from './CustomBottomSheet';
 
-const digits: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, -1, 9, -2];
+const digits: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, -1, 0, -2];
 
 export const GridNumbers = ({route, navigation}: any) => {
   const {passwordLength} = route?.params ?? 4;
@@ -51,7 +51,7 @@ export const GridNumbers = ({route, navigation}: any) => {
     };
     await storeLockData(lock);
     cleanAllDigits();
-    navigation.navigate('Passcode');
+    navigation.navigate(Screen.passcode);
   };
 
   const renderBtns = (number: number) => {
@@ -59,7 +59,7 @@ export const GridNumbers = ({route, navigation}: any) => {
       return (
         <AwesomeButton
           progress={false}
-          width={screenWidth * 0.2}
+          width={screenWidth * 0.22}
           height={screenHeight * 0.1}
           backgroundColor={
             password.length < passwordLength ? colors.customGrey : colors.grey
@@ -71,14 +71,14 @@ export const GridNumbers = ({route, navigation}: any) => {
           onPressOut={() => {
             handlePress(number);
           }}>
-          <Text>{number}</Text>
+          <Text style={GridNumbersStyles.numberAndPasswordTxt}>{number}</Text>
         </AwesomeButton>
       );
     } else if (number === -1) {
       return (
         <AwesomeButton
           progress={false}
-          width={screenWidth * 0.2}
+          width={screenWidth * 0.22}
           height={screenHeight * 0.1}
           backgroundColor={
             password.length === 0 ? colors.customRed : colors.red
@@ -90,14 +90,14 @@ export const GridNumbers = ({route, navigation}: any) => {
           onPressOut={() => {
             removeLastDigit();
           }}>
-          <Text>{'C'}</Text>
+          <Text style={GridNumbersStyles.numberAndPasswordTxt}>{'C'}</Text>
         </AwesomeButton>
       );
     } else if (number === -2) {
       return (
         <AwesomeButton
           progress={false}
-          width={screenWidth * 0.2}
+          width={screenWidth * 0.22}
           height={screenHeight * 0.1}
           backgroundColor={
             password.length < passwordLength ? colors.customGreen : colors.green
@@ -107,7 +107,7 @@ export const GridNumbers = ({route, navigation}: any) => {
           backgroundDarker={colors.customGrenContour}
           disabled={password.length < passwordLength}
           onPressOut={async () => await handleFinish()}>
-          <Text>{'✓'}</Text>
+          <Text style={GridNumbersStyles.numberAndPasswordTxt}>{'✓'}</Text>
         </AwesomeButton>
       );
     }
@@ -122,7 +122,7 @@ export const GridNumbers = ({route, navigation}: any) => {
           setOpenBottomSheet(false);
         }}>
         <View style={GridNumbersStyles.passwordView}>
-          <Text style={GridNumbersStyles.passwordTxt}>{password}</Text>
+          <Text style={GridNumbersStyles.numberAndPasswordTxt}>{password}</Text>
         </View>
         <FlatList
           scrollEnabled={false}
@@ -140,14 +140,14 @@ export const GridNumbers = ({route, navigation}: any) => {
         />
         <AwesomeButton
           progress={false}
-          width={screenWidth * 0.2}
-          height={screenHeight * 0.08}
+          width={screenWidth * 0.22}
+          height={screenHeight * 0.1}
           backgroundColor={colors.gearGrey}
           backgroundShadow={colors.gearGreyContour}
           backgroundActive={colors.gearGreyActive}
           backgroundDarker={colors.gearGreyContour}
           onPress={() => setOpenBottomSheet(true)}>
-          <Text style={{fontSize: 30}}>{'⚙︎'}</Text>
+          <Text style={{fontSize: 30, color: colors.plumPurple}}>{'⚙︎'}</Text>
         </AwesomeButton>
       </View>
       <CustomBottomSheet
@@ -170,7 +170,7 @@ const GridNumbersStyles = StyleSheet.create({
     backgroundColor: colors.floralWhite,
   },
   containerView: {
-    height: screenHeight * 0.8,
+    height: screenHeight * 0.82,
     width: screenWidth * 0.95,
     justifyContent: 'center',
     alignItems: 'center',
@@ -184,10 +184,14 @@ const GridNumbersStyles = StyleSheet.create({
     borderRadius: 8,
     borderColor: 'grey',
   },
-  passwordTxt: {fontSize: 18, fontWeight: '600'},
+  numberAndPasswordTxt: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: colors.plumPurple,
+  },
   flatlistContentContainerStyle: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
   },
 });

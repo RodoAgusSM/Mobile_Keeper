@@ -1,25 +1,28 @@
 import 'react-native-gesture-handler';
-import React, {useEffect, useState} from 'react';
-import {StatusBar} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {StatusBar, DeviceEventEmitter, AppState} from 'react-native';
 import './translation';
 import {useTranslation} from 'react-i18next';
 import RNBootSplash from 'react-native-bootsplash';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
+import QuickActions from 'react-native-quick-actions';
 import {Home} from './views/Home';
 import {Setting} from './views/Setting';
 import {Locker} from './views/Locker';
 import {Passcode} from './views/Passcode';
-import {getLockData, getUserPreferencesData} from './utils/index';
+import {getLockData, getUserPreferencesData, removeLocker} from './utils/index';
 import {Spinner} from './components/Spinner';
 import {UserPreferences} from './types/UserPreferences';
 import {Lock} from './types/Lock';
+import {Screen, QuickAction} from './enums/Index';
 
 const App = () => {
-  const {i18n} = useTranslation();
+  const {t, i18n} = useTranslation();
   const Stack = createNativeStackNavigator();
-  const [hasItemStored, setHasItemStored] = useState<boolean | null>(null);
+  const appState = useRef(AppState.currentState);
+  const [, setAppStateVisible] = useState(appState.current);
+  const [firstScreen, setFirstScreen] = useState<string | undefined>();
 
   useEffect(() => {
     const fetchUserPreferences = async () => {
@@ -30,18 +33,84 @@ const App = () => {
       }
     };
     fetchUserPreferences();
-
-    const fetchStorage = async () => {
-      const data = (await getLockData()) as Lock;
-      if (data) {
-        setHasItemStored(true);
-      } else {
-        setHasItemStored(false);
-      }
-      await RNBootSplash.hide({fade: true, duration: 650});
-    };
-    fetchStorage();
   }, []);
+
+  useEffect(() => {
+    const procesShourtcut = (item: any) => {
+      if (item.type === QuickAction.newLocker) {
+        removeLocker();
+        setFirstScreen(Screen.setting);
+      }
+    };
+
+    QuickActions.popInitialAction()
+      .then((item: any) => {
+        procesShourtcut(item);
+      })
+      .catch((err: any) => {});
+
+    DeviceEventEmitter.addListener('quickActionShortcut', (item: any) => {
+      procesShourtcut(item);
+    });
+
+    QuickActions.setShortcutItems([
+      {
+        title: t('ForceTouch.newLocker'),
+        type: QuickAction.newLocker,
+        icon: 'Add',
+        userInfo: {
+          url: 'url',
+        },
+      },
+    ]);
+    fetchStorage();
+
+    return () => {
+      QuickActions.clearShortcutItems();
+    };
+  }, [i18n.language]);
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', nextAppState => {
+      if (
+        appState.current.match(/inactive|background/) &&
+        nextAppState === 'active'
+      ) {
+        QuickActions.setShortcutItems([
+          {
+            title: t('ForceTouch.newLocker'),
+            type: QuickAction.newLocker,
+            icon: 'Add',
+            userInfo: {
+              url: 'url',
+            },
+          },
+        ]);
+        fetchStorage();
+      } else if (nextAppState === 'inactive' || nextAppState === 'background') {
+        setFirstScreen(undefined);
+      }
+
+      appState.current = nextAppState;
+      setAppStateVisible(appState.current);
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
+  const fetchStorage = async () => {
+    const data = (await getLockData()) as Lock;
+    if (data) {
+      setFirstScreen(Screen.passcode);
+    } else {
+      setFirstScreen(Screen.home);
+    }
+    await RNBootSplash.hide({fade: true, duration: 650});
+  };
+
+  if (firstScreen === undefined) return <Spinner />;
 
   return (
     <NavigationContainer>
@@ -51,20 +120,16 @@ const App = () => {
         networkActivityIndicatorVisible={true}
         backgroundColor={'black'}
       />
-      {hasItemStored === null ? (
-        <Spinner />
-      ) : (
-        <Stack.Navigator
-          initialRouteName={hasItemStored ? 'Passcode' : 'Home'}
-          screenOptions={{
-            headerShown: false,
-          }}>
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Setting" component={Setting} />
-          <Stack.Screen name="Locker" component={Locker} />
-          <Stack.Screen name="Passcode" component={Passcode} />
-        </Stack.Navigator>
-      )}
+      <Stack.Navigator
+        initialRouteName={firstScreen}
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen name={Screen.home} component={Home} />
+        <Stack.Screen name={Screen.setting} component={Setting} />
+        <Stack.Screen name={Screen.locker} component={Locker} />
+        <Stack.Screen name={Screen.passcode} component={Passcode} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };

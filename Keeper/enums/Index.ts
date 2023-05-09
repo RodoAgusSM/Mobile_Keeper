@@ -1,5 +1,7 @@
-import { LockType } from "./LockType";
-import { LockStatus } from "./LockStatus";
-import { Language } from "./Language";
+import { Screen } from './Screen';
+import { LockType } from './LockType';
+import { LockStatus } from './LockStatus';
+import { Language } from './Language';
+import { QuickAction } from './QuickAction';
 
-export { LockType, LockStatus, Language }
+export { Screen, LockType, LockStatus, Language, QuickAction }
