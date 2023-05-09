@@ -1,29 +1,36 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
 import 'react-native-gesture-handler';
 import React, {useEffect, useState} from 'react';
 import {StatusBar} from 'react-native';
 import './translation';
+import {useTranslation} from 'react-i18next';
 import RNBootSplash from 'react-native-bootsplash';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
 import {Home} from './views/Home';
 import {Setting} from './views/Setting';
 import {Locker} from './views/Locker';
 import {Passcode} from './views/Passcode';
-import {getLockData} from './utils';
-import {Lock} from './types/Lock';
+import {getLockData, getUserPreferencesData} from './utils/index';
 import {Spinner} from './components/Spinner';
+import {UserPreferences} from './types/UserPreferences';
+import {Lock} from './types/Lock';
 
 const App = () => {
+  const {i18n} = useTranslation();
   const Stack = createNativeStackNavigator();
   const [hasItemStored, setHasItemStored] = useState<boolean | null>(null);
 
   useEffect(() => {
+    const fetchUserPreferences = async () => {
+      const userPreferences =
+        (await getUserPreferencesData()) as UserPreferences;
+      if (userPreferences) {
+        i18n.changeLanguage(userPreferences.language);
+      }
+    };
+    fetchUserPreferences();
+
     const fetchStorage = async () => {
       const data = (await getLockData()) as Lock;
       if (data) {

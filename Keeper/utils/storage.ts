@@ -25,7 +25,7 @@ const storeLockNumberData = async (value: string) => {
     const jsonValue = await AsyncStorage.getItem('@lock_Object');
     const lock = jsonValue != null ? (JSON.parse(jsonValue) as Lock) : null;
     if (lock) {
-      await deleteData()
+      await removeLocker()
       lock.lockNumber = value;
       const newJsonValue = JSON.stringify(lock);
       await AsyncStorage.setItem('@lock_Object', newJsonValue);
@@ -40,13 +40,21 @@ const removeLockNumberData = async () => {
     const jsonValue = await AsyncStorage.getItem('@lock_Object');
     const lock = jsonValue != null ? (JSON.parse(jsonValue) as Lock) : null;
     if (lock) {
-      await deleteData()
+      await removeLocker()
       lock.lockNumber = null;
       const newJsonValue = JSON.stringify(lock);
       await AsyncStorage.setItem('@lock_Object', newJsonValue);
     }
   } catch (e) {
     // error reading value
+  }
+};
+
+const removeLocker = async () => {
+  try {
+    await AsyncStorage.removeItem("@lock_Object");
+  } catch (e) {
+    // clear error
   }
 };
 
@@ -77,4 +85,4 @@ const storeUserPreferencesData = async (value: UserPreferences) => {
 };
 
 
-export { getLockData, storeLockData, storeLockNumberData, removeLockNumberData, deleteData, getUserPreferencesData, storeUserPreferencesData }
+export { getLockData, storeLockData, storeLockNumberData, removeLockNumberData, removeLocker, deleteData, getUserPreferencesData, storeUserPreferencesData }

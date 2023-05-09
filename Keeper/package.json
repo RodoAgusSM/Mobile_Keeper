@@ -25,6 +25,7 @@
     "react-native": "0.71.6",
     "react-native-bootsplash": "^4.7.1",
     "react-native-gesture-handler": "^2.9.0",
+    "react-native-quick-actions": "^0.3.13",
     "react-native-really-awesome-button": "^2.0.4",
     "react-native-reanimated": "^3.0.2",
     "react-native-rename": "^3.2.12",

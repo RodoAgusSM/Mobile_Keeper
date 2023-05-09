@@ -1,5 +1,6 @@
 #import "AppDelegate.h"
 #import "RNBootSplash.h"
+#import "RNQuickActionManager.h"
 
 #import <React/RCTBundleURLProvider.h>
 
@@ -44,6 +45,10 @@
   [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView];
 
   return rootView;
+}
+
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL succeeded)) completionHandler {
+  [RNQuickActionManager onQuickActionPress:shortcutItem completionHandler:completionHandler];
 }
 
 @end
