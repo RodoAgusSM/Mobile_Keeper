@@ -4,7 +4,7 @@ export default {
         language: "Inglés",
     },
     Menu: {
-        title: "🔒 Bienvenido a Keeper 🔒",
+        title: "🔒 Bienvenido a Keyper 🔒",
         start: "Empecemos! 🔑",
         information: "ⓘ",
     },
