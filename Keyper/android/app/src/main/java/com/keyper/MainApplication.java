@@ -1,4 +1,4 @@
-package com.keeper;
+package com.keyper;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

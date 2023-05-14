@@ -93,9 +93,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.keeper"
+    namespace "com.keyper"
     defaultConfig {
-        applicationId "com.keeper"
+        applicationId "com.keyper"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
