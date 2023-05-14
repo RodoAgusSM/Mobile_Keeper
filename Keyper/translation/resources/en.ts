@@ -16,7 +16,9 @@ export default {
     },
     Code: {
         lockNumber: "Locker number",
+        noLockNumber: "No number",
         passcode: "Passcode",
+        noPasscode: "No passcode",
     },
     BottomSheet: {
         settings: "Settings 🎉",

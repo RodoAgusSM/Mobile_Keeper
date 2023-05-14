@@ -1,8 +1,7 @@
-import React, {useCallback} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
-import {useFocusEffect} from '@react-navigation/native';
-import {useTranslation} from 'react-i18next';
-import i18n from '../translation';
+import React, { useCallback, useEffect } from 'react';
+import { Text, View, StyleSheet, NativeModules } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 import AwesomeButton from 'react-native-really-awesome-button';
 import {
   screenHeight,
@@ -12,13 +11,15 @@ import {
   colors,
   getUserPreferencesData,
 } from '../utils/index';
-import {Lock} from '../types/Lock';
-import {Screen} from '../enums/Index';
-import {CustomBottomSheet} from './CustomBottomSheet';
-import {UserPreferences} from '../types/UserPreferences';
+import { Lock } from '../types/Lock';
+import { Screen } from '../enums/Index';
+import { CustomBottomSheet } from './CustomBottomSheet';
+import { UserPreferences } from '../types/UserPreferences';
 
-export const Code = ({navigation}: any) => {
-  const {t} = useTranslation();
+const { RNSharedWidget } = NativeModules;
+
+export const Code = ({ navigation }: any) => {
+  const { t, i18n } = useTranslation();
 
   const [openBottomSheet, setOpenBottomSheet] = React.useState<boolean>(false);
   const [storage, setStorage] = React.useState<Lock>();
@@ -36,6 +37,12 @@ export const Code = ({navigation}: any) => {
     }, []),
   );
 
+  useEffect(() => {
+    if (storage) {
+      handleWidget(storage);
+    }
+  }, [i18n.language]);
+
   const fetchUserPreferences = async () => {
     const userPreferences = (await getUserPreferencesData()) as UserPreferences;
     if (userPreferences) {
@@ -45,6 +52,7 @@ export const Code = ({navigation}: any) => {
 
   const fetchStorage = async () => {
     const data = (await getLockData()) as Lock;
+    handleWidget(data);
     setStorage(data);
   };
 
@@ -64,13 +72,48 @@ export const Code = ({navigation}: any) => {
     });
   };
 
+  const handleWidget = (data: Lock | null) => {
+    if (data) {
+      RNSharedWidget.setData(
+        'lockerNumberAndPasscode',
+        JSON.stringify({
+          numberTitle: t('Code.lockNumber'),
+          number: data?.lockNumber as string,
+          passcodeTitle: t('Code.passcode'),
+          passcode: data?.lockCode as string,
+        }),
+        (status: number | null) => {
+          console.log('---------');
+          console.log('Status ', status);
+          console.log('---------');
+        },
+      );
+    } else {
+      RNSharedWidget.setData(
+        'lockerNumberAndPasscode',
+        JSON.stringify({
+          numberTitle: t('Code.lockNumber'),
+          number: t('Code.noLockNumber'),
+          passcodeTitle: t('Code.passcode'),
+          passcode: t('Code.noPasscode'),
+        }),
+        (status: number | null) => {
+          console.log('---------');
+          console.log('Status ', status);
+          console.log('---------');
+        },
+      );
+    }
+  };
+
   return (
     <View style={GridNumbersStyles.container}>
       <View
         style={GridNumbersStyles.upperContainer}
         onTouchStart={() => {
           setOpenBottomSheet(false);
-        }}>
+        }}
+      >
         <View style={GridNumbersStyles.dataContainer}>
           <View style={GridNumbersStyles.lockNumberView}>
             <Text style={GridNumbersStyles.lockNumberTitleTxt}>
@@ -99,8 +142,9 @@ export const Code = ({navigation}: any) => {
           backgroundShadow={colors.gearGreyContour}
           backgroundActive={colors.gearGreyActive}
           backgroundDarker={colors.gearGreyContour}
-          onPress={() => setOpenBottomSheet(true)}>
-          <Text style={{fontSize: 30, color: colors.plumPurple}}>{'⚙︎'}</Text>
+          onPress={() => setOpenBottomSheet(true)}
+        >
+          <Text style={{ fontSize: 30, color: colors.plumPurple }}>{'⚙︎'}</Text>
         </AwesomeButton>
       </View>
       <CustomBottomSheet
@@ -108,9 +152,10 @@ export const Code = ({navigation}: any) => {
         setOpenBottomSheet={setOpenBottomSheet}
         handleChangeLocker={handleChangeLocker}
         handleChangePassword={handleChangePassword}
-        handleEraseLocker={() =>
-          handleEraseLocker(navigation, setOpenBottomSheet)
-        }
+        handleEraseLocker={() => {
+          handleEraseLocker(navigation, setOpenBottomSheet);
+          handleWidget(null);
+        }}
       />
     </View>
   );
@@ -164,7 +209,11 @@ const GridNumbersStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  passcodeTitleTxt: {fontSize: 22, fontWeight: '800', color: colors.plumPurple},
+  passcodeTitleTxt: {
+    fontSize: 22,
+    fontWeight: '800',
+    color: colors.plumPurple,
+  },
   passcodeTxt: {
     fontSize: 20,
     fontWeight: '700',

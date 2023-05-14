@@ -1,24 +1,28 @@
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import React, {useEffect, useRef, useState} from 'react';
-import {StatusBar, DeviceEventEmitter, AppState} from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import React, { useEffect, useRef, useState } from 'react';
+import { StatusBar, DeviceEventEmitter, AppState } from 'react-native';
 import './translation';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import RNBootSplash from 'react-native-bootsplash';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import QuickActions from 'react-native-quick-actions';
-import {Home} from './views/Home';
-import {Setting} from './views/Setting';
-import {Locker} from './views/Locker';
-import {Passcode} from './views/Passcode';
-import {getLockData, getUserPreferencesData, removeLocker} from './utils/index';
-import {Spinner} from './components/Spinner';
-import {UserPreferences} from './types/UserPreferences';
-import {Lock} from './types/Lock';
-import {Screen, QuickAction} from './enums/Index';
+import { Home } from './views/Home';
+import { Setting } from './views/Setting';
+import { Locker } from './views/Locker';
+import { Passcode } from './views/Passcode';
+import {
+  getLockData,
+  getUserPreferencesData,
+  removeLocker,
+} from './utils/index';
+import { Spinner } from './components/Spinner';
+import { UserPreferences } from './types/UserPreferences';
+import { Lock } from './types/Lock';
+import { Screen, QuickAction } from './enums/Index';
 
 const App = () => {
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   const Stack = createNativeStackNavigator();
   const appState = useRef(AppState.currentState);
   const [, setAppStateVisible] = useState(appState.current);
@@ -107,13 +111,13 @@ const App = () => {
     } else {
       setFirstScreen(Screen.home);
     }
-    await RNBootSplash.hide({fade: true, duration: 650});
+    await RNBootSplash.hide({ fade: true, duration: 650 });
   };
 
   if (firstScreen === undefined) return <Spinner />;
 
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <NavigationContainer>
         <StatusBar
           hidden={false}
@@ -125,7 +129,8 @@ const App = () => {
           initialRouteName={firstScreen}
           screenOptions={{
             headerShown: false,
-          }}>
+          }}
+        >
           <Stack.Screen name={Screen.home} component={Home} />
           <Stack.Screen name={Screen.setting} component={Setting} />
           <Stack.Screen name={Screen.locker} component={Locker} />

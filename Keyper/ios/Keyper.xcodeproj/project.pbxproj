@@ -13,6 +13,17 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		4205BAA22A1053D700408A5A /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4205BAA12A1053D600408A5A /* BootSplash.storyboard */; };
+		4272B3642A118FB700814824 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4272B3632A118FB700814824 /* WidgetKit.framework */; };
+		4272B3662A118FB700814824 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4272B3652A118FB700814824 /* SwiftUI.framework */; };
+		4272B3692A118FB700814824 /* LockerNumberAndPasscodeBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4272B3682A118FB700814824 /* LockerNumberAndPasscodeBundle.swift */; };
+		4272B36B2A118FB700814824 /* LockerNumberAndPasscodeLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4272B36A2A118FB700814824 /* LockerNumberAndPasscodeLiveActivity.swift */; };
+		4272B36D2A118FB700814824 /* LockerNumberAndPasscode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4272B36C2A118FB700814824 /* LockerNumberAndPasscode.swift */; };
+		4272B3702A118FB800814824 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4272B36F2A118FB800814824 /* Assets.xcassets */; };
+		4272B3722A118FB800814824 /* LockerNumberAndPasscode.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 4272B36E2A118FB700814824 /* LockerNumberAndPasscode.intentdefinition */; };
+		4272B3732A118FB800814824 /* LockerNumberAndPasscode.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 4272B36E2A118FB700814824 /* LockerNumberAndPasscode.intentdefinition */; };
+		4272B3762A118FB800814824 /* LockerNumberAndPasscodeExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4272B3622A118FB700814824 /* LockerNumberAndPasscodeExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4272B37D2A1190A500814824 /* RNSharedWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 4272B37C2A1190A500814824 /* RNSharedWidget.m */; };
+		4296D0DB2A11929E00E5E208 /* WidgetKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4296D0DA2A11929E00E5E208 /* WidgetKitHelper.swift */; };
 		7699B88040F8A987B510C191 /* libPods-Keyper-KeyperTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Keyper-KeyperTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -25,7 +36,28 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = Keyper;
 		};
+		4272B3742A118FB800814824 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4272B3612A118FB700814824;
+			remoteInfo = LockerNumberAndPasscodeExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4272B37A2A118FB800814824 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4272B3762A118FB800814824 /* LockerNumberAndPasscodeExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		00E356EE1AD99517003FC87E /* KeyperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeyperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,6 +72,21 @@
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-Keyper-KeyperTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Keyper-KeyperTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-Keyper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keyper.debug.xcconfig"; path = "Target Support Files/Pods-Keyper/Pods-Keyper.debug.xcconfig"; sourceTree = "<group>"; };
 		4205BAA12A1053D600408A5A /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = Keyper/BootSplash.storyboard; sourceTree = "<group>"; };
+		4272B35D2A118F6F00814824 /* Keyper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Keyper.entitlements; path = Keyper/Keyper.entitlements; sourceTree = "<group>"; };
+		4272B3622A118FB700814824 /* LockerNumberAndPasscodeExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LockerNumberAndPasscodeExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4272B3632A118FB700814824 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		4272B3652A118FB700814824 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		4272B3682A118FB700814824 /* LockerNumberAndPasscodeBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockerNumberAndPasscodeBundle.swift; sourceTree = "<group>"; };
+		4272B36A2A118FB700814824 /* LockerNumberAndPasscodeLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockerNumberAndPasscodeLiveActivity.swift; sourceTree = "<group>"; };
+		4272B36C2A118FB700814824 /* LockerNumberAndPasscode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockerNumberAndPasscode.swift; sourceTree = "<group>"; };
+		4272B36E2A118FB700814824 /* LockerNumberAndPasscode.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = LockerNumberAndPasscode.intentdefinition; sourceTree = "<group>"; };
+		4272B36F2A118FB800814824 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4272B3712A118FB800814824 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4272B37B2A118FC400814824 /* LockerNumberAndPasscodeExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LockerNumberAndPasscodeExtension.entitlements; sourceTree = "<group>"; };
+		4272B37C2A1190A500814824 /* RNSharedWidget.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSharedWidget.m; sourceTree = "<group>"; };
+		4272B37E2A1190B500814824 /* RNSharedWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSharedWidget.h; sourceTree = "<group>"; };
+		4296D0D92A11929E00E5E208 /* Keyper-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Keyper-Bridging-Header.h"; sourceTree = "<group>"; };
+		4296D0DA2A11929E00E5E208 /* WidgetKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetKitHelper.swift; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-Keyper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keyper.release.xcconfig"; path = "Target Support Files/Pods-Keyper/Pods-Keyper.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-Keyper-KeyperTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keyper-KeyperTests.debug.xcconfig"; path = "Target Support Files/Pods-Keyper-KeyperTests/Pods-Keyper-KeyperTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-Keyper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Keyper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +109,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C80B921A6F3F58F76C31292 /* libPods-Keyper.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4272B35F2A118FB700814824 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4272B3662A118FB700814824 /* SwiftUI.framework in Frameworks */,
+				4272B3642A118FB700814824 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +144,7 @@
 		13B07FAE1A68108700A75B9A /* Keyper */ = {
 			isa = PBXGroup;
 			children = (
+				4272B35D2A118F6F00814824 /* Keyper.entitlements */,
 				4205BAA12A1053D600408A5A /* BootSplash.storyboard */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -95,6 +152,10 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				4272B37C2A1190A500814824 /* RNSharedWidget.m */,
+				4272B37E2A1190B500814824 /* RNSharedWidget.h */,
+				4296D0DA2A11929E00E5E208 /* WidgetKitHelper.swift */,
+				4296D0D92A11929E00E5E208 /* Keyper-Bridging-Header.h */,
 			);
 			name = Keyper;
 			sourceTree = "<group>";
@@ -105,8 +166,23 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				5DCACB8F33CDC322A6C60F78 /* libPods-Keyper.a */,
 				19F6CBCC0A4E27FBF8BF4A61 /* libPods-Keyper-KeyperTests.a */,
+				4272B3632A118FB700814824 /* WidgetKit.framework */,
+				4272B3652A118FB700814824 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4272B3672A118FB700814824 /* LockerNumberAndPasscode */ = {
+			isa = PBXGroup;
+			children = (
+				4272B3682A118FB700814824 /* LockerNumberAndPasscodeBundle.swift */,
+				4272B36A2A118FB700814824 /* LockerNumberAndPasscodeLiveActivity.swift */,
+				4272B36C2A118FB700814824 /* LockerNumberAndPasscode.swift */,
+				4272B36E2A118FB700814824 /* LockerNumberAndPasscode.intentdefinition */,
+				4272B36F2A118FB800814824 /* Assets.xcassets */,
+				4272B3712A118FB800814824 /* Info.plist */,
+			);
+			path = LockerNumberAndPasscode;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -119,9 +195,11 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				4272B37B2A118FC400814824 /* LockerNumberAndPasscodeExtension.entitlements */,
 				13B07FAE1A68108700A75B9A /* Keyper */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* KeyperTests */,
+				4272B3672A118FB700814824 /* LockerNumberAndPasscode */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
@@ -136,6 +214,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* Keyper.app */,
 				00E356EE1AD99517003FC87E /* KeyperTests.xctest */,
+				4272B3622A118FB700814824 /* LockerNumberAndPasscodeExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -187,15 +266,34 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
 				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				4272B37A2A118FB800814824 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4272B3752A118FB800814824 /* PBXTargetDependency */,
 			);
 			name = Keyper;
 			productName = Keyper;
 			productReference = 13B07F961A680F5B00A75B9A /* Keyper.app */;
 			productType = "com.apple.product-type.application";
+		};
+		4272B3612A118FB700814824 /* LockerNumberAndPasscodeExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4272B3772A118FB800814824 /* Build configuration list for PBXNativeTarget "LockerNumberAndPasscodeExtension" */;
+			buildPhases = (
+				4272B35E2A118FB700814824 /* Sources */,
+				4272B35F2A118FB700814824 /* Frameworks */,
+				4272B3602A118FB700814824 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LockerNumberAndPasscodeExtension;
+			productName = LockerNumberAndPasscodeExtension;
+			productReference = 4272B3622A118FB700814824 /* LockerNumberAndPasscodeExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -203,6 +301,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -210,7 +309,10 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1430;
+					};
+					4272B3612A118FB700814824 = {
+						CreatedOnToolsVersion = 14.3;
 					};
 				};
 			};
@@ -229,6 +331,7 @@
 			targets = (
 				13B07F861A680F5B00A75B9A /* Keyper */,
 				00E356ED1AD99517003FC87E /* KeyperTests */,
+				4272B3612A118FB700814824 /* LockerNumberAndPasscodeExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -248,6 +351,14 @@
 				4205BAA22A1053D700408A5A /* BootSplash.storyboard in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4272B3602A118FB700814824 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4272B3702A118FB800814824 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,7 +528,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				4296D0DB2A11929E00E5E208 /* WidgetKitHelper.swift in Sources */,
+				4272B3732A118FB800814824 /* LockerNumberAndPasscode.intentdefinition in Sources */,
+				4272B37D2A1190A500814824 /* RNSharedWidget.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4272B35E2A118FB700814824 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4272B36D2A118FB700814824 /* LockerNumberAndPasscode.swift in Sources */,
+				4272B3692A118FB700814824 /* LockerNumberAndPasscodeBundle.swift in Sources */,
+				4272B36B2A118FB700814824 /* LockerNumberAndPasscodeLiveActivity.swift in Sources */,
+				4272B3722A118FB800814824 /* LockerNumberAndPasscode.intentdefinition in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +554,11 @@
 			target = 13B07F861A680F5B00A75B9A /* Keyper */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
+		4272B3752A118FB800814824 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4272B3612A118FB700814824 /* LockerNumberAndPasscodeExtension */;
+			targetProxy = 4272B3742A118FB800814824 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -436,6 +566,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-Keyper-KeyperTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -463,6 +594,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-Keyper-KeyperTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = KeyperTests/Info.plist;
@@ -487,9 +619,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-Keyper.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Keyper/Keyper.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 73G966M29F;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Keyper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -504,6 +639,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Keyper;
+				SWIFT_OBJC_BRIDGING_HEADER = "Keyper-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -514,9 +650,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-Keyper.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Keyper/Keyper.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 73G966M29F;
 				INFOPLIST_FILE = Keyper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -530,8 +669,91 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Keyper;
+				SWIFT_OBJC_BRIDGING_HEADER = "Keyper-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		4272B3782A118FB800814824 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = LockerNumberAndPasscodeExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 73G966M29F;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LockerNumberAndPasscode/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LockerNumberAndPasscode;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.Keyper.LockerNumberAndPasscode;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4272B3792A118FB800814824 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = LockerNumberAndPasscodeExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 73G966M29F;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LockerNumberAndPasscode/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LockerNumberAndPasscode;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.Keyper.LockerNumberAndPasscode;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -689,6 +911,15 @@
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
 				13B07F951A680F5B00A75B9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4272B3772A118FB800814824 /* Build configuration list for PBXNativeTarget "LockerNumberAndPasscodeExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4272B3782A118FB800814824 /* Debug */,
+				4272B3792A118FB800814824 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

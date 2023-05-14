@@ -16,7 +16,9 @@ export default {
     },
     Code: {
         lockNumber: "Número de casillero",
+        noLockNumber: "Sin número",
         passcode: "Contraseña",
+        noPasscode: "Sin contraseña",
     },
     BottomSheet: {
         settings: "Ajustes 🎉",
