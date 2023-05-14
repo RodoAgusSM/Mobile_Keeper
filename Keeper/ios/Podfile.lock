@@ -73,9 +73,9 @@ PODS:
     - FlipperKit/FlipperKitNetworkPlugin
   - fmt (6.2.1)
   - glog (0.3.5)
-  - hermes-engine (0.71.7):
-    - hermes-engine/Pre-built (= 0.71.7)
-  - hermes-engine/Pre-built (0.71.7)
+  - hermes-engine (0.71.8):
+    - hermes-engine/Pre-built (= 0.71.8)
+  - hermes-engine/Pre-built (0.71.8)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
   - RCT-Folly (2021.07.22.00):
@@ -425,7 +425,7 @@ PODS:
     - React-Core
   - RNCAsyncStorage (1.18.1):
     - React-Core
-  - RNGestureHandler (2.9.0):
+  - RNGestureHandler (2.10.0):
     - React-Core
   - RNQuickAction (0.3.13):
     - React
@@ -654,7 +654,7 @@ SPEC CHECKSUMS:
   FlipperKit: cbdee19bdd4e7f05472a66ce290f1b729ba3cb86
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
-  hermes-engine: 4438d2b8bf8bebaba1b1ac0451160bab59e491f8
+  hermes-engine: 47986d26692ae75ee7a17ab049caee8864f855de
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
@@ -688,7 +688,7 @@ SPEC CHECKSUMS:
   ReactCommon: 0c43eaeaaee231d7d8dc24fc5a6e4cf2b75bf196
   RNBootSplash: 3f3f7f82efe2addbfe7ddeda20877ff4d579cd81
   RNCAsyncStorage: b90b71f45b8b97be43bc4284e71a6af48ac9f547
-  RNGestureHandler: 071d7a9ad81e8b83fe7663b303d132406a7d8f39
+  RNGestureHandler: e145476da655f3dbc48ef2f0a08cf7a34338c02b
   RNQuickAction: 6d404a869dc872cde841ad3147416a670d13fa93
   RNReanimated: b1220a0e5168745283ff5d53bfc7d2144b2cee1b
   RNScreens: 218801c16a2782546d30bd2026bb625c0302d70f
@@ -696,6 +696,6 @@ SPEC CHECKSUMS:
   Yoga: ba09b6b11e6139e3df8229238aa794205ca6a02a
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 6b63e4d9b450a923dfa5d28ec449950659a1bb4d
+PODFILE CHECKSUM: 2c3558eea56e45d0d5c888c41f99b68e73d3b28c
 
 COCOAPODS: 1.12.0
