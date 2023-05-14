@@ -1,46 +1,45 @@
-import React, {useCallback, useEffect, useMemo, useRef} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import BottomSheet from '@gorhom/bottom-sheet';
-import AwesomeButton from 'react-native-really-awesome-button';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import BottomSheet from '@gorhom/bottom-sheet'
+import AwesomeButton from 'react-native-really-awesome-button'
 import {
   screenHeight,
   screenWidth,
   colors,
   handleLanguageChange,
-} from '../utils/index';
-import {useTranslation} from 'react-i18next';
-import {UserPreferences} from '../types/UserPreferences';
-import {Language} from '../enums/Index';
+} from '../utils/index'
+import { useTranslation } from 'react-i18next'
+import { Language } from '../enums/Index'
 
 type BottomSheetProps = {
-  openBottomSheet: any;
-  setOpenBottomSheet: any;
-  handleChangeLocker?: any;
-  handleChangePassword?: any;
-  handleEraseLocker: any;
-};
+  openBottomSheet: any
+  setOpenBottomSheet: any
+  handleChangeLocker?: any
+  handleChangePassword?: any
+  handleEraseLocker: any
+}
 
 export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation()
   const {
     openBottomSheet,
     setOpenBottomSheet,
     handleChangeLocker,
     handleChangePassword,
     handleEraseLocker,
-  } = bottomSheetProps;
+  } = bottomSheetProps
 
-  const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = useMemo(() => ['65%'], []);
-  const handleSheetChanges = useCallback((index: number) => {}, []);
+  const bottomSheetRef = useRef<BottomSheet>(null)
+  const snapPoints = useMemo(() => ['65%'], [])
+  const handleSheetChanges = useCallback((index: number) => {}, [])
 
   useEffect(() => {
     if (!openBottomSheet) {
-      bottomSheetRef.current?.close();
+      bottomSheetRef.current?.close()
     } else if (openBottomSheet) {
-      bottomSheetRef.current?.expand();
+      bottomSheetRef.current?.expand()
     }
-  }, [openBottomSheet]);
+  }, [openBottomSheet])
 
   return (
     <BottomSheet
@@ -49,9 +48,10 @@ export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
       index={openBottomSheet ? 0 : -1}
       snapPoints={snapPoints}
       enablePanDownToClose={true}
-      style={{backgroundColor: 'transparent'}}
+      style={{ backgroundColor: 'transparent' }}
       backgroundStyle={CustomBottomSheetStyles.bottomSheetBackgroundStyle}
-      onChange={() => handleSheetChanges}>
+      onChange={() => handleSheetChanges}
+    >
       <Text style={CustomBottomSheetStyles.settingsTitleTxt}>
         {t('BottomSheet.settings')}
       </Text>
@@ -66,8 +66,9 @@ export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
             backgroundActive={colors.peach}
             backgroundDarker={colors.xanthous}
             onPress={async () => {
-              await handleChangeLocker();
-            }}>
+              await handleChangeLocker()
+            }}
+          >
             <Text style={CustomBottomSheetStyles.labeltxt}>
               {t('BottomSheet.changeLocker')}
             </Text>
@@ -83,8 +84,9 @@ export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
             backgroundActive={colors.peach}
             backgroundDarker={colors.xanthous}
             onPress={async () => {
-              await handleChangePassword();
-            }}>
+              await handleChangePassword()
+            }}
+          >
             <Text style={CustomBottomSheetStyles.labeltxt}>
               {t('BottomSheet.changePassword')}
             </Text>
@@ -99,8 +101,9 @@ export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
           backgroundActive={colors.peach}
           backgroundDarker={colors.xanthous}
           onPress={async () => {
-            await handleEraseLocker();
-          }}>
+            await handleEraseLocker()
+          }}
+        >
           <Text style={CustomBottomSheetStyles.labeltxt}>
             {t('BottomSheet.eraseLocker')}
           </Text>
@@ -115,8 +118,9 @@ export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
             backgroundActive={colors.peach}
             backgroundDarker={colors.xanthous}
             onPressOut={async () => {
-              await handleLanguageChange(Language.english);
-            }}>
+              await handleLanguageChange(Language.english)
+            }}
+          >
             <Text style={CustomBottomSheetStyles.labeltxt}>
               {t('Language.english')}
             </Text>
@@ -132,8 +136,9 @@ export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
             backgroundActive={colors.peach}
             backgroundDarker={colors.xanthous}
             onPressOut={async () => {
-              await handleLanguageChange(Language.spanish);
-            }}>
+              await handleLanguageChange(Language.spanish)
+            }}
+          >
             <Text style={CustomBottomSheetStyles.labeltxt}>
               {t('Language.spanish')}
             </Text>
@@ -141,8 +146,8 @@ export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
         )}
       </View>
     </BottomSheet>
-  );
-};
+  )
+}
 
 const CustomBottomSheetStyles = StyleSheet.create({
   bottomSheetBackgroundStyle: {
@@ -166,4 +171,4 @@ const CustomBottomSheetStyles = StyleSheet.create({
     fontWeight: '700',
     color: colors.plumPurple,
   },
-});
+})

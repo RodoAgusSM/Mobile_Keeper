@@ -1,4 +1,4 @@
-import 'react-native-gesture-handler';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import React, {useEffect, useRef, useState} from 'react';
 import {StatusBar, DeviceEventEmitter, AppState} from 'react-native';
 import './translation';
@@ -113,24 +113,26 @@ const App = () => {
   if (firstScreen === undefined) return <Spinner />;
 
   return (
-    <NavigationContainer>
-      <StatusBar
-        hidden={false}
-        animated={true}
-        networkActivityIndicatorVisible={true}
-        backgroundColor={'black'}
-      />
-      <Stack.Navigator
-        initialRouteName={firstScreen}
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <Stack.Screen name={Screen.home} component={Home} />
-        <Stack.Screen name={Screen.setting} component={Setting} />
-        <Stack.Screen name={Screen.locker} component={Locker} />
-        <Stack.Screen name={Screen.passcode} component={Passcode} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <NavigationContainer>
+        <StatusBar
+          hidden={false}
+          animated={true}
+          networkActivityIndicatorVisible={true}
+          backgroundColor={'black'}
+        />
+        <Stack.Navigator
+          initialRouteName={firstScreen}
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen name={Screen.home} component={Home} />
+          <Stack.Screen name={Screen.setting} component={Setting} />
+          <Stack.Screen name={Screen.locker} component={Locker} />
+          <Stack.Screen name={Screen.passcode} component={Passcode} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 };
 
