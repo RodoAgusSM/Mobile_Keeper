@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
-import {useTranslation} from 'react-i18next';
+import React, { useEffect } from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import AwesomeButton from 'react-native-really-awesome-button';
 import {
   colors,
@@ -10,13 +10,13 @@ import {
   screenHeight,
   screenWidth,
 } from '../utils/index';
-import {Screen, Language} from '../enums/Index';
-import {Lock} from '../types/Lock';
-import {UserPreferences} from '../types/UserPreferences';
-import {Popup} from './Popup';
+import { Screen, Language } from '../enums/Index';
+import { Lock } from '../types/Lock';
+import { UserPreferences } from '../types/UserPreferences';
+import { Popup } from './Popup';
 
-export const Menu = ({navigation}: any) => {
-  const {t, i18n} = useTranslation();
+export const Menu = ({ navigation }: any) => {
+  const { t, i18n } = useTranslation();
   const [showPopup, setShowPopup] = React.useState<boolean>(false);
 
   const handlePopup = () => {
@@ -54,7 +54,7 @@ export const Menu = ({navigation}: any) => {
           progress={false}
           width={screenWidth * 0.7}
           height={screenHeight * 0.08}
-          style={{margin: '2%'}}
+          style={{ margin: '2%' }}
           backgroundColor={colors.celadon}
           backgroundShadow={colors.esmerald}
           backgroundActive={colors.sage}
@@ -62,7 +62,8 @@ export const Menu = ({navigation}: any) => {
           disabled={showPopup}
           onPressOut={() => {
             navigation.navigate(Screen.setting);
-          }}>
+          }}
+        >
           <Text style={homeStyles.labeltxt}>{t('Menu.start')}</Text>
         </AwesomeButton>
         {i18n.language === 'sp' && (
@@ -70,7 +71,7 @@ export const Menu = ({navigation}: any) => {
             progress={false}
             width={screenWidth * 0.7}
             height={screenHeight * 0.08}
-            style={{marginTop: '2%'}}
+            style={{ marginTop: '2%' }}
             backgroundColor={colors.lightRed}
             backgroundShadow={colors.bittersweet}
             backgroundActive={colors.melon}
@@ -78,7 +79,8 @@ export const Menu = ({navigation}: any) => {
             disabled={showPopup}
             onPressOut={async () => {
               await handleLanguageChange(Language.english);
-            }}>
+            }}
+          >
             <Text style={homeStyles.labeltxt}>{t('Language.english')}</Text>
           </AwesomeButton>
         )}
@@ -87,7 +89,7 @@ export const Menu = ({navigation}: any) => {
             progress={false}
             width={screenWidth * 0.7}
             height={screenHeight * 0.08}
-            style={{marginTop: '2%'}}
+            style={{ marginTop: '2%' }}
             backgroundColor={colors.lightRed}
             backgroundShadow={colors.bittersweet}
             backgroundActive={colors.melon}
@@ -95,7 +97,8 @@ export const Menu = ({navigation}: any) => {
             disabled={showPopup}
             onPressOut={async () => {
               await handleLanguageChange(Language.spanish);
-            }}>
+            }}
+          >
             <Text style={homeStyles.labeltxt}>{t('Language.spanish')}</Text>
           </AwesomeButton>
         )}
@@ -103,7 +106,7 @@ export const Menu = ({navigation}: any) => {
           progress={false}
           width={screenWidth * 0.22}
           height={screenHeight * 0.08}
-          style={{marginTop: '4%'}}
+          style={{ marginTop: '4%' }}
           backgroundColor={colors.lightSeaGreen}
           backgroundShadow={colors.moonstone}
           backgroundActive={colors.cerulean}
@@ -111,9 +114,15 @@ export const Menu = ({navigation}: any) => {
           disabled={showPopup}
           onPressOut={() => {
             handlePopup();
-          }}>
+          }}
+        >
           <Text
-            style={{fontSize: 22, fontWeight: '700', color: colors.plumPurple}}>
+            style={{
+              fontSize: 22,
+              fontWeight: '700',
+              color: colors.plumPurple,
+            }}
+          >
             {t('Menu.information')}
           </Text>
         </AwesomeButton>

@@ -1,6 +1,11 @@
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import React, { useEffect, useRef, useState } from 'react';
-import { StatusBar, DeviceEventEmitter, AppState } from 'react-native';
+import {
+  StatusBar,
+  DeviceEventEmitter,
+  AppState,
+  NativeModules,
+} from 'react-native';
 import './translation';
 import { useTranslation } from 'react-i18next';
 import RNBootSplash from 'react-native-bootsplash';
@@ -20,6 +25,8 @@ import { Spinner } from './components/Spinner';
 import { UserPreferences } from './types/UserPreferences';
 import { Lock } from './types/Lock';
 import { Screen, QuickAction } from './enums/Index';
+
+const { RNSharedWidget } = NativeModules;
 
 const App = () => {
   const { t, i18n } = useTranslation();
@@ -106,12 +113,47 @@ const App = () => {
 
   const fetchStorage = async () => {
     const data = (await getLockData()) as Lock;
+    handleWidget(data);
     if (data) {
       setFirstScreen(Screen.passcode);
     } else {
       setFirstScreen(Screen.home);
     }
     await RNBootSplash.hide({ fade: true, duration: 650 });
+  };
+
+  const handleWidget = (data: Lock | null) => {
+    if (data) {
+      RNSharedWidget.setData(
+        'lockerNumberAndPasscode',
+        JSON.stringify({
+          numberTitle: t('Code.lockNumber'),
+          number: data?.lockNumber as string,
+          passcodeTitle: t('Code.passcode'),
+          passcode: data?.lockCode as string,
+        }),
+        (status: number | null) => {
+          console.log('---------');
+          console.log('Status ', status);
+          console.log('---------');
+        },
+      );
+    } else {
+      RNSharedWidget.setData(
+        'lockerNumberAndPasscode',
+        JSON.stringify({
+          numberTitle: t('Code.lockNumber'),
+          number: t('Code.noLockNumber'),
+          passcodeTitle: t('Code.passcode'),
+          passcode: t('Code.noPasscode'),
+        }),
+        (status: number | null) => {
+          console.log('---------');
+          console.log('Status ', status);
+          console.log('---------');
+        },
+      );
+    }
   };
 
   if (firstScreen === undefined) return <Spinner />;

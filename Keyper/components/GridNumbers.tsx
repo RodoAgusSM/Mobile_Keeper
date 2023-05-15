@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, StyleSheet, FlatList} from 'react-native';
+import { Text, View, StyleSheet, FlatList } from 'react-native';
 import AwesomeButton from 'react-native-really-awesome-button';
 import {
   screenHeight,
@@ -8,15 +8,15 @@ import {
   colors,
   handleEraseLocker,
 } from '../utils/index';
-import {LockType, LockStatus, Screen} from '../enums/Index';
-import {Lock} from '../types/Lock';
-import {CustomBottomSheet} from './CustomBottomSheet';
+import { LockType, LockStatus, Screen } from '../enums/Index';
+import { Lock } from '../types/Lock';
+import { CustomBottomSheet } from './CustomBottomSheet';
 
 const digits: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, -1, 0, -2];
 
-export const GridNumbers = ({route, navigation}: any) => {
-  const {passwordLength} = route?.params ?? 4;
-  const {lockNumber} = route?.params ?? 1;
+export const GridNumbers = ({ route, navigation }: any) => {
+  const { passwordLength } = route?.params ?? 4;
+  const { lockNumber } = route?.params ?? 1;
 
   const [password, setPassword] = React.useState<number[]>([]);
   const [openBottomSheet, setOpenBottomSheet] = React.useState<boolean>(false);
@@ -70,7 +70,8 @@ export const GridNumbers = ({route, navigation}: any) => {
           disabled={password.length === passwordLength}
           onPressOut={() => {
             handlePress(number);
-          }}>
+          }}
+        >
           <Text style={GridNumbersStyles.numberAndPasswordTxt}>{number}</Text>
         </AwesomeButton>
       );
@@ -89,7 +90,8 @@ export const GridNumbers = ({route, navigation}: any) => {
           disabled={password.length === 0}
           onPressOut={() => {
             removeLastDigit();
-          }}>
+          }}
+        >
           <Text style={GridNumbersStyles.numberAndPasswordTxt}>{'C'}</Text>
         </AwesomeButton>
       );
@@ -106,7 +108,8 @@ export const GridNumbers = ({route, navigation}: any) => {
           backgroundActive={colors.customGrenActive}
           backgroundDarker={colors.customGrenContour}
           disabled={password.length < passwordLength}
-          onPressOut={async () => await handleFinish()}>
+          onPressOut={async () => await handleFinish()}
+        >
           <Text style={GridNumbersStyles.numberAndPasswordTxt}>{'✓'}</Text>
         </AwesomeButton>
       );
@@ -120,7 +123,8 @@ export const GridNumbers = ({route, navigation}: any) => {
         style={GridNumbersStyles.containerView}
         onTouchStart={() => {
           setOpenBottomSheet(false);
-        }}>
+        }}
+      >
         <View style={GridNumbersStyles.passwordView}>
           <Text style={GridNumbersStyles.numberAndPasswordTxt}>{password}</Text>
         </View>
@@ -135,7 +139,7 @@ export const GridNumbers = ({route, navigation}: any) => {
           contentContainerStyle={
             GridNumbersStyles.flatlistContentContainerStyle
           }
-          renderItem={({item}) => renderBtns(item)}
+          renderItem={({ item }) => renderBtns(item)}
           numColumns={3}
         />
         <AwesomeButton
@@ -146,8 +150,9 @@ export const GridNumbers = ({route, navigation}: any) => {
           backgroundShadow={colors.gearGreyContour}
           backgroundActive={colors.gearGreyActive}
           backgroundDarker={colors.gearGreyContour}
-          onPress={() => setOpenBottomSheet(true)}>
-          <Text style={{fontSize: 30, color: colors.plumPurple}}>{'⚙︎'}</Text>
+          onPress={() => setOpenBottomSheet(true)}
+        >
+          <Text style={{ fontSize: 30, color: colors.plumPurple }}>{'⚙︎'}</Text>
         </AwesomeButton>
       </View>
       <CustomBottomSheet

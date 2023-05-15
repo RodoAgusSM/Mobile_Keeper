@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, ActivityIndicator, StyleSheet} from 'react-native';
-import {colors, screenHeight, screenWidth} from '../utils/index';
+import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import { colors, screenHeight, screenWidth } from '../utils/index';
 
 export const Spinner = () => {
   return (

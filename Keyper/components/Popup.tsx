@@ -1,16 +1,16 @@
 import React from 'react';
-import {useTranslation} from 'react-i18next';
-import {Text, View, StyleSheet, Linking} from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { Text, View, StyleSheet, Linking } from 'react-native';
 import AwesomeButton from 'react-native-really-awesome-button';
-import {colors, screenHeight, screenWidth} from '../utils/index';
+import { colors, screenHeight, screenWidth } from '../utils/index';
 
 type PopupProps = {
   event: any;
 };
 
 export const Popup = (handlePopup: PopupProps) => {
-  const {event} = handlePopup;
-  const {t} = useTranslation();
+  const { event } = handlePopup;
+  const { t } = useTranslation();
   return (
     <View style={popupStyles.superMainContainer}>
       <View style={popupStyles.container}>
@@ -20,36 +20,42 @@ export const Popup = (handlePopup: PopupProps) => {
         <View style={popupStyles.mediaView}>
           <Text
             style={popupStyles.hiperlinkNameTxt}
-            onPress={() => Linking.openURL(t('Info.githubURL'))}>
+            onPress={() => Linking.openURL(t('Info.githubURL'))}
+          >
             {t('Info.githubMedia')} {': '}
           </Text>
           <Text
             style={popupStyles.hiperlinkTxt}
-            onPress={() => Linking.openURL(t('Info.githubURL'))}>
+            onPress={() => Linking.openURL(t('Info.githubURL'))}
+          >
             {t('Info.github')}
           </Text>
         </View>
         <View style={popupStyles.mediaView}>
           <Text
             style={popupStyles.hiperlinkNameTxt}
-            onPress={() => Linking.openURL(t('Info.githubURL'))}>
+            onPress={() => Linking.openURL(t('Info.githubURL'))}
+          >
             {t('Info.instagramMedia')} {': '}
           </Text>
           <Text
             style={popupStyles.hiperlinkTxt}
-            onPress={() => Linking.openURL(t('Info.instagramURL'))}>
+            onPress={() => Linking.openURL(t('Info.instagramURL'))}
+          >
             {t('Info.instagram')}
           </Text>
         </View>
         <View style={popupStyles.mediaView}>
           <Text
             style={popupStyles.hiperlinkNameTxt}
-            onPress={() => Linking.openURL(t('Info.githubURL'))}>
+            onPress={() => Linking.openURL(t('Info.githubURL'))}
+          >
             {t('Info.twitterMedia')} {': '}
           </Text>
           <Text
             style={popupStyles.hiperlinkTxt}
-            onPress={() => Linking.openURL(t('Info.twitterURL'))}>
+            onPress={() => Linking.openURL(t('Info.twitterURL'))}
+          >
             {t('Info.twitter')}
           </Text>
         </View>
@@ -57,14 +63,15 @@ export const Popup = (handlePopup: PopupProps) => {
           progress={false}
           width={screenWidth * 0.22}
           height={screenHeight * 0.08}
-          style={{marginTop: '12%'}}
+          style={{ marginTop: '12%' }}
           backgroundColor={colors.lightSeaGreen}
           backgroundShadow={colors.moonstone}
           backgroundActive={colors.cerulean}
           backgroundDarker={colors.moonstone}
           onPressOut={() => {
             event();
-          }}>
+          }}
+        >
           <Text style={popupStyles.labeltxt}>{t('Info.close')}</Text>
         </AwesomeButton>
       </View>
@@ -98,7 +105,7 @@ const popupStyles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
   },
-  mediaView: {flexDirection: 'row', flexWrap: 'wrap'},
+  mediaView: { flexDirection: 'row', flexWrap: 'wrap' },
   hiperlinkNameTxt: {
     fontSize: 20,
     fontWeight: '500',
