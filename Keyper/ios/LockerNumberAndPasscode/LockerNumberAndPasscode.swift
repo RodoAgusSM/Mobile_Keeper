@@ -57,45 +57,60 @@ struct SimpleEntry: TimelineEntry {
 struct LockerNumberAndPasscodeEntryView : View {
     var entry: Provider.Entry
 
-    var redColor = Color(UIColor(displayP3Red: 1, green: 15/255, blue: 83/255, alpha: 1))
+  var plumPurple = Color(UIColor(red: 0.306, green: 0.157, blue: 0.365, alpha: 1))
+  var deepCerise = Color(UIColor(red: 0.863, green: 0.259, blue: 0.557, alpha: 1))
+  var papayaWhite = Color(UIColor(red: 1.000, green: 0.937, blue: 0.839, alpha: 1))
+  //var melon = Color(UIColor(red: 0.996, green: 0.702, blue: 0.694, alpha: 1))
+  //var floralWhite = Color(UIColor(red: 0.996, green: 0.976, blue: 0.937, alpha: 1))
+  //var peach = Color(UIColor(red: 1.000, green: 0.886, blue: 0.702, alpha: 1))
   
   @Environment(\.widgetFamily) var family
 
   var body: some View {
     HStack(spacing: 20) {
-      VStack(alignment: .leading) {
-        Text(entry.data.numberTitle).bold().font(.system(size: 12)).foregroundColor(redColor)
-        Text(String(entry.data.number))
-          .bold()
-          .font(.system(size: 50))
-          .foregroundColor(Color.black)
-          .shadow(color: .gray, radius: 15, x: 7, y: 7)
-          .minimumScaleFactor(0.5)
-        Text(entry.data.passcodeTitle).bold().font(.system(size: 12)).foregroundColor(redColor)
-        Text(String(entry.data.passcode))
-          .bold()
-          .font(.system(size: 50))
-          .foregroundColor(Color.black)
-          .shadow(color: .gray, radius: 15, x: 7, y: 7)
-          .minimumScaleFactor(0.5)
-      }
-      if family == .systemMedium {
-        VStack(alignment: .center) {
-          Text("Last Updated")
-            .bold()
-            .font(.system(size: 12))
-            .foregroundColor(redColor)
-            .shadow(color: .gray, radius: 15, x: 7, y: 7)
-            .minimumScaleFactor(0.5)
-          Text("Today")
+      if family == .systemSmall {
+        VStack(alignment: .leading) {
+          Text(entry.data.numberTitle).bold().font(.system(size: 16)).foregroundColor(deepCerise)
+          Text(String(entry.data.number))
             .bold()
             .font(.system(size: 40))
-            .foregroundColor(Color.black)
-            .shadow(color: .gray, radius: 15, x: 7, y: 7)
-            .minimumScaleFactor(0.5)
+            .foregroundColor(plumPurple)
+          Text(entry.data.passcodeTitle).bold().font(.system(size: 16)).foregroundColor(deepCerise)
+          Text(String(entry.data.passcode))
+            .bold()
+            .font(.system(size: 40))
+            .foregroundColor(plumPurple)
         }
       }
-    }.padding(.all, 10)
+      else if family == .systemMedium {
+        HStack() {
+          VStack(alignment: .center) {
+            Text(entry.data.numberTitle).bold().font(.system(size: 20)).foregroundColor(deepCerise)
+            Text(String(entry.data.number))
+              .bold()
+              .font(.system(size: 40))
+              .foregroundColor(plumPurple)
+          }.frame(
+              maxWidth: .infinity,
+              maxHeight: .infinity
+            )
+          Divider().overlay(deepCerise).frame(height: 120)
+          VStack(alignment: .center) {
+            Text(entry.data.passcodeTitle).bold().font(.system(size: 20)).foregroundColor(deepCerise)
+            Text(String(entry.data.passcode))
+              .bold()
+              .font(.system(size: 40))
+              .foregroundColor(plumPurple)
+          }.frame(
+            maxWidth: .infinity,
+            maxHeight: .infinity
+          )
+        }
+      }
+    }.frame(
+      maxWidth: .infinity,
+      maxHeight: .infinity
+    ).background(papayaWhite)
   }
 }
 
@@ -108,6 +123,7 @@ struct LockerNumberAndPasscode: Widget {
         }
         .configurationDisplayName("Locker information")
         .description("Widget to view the locker number and passcode.")
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
 
