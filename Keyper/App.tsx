@@ -166,6 +166,7 @@ const App = () => {
           animated={true}
           networkActivityIndicatorVisible={true}
           backgroundColor={'black'}
+          barStyle={'dark-content'}
         />
         <Stack.Navigator
           initialRouteName={firstScreen}
