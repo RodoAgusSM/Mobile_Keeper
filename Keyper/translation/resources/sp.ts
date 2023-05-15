@@ -42,5 +42,12 @@ export default {
         twitter: "@RodoAgusSM",
         twitterURL: "https://twitter.com/RodoAgusSM",
         close: "Cerrar",
-    }
+    },
+    Widget: {
+        locker: "Casillero",
+        lockNumber: "n.º",
+        noLockNumber: "-",
+        passcode: "Contraseña",
+        noPasscode: "-",
+    },
 };

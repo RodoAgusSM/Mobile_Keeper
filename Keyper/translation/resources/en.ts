@@ -42,5 +42,12 @@ export default {
         twitter: "@RodoAgusSM",
         twitterURL: "https://twitter.com/RodoAgusSM",
         close: "Close",
-    }
+    },
+    Widget: {
+        locker: "Locker",
+        lockNumber: "#",
+        noLockNumber: "-",
+        passcode: "Passcode",
+        noPasscode: "-",
+    },
 };

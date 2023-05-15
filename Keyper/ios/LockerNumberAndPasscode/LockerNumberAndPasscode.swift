@@ -11,12 +11,12 @@ import Intents
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-      let valuesData = ValuesData(numberTitle: "Key", number: "73", passcodeTitle: "Passcode" ,  passcode: "1234")
+      let valuesData = ValuesData(numberTitle: "Locker", number: "#73", passcodeTitle: "Passcode" ,  passcode: "1234")
       return SimpleEntry(date: Date(), configuration: ConfigurationIntent(), data: valuesData)
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-      let valuesData = ValuesData(numberTitle: "Key", number: "73", passcodeTitle: "Passcode" ,  passcode: "1234")
+      let valuesData = ValuesData(numberTitle: "Locker", number: "#73", passcodeTitle: "Passcode" ,  passcode: "1234")
       let entry = SimpleEntry(date: Date(), configuration: configuration, data: valuesData)
         completion(entry)
     }
@@ -129,7 +129,7 @@ struct LockerNumberAndPasscode: Widget {
 
 struct LockerNumberAndPasscode_Previews: PreviewProvider {
     static var previews: some View {
-      let valuesData = ValuesData(numberTitle: "Key", number: "73", passcodeTitle: "Passcode" ,  passcode: "1234")
+      let valuesData = ValuesData(numberTitle: "Locker", number: "# 73", passcodeTitle: "Passcode" ,  passcode: "1234")
       LockerNumberAndPasscodeEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), data: valuesData))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }

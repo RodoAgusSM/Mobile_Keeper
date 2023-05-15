@@ -127,9 +127,9 @@ const App = () => {
       RNSharedWidget.setData(
         'lockerNumberAndPasscode',
         JSON.stringify({
-          numberTitle: t('Code.lockNumber'),
-          number: data?.lockNumber as string,
-          passcodeTitle: t('Code.passcode'),
+          numberTitle: t('Widget.locker'),
+          number: `${t('Widget.lockNumber')} ${data?.lockNumber}` as string,
+          passcodeTitle: t('Widget.passcode'),
           passcode: data?.lockCode as string,
         }),
         (status: number | null) => {
