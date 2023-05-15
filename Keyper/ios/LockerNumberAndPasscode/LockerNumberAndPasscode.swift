@@ -73,19 +73,19 @@ struct LockerNumberAndPasscodeEntryView : View {
           Text(entry.data.numberTitle).bold().font(.system(size: 16)).foregroundColor(deepCerise)
           Text(String(entry.data.number))
             .bold()
-            .font(.system(size: 40))
+            .font(.system(size: 36))
             .foregroundColor(plumPurple)
           Text(entry.data.passcodeTitle).bold().font(.system(size: 16)).foregroundColor(deepCerise)
           Text(String(entry.data.passcode))
             .bold()
-            .font(.system(size: 40))
+            .font(.system(size: 36))
             .foregroundColor(plumPurple)
         }
       }
       else if family == .systemMedium {
         HStack() {
           VStack(alignment: .center) {
-            Text(entry.data.numberTitle).bold().font(.system(size: 20)).foregroundColor(deepCerise)
+            Text(entry.data.numberTitle).bold().font(.system(size: 16)).foregroundColor(deepCerise)
             Text(String(entry.data.number))
               .bold()
               .font(.system(size: 40))
@@ -96,7 +96,7 @@ struct LockerNumberAndPasscodeEntryView : View {
             )
           Divider().overlay(deepCerise).frame(height: 120)
           VStack(alignment: .center) {
-            Text(entry.data.passcodeTitle).bold().font(.system(size: 20)).foregroundColor(deepCerise)
+            Text(entry.data.passcodeTitle).bold().font(.system(size: 16)).foregroundColor(deepCerise)
             Text(String(entry.data.passcode))
               .bold()
               .font(.system(size: 40))
