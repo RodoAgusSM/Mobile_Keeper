@@ -90,13 +90,10 @@ export const Configuration = ({ route, navigation }: any) => {
           width={screenWidth * 0.4}
           height={screenHeight * 0.08}
           style={{ margin: '2%' }}
-          backgroundColor={
-            lockNumber.trim() !== '' ? colors.sunset : colors.peach
-          }
+          backgroundColor={colors.sunset}
           backgroundShadow={colors.xanthous}
           backgroundActive={colors.peach}
           backgroundDarker={colors.xanthous}
-          disabled={lockNumber.trim() === ''}
           onPressOut={async () => await handleFlow()}
         >
           <Text style={settingStyles.labeltxt}>{t('Settings.continue')}</Text>

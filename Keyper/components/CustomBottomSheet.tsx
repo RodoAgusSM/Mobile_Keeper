@@ -56,7 +56,7 @@ export const CustomBottomSheet = (bottomSheetProps: BottomSheetProps) => {
         {t('BottomSheet.settings')}
       </Text>
       <View style={CustomBottomSheetStyles.bottomSheetView}>
-        {handleChangePassword && (
+        {handleChangeLocker && (
           <AwesomeButton
             progress={false}
             width={screenWidth * 0.55}

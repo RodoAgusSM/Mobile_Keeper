@@ -4,7 +4,7 @@ export default {
         language: "Spanish",
     },
     Menu: {
-        title: "🔒 Welcome to Keyper 🔒",
+        title: "🔐 Welcome to Keyper 🔐",
         start: "Let's go! 🔑",
         information: "ⓘ",
     },
@@ -22,9 +22,9 @@ export default {
     },
     BottomSheet: {
         settings: "Settings 🎉",
-        changeLocker: "Change locker",
-        changePassword: "Change password",
-        eraseLocker: "Erase locker",
+        changeLocker: "Change locker 🔒",
+        changePassword: "Change password ♻️",
+        eraseLocker: "Erase locker 🗑️",
     },
     Language: {
         english: "English 🇺🇸",

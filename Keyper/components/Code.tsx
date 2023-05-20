@@ -115,14 +115,16 @@ export const Code = ({ navigation }: any) => {
         }}
       >
         <View style={GridNumbersStyles.dataContainer}>
-          <View style={GridNumbersStyles.lockNumberView}>
-            <Text style={GridNumbersStyles.lockNumberTitleTxt}>
-              {t('Code.lockNumber')}
-            </Text>
-            <Text style={GridNumbersStyles.lockNumberTxt}>
-              {storage?.lockNumber}
-            </Text>
-          </View>
+          {storage?.lockNumber && (
+            <View style={GridNumbersStyles.lockNumberView}>
+              <Text style={GridNumbersStyles.lockNumberTitleTxt}>
+                {t('Code.lockNumber')}
+              </Text>
+              <Text style={GridNumbersStyles.lockNumberTxt}>
+                {storage?.lockNumber}
+              </Text>
+            </View>
+          )}
           <View style={GridNumbersStyles.passcodeView}>
             <Text style={GridNumbersStyles.passcodeTitleTxt}>
               {t('Code.passcode')}
@@ -150,7 +152,7 @@ export const Code = ({ navigation }: any) => {
       <CustomBottomSheet
         openBottomSheet={openBottomSheet}
         setOpenBottomSheet={setOpenBottomSheet}
-        handleChangeLocker={handleChangeLocker}
+        handleChangeLocker={storage?.lockNumber ? handleChangeLocker : null}
         handleChangePassword={handleChangePassword}
         handleEraseLocker={() => {
           handleEraseLocker(navigation, setOpenBottomSheet);
