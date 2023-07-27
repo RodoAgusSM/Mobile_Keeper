@@ -2,7 +2,7 @@
 
 ### <b> Quick demo. </b>
 
-<img src='./Keyper/demo_app/keyper_demo.gif' width='350' height='650'>
+<img src='./Keyper/app_demo_video/keyper_demo_video.gif' width='350' height='650'>
 
 ## <u> Guide in english </u>
 
