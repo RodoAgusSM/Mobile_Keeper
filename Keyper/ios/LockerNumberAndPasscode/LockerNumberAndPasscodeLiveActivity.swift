@@ -2,7 +2,7 @@
 //  LockerNumberAndPasscodeLiveActivity.swift
 //  LockerNumberAndPasscode
 //
-//  Created by Rodolfo Agustin Silva Messano on 14/5/23.
+//  Created by Rodolfo Agustin Silva Messano on 11/2/24.
 //
 
 import ActivityKit
@@ -12,7 +12,7 @@ import SwiftUI
 struct LockerNumberAndPasscodeAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
         // Dynamic stateful properties about your activity go here!
-        var value: Int
+        var emoji: String
     }
 
     // Fixed non-changing properties about your activity go here!
@@ -24,7 +24,7 @@ struct LockerNumberAndPasscodeLiveActivity: Widget {
         ActivityConfiguration(for: LockerNumberAndPasscodeAttributes.self) { context in
             // Lock screen/banner UI goes here
             VStack {
-                Text("Hello")
+                Text("Hello \(context.state.emoji)")
             }
             .activityBackgroundTint(Color.cyan)
             .activitySystemActionForegroundColor(Color.black)
@@ -40,15 +40,15 @@ struct LockerNumberAndPasscodeLiveActivity: Widget {
                     Text("Trailing")
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom")
+                    Text("Bottom \(context.state.emoji)")
                     // more content
                 }
             } compactLeading: {
                 Text("L")
             } compactTrailing: {
-                Text("T")
+                Text("T \(context.state.emoji)")
             } minimal: {
-                Text("Min")
+                Text(context.state.emoji)
             }
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
@@ -56,22 +56,25 @@ struct LockerNumberAndPasscodeLiveActivity: Widget {
     }
 }
 
-struct LockerNumberAndPasscodeLiveActivity_Previews: PreviewProvider {
-    static let attributes = LockerNumberAndPasscodeAttributes(name: "Me")
-    static let contentState = LockerNumberAndPasscodeAttributes.ContentState(value: 3)
-
-    static var previews: some View {
-        attributes
-            .previewContext(contentState, viewKind: .dynamicIsland(.compact))
-            .previewDisplayName("Island Compact")
-        attributes
-            .previewContext(contentState, viewKind: .dynamicIsland(.expanded))
-            .previewDisplayName("Island Expanded")
-        attributes
-            .previewContext(contentState, viewKind: .dynamicIsland(.minimal))
-            .previewDisplayName("Minimal")
-        attributes
-            .previewContext(contentState, viewKind: .content)
-            .previewDisplayName("Notification")
+extension LockerNumberAndPasscodeAttributes {
+    fileprivate static var preview: LockerNumberAndPasscodeAttributes {
+        LockerNumberAndPasscodeAttributes(name: "World")
     }
+}
+
+extension LockerNumberAndPasscodeAttributes.ContentState {
+    fileprivate static var smiley: LockerNumberAndPasscodeAttributes.ContentState {
+        LockerNumberAndPasscodeAttributes.ContentState(emoji: "😀")
+     }
+     
+     fileprivate static var starEyes: LockerNumberAndPasscodeAttributes.ContentState {
+         LockerNumberAndPasscodeAttributes.ContentState(emoji: "🤩")
+     }
+}
+
+#Preview("Notification", as: .content, using: LockerNumberAndPasscodeAttributes.preview) {
+   LockerNumberAndPasscodeLiveActivity()
+} contentStates: {
+    LockerNumberAndPasscodeAttributes.ContentState.smiley
+    LockerNumberAndPasscodeAttributes.ContentState.starEyes
 }

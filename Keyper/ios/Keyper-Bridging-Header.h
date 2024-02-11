@@ -1,4 +1,12 @@
 //
-//  Use this file to import your target's public headers that you would like to expose to Swift.
+//  Keyper-Bridging-Header.h
+//  Keyper
+//
+//  Created by Rodolfo Agustin Silva Messano on 11/2/24.
 //
 
+#ifndef Keyper_Bridging_Header_h
+#define Keyper_Bridging_Header_h
+
+
+#endif /* Keyper_Bridging_Header_h */

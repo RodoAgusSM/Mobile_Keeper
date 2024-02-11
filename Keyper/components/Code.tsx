@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { Text, View, StyleSheet, NativeModules } from 'react-native';
+import { Text, View, StyleSheet, NativeModules, Platform } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import AwesomeButton from 'react-native-really-awesome-button';
@@ -38,7 +38,7 @@ export const Code = ({ navigation }: any) => {
   );
 
   useEffect(() => {
-    if (storage) {
+    if (storage && Platform.OS === 'ios') {
       handleWidget(storage);
     }
   }, [i18n.language]);
@@ -52,7 +52,9 @@ export const Code = ({ navigation }: any) => {
 
   const fetchStorage = async () => {
     const data = (await getLockData()) as Lock;
-    handleWidget(data);
+    if (Platform.OS === 'ios') {
+      handleWidget(data);
+    }
     setStorage(data);
   };
 
@@ -156,7 +158,9 @@ export const Code = ({ navigation }: any) => {
         handleChangePassword={handleChangePassword}
         handleEraseLocker={() => {
           handleEraseLocker(navigation, setOpenBottomSheet);
-          handleWidget(null);
+          if (Platform.OS === 'ios') {
+            handleWidget(null);
+          }
         }}
       />
     </View>

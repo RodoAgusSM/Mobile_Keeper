@@ -31,4 +31,4 @@ export const colors = {
     bittersweet: '#FF5C61',
     deepCerise: '#DC428E',
     plumPurple: '#4E285D',
-}
+};

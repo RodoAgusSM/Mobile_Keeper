@@ -25,5 +25,5 @@ export {
     screenWidth,
     colors,
     handleLanguageChange,
-    handleEraseLocker
+    handleEraseLocker,
 };

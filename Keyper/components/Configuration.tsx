@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Text, View, TextInput, StyleSheet } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import React, {useState} from 'react';
+import {Text, View, TextInput, StyleSheet} from 'react-native';
+import {useTranslation} from 'react-i18next';
 import AwesomeButton from 'react-native-really-awesome-button';
 import Slider from '@react-native-community/slider';
 import {
@@ -10,13 +10,13 @@ import {
   screenWidth,
   storeLockNumberData,
 } from '../utils/index';
-import { Screen } from '../enums/Index';
+import {Screen} from '../enums/Index';
 
-export const Configuration = ({ route, navigation }: any) => {
-  const { t } = useTranslation();
+export const Configuration = ({route, navigation}: any) => {
+  const {t} = useTranslation();
 
-  const { isChangingLockNumber } = route?.params ? route?.params : false;
-  const { passwordLength: pLength } = route?.params ? route?.params : 3;
+  const {isChangingLockNumber} = route?.params ? route?.params : false;
+  const {passwordLength: pLength} = route?.params ? route?.params : 3;
 
   const [lockNumber, setLockNumber] = React.useState<string>('');
   const [passwordLength, setPasswordLength] = useState<number>(
@@ -37,7 +37,7 @@ export const Configuration = ({ route, navigation }: any) => {
       await storeLockNumberData(lockNumber);
       navigation.navigate(Screen.passcode);
     } else {
-      navigation.navigate(Screen.locker, { passwordLength, lockNumber });
+      navigation.navigate(Screen.locker, {passwordLength, lockNumber});
     }
     setLockNumber('');
   };
@@ -69,7 +69,7 @@ export const Configuration = ({ route, navigation }: any) => {
                 {passwordLength && +passwordLength.toFixed(3)}
               </Text>
               <Slider
-                style={{ width: screenWidth * 0.7 }}
+                style={{width: screenWidth * 0.7}}
                 minimumTrackTintColor={colors.xanthous}
                 thumbTintColor={colors.xanthous}
                 value={passwordLength}
@@ -89,13 +89,12 @@ export const Configuration = ({ route, navigation }: any) => {
           progress={false}
           width={screenWidth * 0.4}
           height={screenHeight * 0.08}
-          style={{ margin: '2%' }}
+          style={{margin: '2%'}}
           backgroundColor={colors.sunset}
           backgroundShadow={colors.xanthous}
           backgroundActive={colors.peach}
           backgroundDarker={colors.xanthous}
-          onPressOut={async () => await handleFlow()}
-        >
+          onPressOut={async () => await handleFlow()}>
           <Text style={settingStyles.labeltxt}>{t('Settings.continue')}</Text>
         </AwesomeButton>
       </View>
