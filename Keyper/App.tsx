@@ -7,21 +7,21 @@ import {
   NativeModules,
   Platform
 } from 'react-native';
-import './translation';
+import './src/translations';
 import {useTranslation} from 'react-i18next';
 import BootSplash from 'react-native-bootsplash';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import QuickActions from 'react-native-quick-actions';
-import {Home} from './views/Home';
-import {Setting} from './views/Setting';
-import {Locker} from './views/Locker';
-import {Passcode} from './views/Passcode';
-import {getLockData, getUserPreferencesData, removeLocker} from './utils/index';
-import {Spinner} from './components/Spinner';
-import {UserPreferences} from './types/UserPreferences';
-import {Lock} from './types/Lock';
-import {Screen, QuickAction} from './enums/Index';
+import {Home} from './src/views/Home';
+import {Setting} from './src/views/Setting';
+import {Locker} from './src/views/Locker';
+import {Passcode} from './src/views/Passcode';
+import {getLockData, getUserPreferencesData, removeLocker} from './src/utils/index';
+import {Spinner} from './src/components/Spinner';
+import {UserPreferences} from './src/types/UserPreferences';
+import {Lock} from './src/types/Lock';
+import {Screen, QuickAction} from './src/enums/Index';
 
 const {RNSharedWidget} = NativeModules;
 
