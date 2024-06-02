@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
-import {Text, View, TextInput, StyleSheet} from 'react-native';
 import {useTranslation} from 'react-i18next';
+import {StyleSheet,Text, TextInput, View} from 'react-native';
 import AwesomeButton from 'react-native-really-awesome-button';
+
 import Slider from '@react-native-community/slider';
+
+import {Screen} from '../enums/Index';
 import {
   colors,
   removeLockNumberData,
@@ -10,7 +13,6 @@ import {
   screenWidth,
   storeLockNumberData,
 } from '../utils/index';
-import {Screen} from '../enums/Index';
 
 export const Configuration = ({route, navigation}: any) => {
   const {t} = useTranslation();

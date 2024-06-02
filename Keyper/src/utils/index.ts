@@ -1,29 +1,29 @@
+import { colors } from './colors';
+import { handleEraseLocker,handleLanguageChange } from './functions';
+import { screenHeight, screenWidth } from './screenDimension';
 import {
+    deleteData,
     getLockData,
+    getUserPreferencesData,
+    removeLocker,
+    removeLockNumberData,
     storeLockData,
     storeLockNumberData,
-    removeLockNumberData,
-    removeLocker,
-    deleteData,
-    getUserPreferencesData,
     storeUserPreferencesData,
 } from './storage';
-import { screenHeight, screenWidth } from './screenDimension';
-import { colors } from './colors';
-import { handleLanguageChange, handleEraseLocker } from './functions';
 
 export {
-    getLockData,
-    storeLockData,
-    storeLockNumberData,
-    removeLockNumberData,
-    removeLocker,
+    colors,
     deleteData,
+    getLockData,
     getUserPreferencesData,
-    storeUserPreferencesData,
+    handleEraseLocker,
+    handleLanguageChange,
+    removeLocker,
+    removeLockNumberData,
     screenHeight,
     screenWidth,
-    colors,
-    handleLanguageChange,
-    handleEraseLocker,
+    storeLockData,
+    storeLockNumberData,
+    storeUserPreferencesData,
 };

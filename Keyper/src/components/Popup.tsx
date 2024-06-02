@@ -1,7 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, View, StyleSheet, Linking } from 'react-native';
+import { Linking,StyleSheet, Text, View } from 'react-native';
 import AwesomeButton from 'react-native-really-awesome-button';
+
 import { colors, screenHeight, screenWidth } from '@/utils/index';
 
 type PopupProps = {

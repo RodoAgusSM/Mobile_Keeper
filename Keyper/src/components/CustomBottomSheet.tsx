@@ -1,15 +1,17 @@
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, View } from 'react-native';
-import BottomSheet from '@gorhom/bottom-sheet';
 import AwesomeButton from 'react-native-really-awesome-button';
+
+import BottomSheet from '@gorhom/bottom-sheet';
+
+import { Language } from '../enums/Index';
 import {
-  screenHeight,
-  screenWidth,
   colors,
   handleLanguageChange,
+  screenHeight,
+  screenWidth,
 } from '../utils/index';
-import { useTranslation } from 'react-i18next';
-import { Language } from '../enums/Index';
 
 type BottomSheetProps = {
   openBottomSheet: any;

@@ -1,15 +1,17 @@
 import React from 'react';
-import { Text, View, StyleSheet, FlatList } from 'react-native';
+import { FlatList,StyleSheet, Text, View } from 'react-native';
 import AwesomeButton from 'react-native-really-awesome-button';
+
+import { LockStatus, LockType, Screen } from '../enums/Index';
+import { Lock } from '../types/Lock';
 import {
+  colors,
+  handleEraseLocker,
   screenHeight,
   screenWidth,
   storeLockData,
-  colors,
-  handleEraseLocker,
 } from '../utils/index';
-import { LockType, LockStatus, Screen } from '../enums/Index';
-import { Lock } from '../types/Lock';
+
 import { CustomBottomSheet } from './CustomBottomSheet';
 
 const digits: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, -1, 0, -2];

@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { StyleSheet,Text, View } from 'react-native';
 import AwesomeButton from 'react-native-really-awesome-button';
+
+import { Language,Screen } from '../enums/Index';
+import { Lock } from '../types/Lock';
+import { UserPreferences } from '../types/UserPreferences';
 import {
   colors,
   getLockData,
@@ -10,9 +14,7 @@ import {
   screenHeight,
   screenWidth,
 } from '../utils/index';
-import { Screen, Language } from '../enums/Index';
-import { Lock } from '../types/Lock';
-import { UserPreferences } from '../types/UserPreferences';
+
 import { Popup } from './Popup';
 
 export const Menu = ({ navigation }: any) => {

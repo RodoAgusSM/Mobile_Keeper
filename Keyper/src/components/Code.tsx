@@ -1,20 +1,23 @@
 import React, { useCallback, useEffect } from 'react';
-import { Text, View, StyleSheet, NativeModules, Platform } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
+import { NativeModules, Platform,StyleSheet, Text, View } from 'react-native';
 import AwesomeButton from 'react-native-really-awesome-button';
+
+import { useFocusEffect } from '@react-navigation/native';
+
+import { Screen } from '../enums/Index';
+import { Lock } from '../types/Lock';
+import { UserPreferences } from '../types/UserPreferences';
 import {
+  colors,
+  getLockData,
+  getUserPreferencesData,
+  handleEraseLocker,
   screenHeight,
   screenWidth,
-  getLockData,
-  handleEraseLocker,
-  colors,
-  getUserPreferencesData,
 } from '../utils/index';
-import { Lock } from '../types/Lock';
-import { Screen } from '../enums/Index';
+
 import { CustomBottomSheet } from './CustomBottomSheet';
-import { UserPreferences } from '../types/UserPreferences';
 
 const { RNSharedWidget } = NativeModules;
 

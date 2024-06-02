@@ -1,6 +1,6 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Lock } from '@/types/Lock';
 import { UserPreferences } from '@/types/UserPreferences';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const getLockData = async () => {
   try {
@@ -85,4 +85,4 @@ const storeUserPreferencesData = async (value: UserPreferences) => {
 };
 
 
-export { getLockData, storeLockData, storeLockNumberData, removeLockNumberData, removeLocker, deleteData, getUserPreferencesData, storeUserPreferencesData }
+export { deleteData, getLockData, getUserPreferencesData, removeLocker, removeLockNumberData, storeLockData, storeLockNumberData, storeUserPreferencesData }

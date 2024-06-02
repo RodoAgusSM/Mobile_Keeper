@@ -1,7 +1,7 @@
-import i18n from '@/translations/index';
-import { deleteData, storeUserPreferencesData } from '@/utils/storage';
 import { Language, Screen } from '@/enums/Index';
+import i18n from '@/translations/index';
 import { UserPreferences } from '@/types/UserPreferences';
+import { deleteData, storeUserPreferencesData } from '@/utils/storage';
 
 export const handleLanguageChange = async (language: Language) => {
     const userPreferences: UserPreferences = {

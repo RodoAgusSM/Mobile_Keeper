@@ -1,4 +1,4 @@
-import { LockType, LockStatus } from "@/enums/Index";
+import { LockStatus,LockType } from "@/enums/Index";
 
 export type Lock = {
     lockNumber: number | string | null;

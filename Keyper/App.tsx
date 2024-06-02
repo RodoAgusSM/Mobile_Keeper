@@ -1,27 +1,29 @@
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import React, {useEffect, useRef, useState} from 'react';
-import {
-  StatusBar,
-  DeviceEventEmitter,
-  AppState,
-  NativeModules,
-  Platform
-} from 'react-native';
-import './src/translations';
 import {useTranslation} from 'react-i18next';
+import {
+  AppState,
+  DeviceEventEmitter,
+  NativeModules,
+  Platform,
+  StatusBar} from 'react-native';
 import BootSplash from 'react-native-bootsplash';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import QuickActions from 'react-native-quick-actions';
+
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import QuickActions from 'react-native-quick-actions';
+
+import {Spinner} from './src/components/Spinner';
+import {QuickAction,Screen} from './src/enums/Index';
+import {Lock} from './src/types/Lock';
+import {UserPreferences} from './src/types/UserPreferences';
+import {getLockData, getUserPreferencesData, removeLocker} from './src/utils/index';
 import {Home} from './src/views/Home';
-import {Setting} from './src/views/Setting';
 import {Locker} from './src/views/Locker';
 import {Passcode} from './src/views/Passcode';
-import {getLockData, getUserPreferencesData, removeLocker} from './src/utils/index';
-import {Spinner} from './src/components/Spinner';
-import {UserPreferences} from './src/types/UserPreferences';
-import {Lock} from './src/types/Lock';
-import {Screen, QuickAction} from './src/enums/Index';
+import {Setting} from './src/views/Setting';
+
+import './src/translations';
 
 const {RNSharedWidget} = NativeModules;
 
